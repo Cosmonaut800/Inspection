@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://by2771v3haugr"]
+[gd_scene load_steps=9 format=3 uid="uid://by2771v3haugr"]
 
 [ext_resource type="Texture2D" uid="uid://bv68o32w2syqa" path="res://Materials/Textures/ground.png" id="1_27my0"]
 [ext_resource type="PackedScene" uid="uid://btjt3q81y0i2b" path="res://Scenes/player.tscn" id="1_iq64q"]
 [ext_resource type="Material" uid="uid://cm76uwm7kjl1n" path="res://Materials/checkerboard.tres" id="3_rjy6d"]
+[ext_resource type="PackedScene" uid="uid://y3fhbrp47ptv" path="res://Scenes/oscilloscope.tscn" id="4_kkmu0"]
 
 [sub_resource type="Environment" id="Environment_frknc"]
 
@@ -19,9 +20,6 @@ size = Vector3(25, 1, 25)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_frknc")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.920505, -0.301498, 0.248536, 0, 0.636078, 0.771625, -0.390731, -0.710284, 0.585513, 0, 8.46299, 0)
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 visible = false
@@ -89,12 +87,16 @@ size = Vector3(2.5, 4.5, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 1.75, -2)
 size = Vector3(2.5, 4.5, 1)
 
+[node name="Box7" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.25, 1.75, -0.167)
+size = Vector3(2.5, 4.5, 1)
+
 [node name="Box1" type="CSGBox3D" parent="TestEnvironment/Ground"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.75, 1.75, 4.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.25, 1.75, 4.5)
 size = Vector3(2.5, 4.5, 1)
 
 [node name="Box2" type="CSGBox3D" parent="TestEnvironment/Ground"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.75, 1.75, 4.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.25, 1.75, 4.5)
 size = Vector3(2.5, 4.5, 1)
 
 [node name="Walls" type="CSGBox3D" parent="TestEnvironment"]
@@ -105,10 +107,17 @@ flip_faces = true
 size = Vector3(17, 8.5, 9.75)
 
 [node name="Window" type="CSGBox3D" parent="TestEnvironment/Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66667, -1.18333, 4.86667)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.33333, -1.18333, 4.86667)
 flip_faces = true
 
 [node name="Window2" type="CSGBox3D" parent="TestEnvironment/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66667, -1.43333, 2.2)
 flip_faces = true
 size = Vector3(1, 3.5, 2)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="TestEnvironment"]
+transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 5.44533, 0)
+omni_range = 7.5
+
+[node name="Oscilloscope" parent="." instance=ExtResource("4_kkmu0")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.5, 1, 1)

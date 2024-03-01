@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://y3fhbrp47ptv"]
+
+[ext_resource type="Script" path="res://Scripts/scope_line.gd" id="1_agbpb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j2vi6"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_spv2y"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rto3v"]
+viewport_path = NodePath("Screen/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g507j"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_rto3v")
+
+[node name="Oscilloscope" type="Node3D"]
+
+[node name="BodyGraphics" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_j2vi6")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0597745, 0)
+mesh = SubResource("PlaneMesh_spv2y")
+surface_material_override/0 = SubResource("StandardMaterial3D_g507j")
+
+[node name="SubViewport" type="SubViewport" parent="Screen"]
+disable_3d = true
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Line" type="Node2D" parent="Screen/SubViewport"]
+script = ExtResource("1_agbpb")
