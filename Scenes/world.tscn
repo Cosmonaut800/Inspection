@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://by2771v3haugr"]
+
+[ext_resource type="Texture2D" uid="uid://bv68o32w2syqa" path="res://Materials/Textures/ground.png" id="1_27my0"]
+[ext_resource type="PackedScene" uid="uid://btjt3q81y0i2b" path="res://Scenes/player.tscn" id="1_iq64q"]
+[ext_resource type="Material" uid="uid://cm76uwm7kjl1n" path="res://Materials/checkerboard.tres" id="3_rjy6d"]
+
+[sub_resource type="Environment" id="Environment_frknc"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n3yj0"]
+size = Vector2(25, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5aquu"]
+albedo_texture = ExtResource("1_27my0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fj0bd"]
+size = Vector3(25, 1, 25)
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_frknc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.920505, -0.301498, 0.248536, 0, 0.636078, 0.771625, -0.390731, -0.710284, 0.585513, 0, 8.46299, 0)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_n3yj0")
+surface_material_override/0 = SubResource("StandardMaterial3D_5aquu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_fj0bd")
+
+[node name="Player" parent="." instance=ExtResource("1_iq64q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+
+[node name="TestEnvironment" type="Node3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+
+[node name="Ground" type="CSGBox3D" parent="TestEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("3_rjy6d")
+use_collision = true
+size = Vector3(17, 1, 9.5)
+material = ExtResource("3_rjy6d")
+
+[node name="Platform" type="CSGBox3D" parent="TestEnvironment/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -2.75)
+size = Vector3(17, 1.5, 4.5)
+
+[node name="Ramp" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 5.83333, 0.625, 1.78349)
+operation = 2
+size = Vector3(3, 1, 2.5)
+
+[node name="Ramp2" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, -5.66667, 0.625, 1.78349)
+operation = 2
+size = Vector3(3, 1, 2.5)
+
+[node name="Rail" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 2.125)
+size = Vector3(8, 2.5, 0.05)
+
+[node name="Box1" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.25, 1.75, -0.166667)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box2" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75, 1.75, -2)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box3" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 1.75, -2)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box4" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.75, -2)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box5" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25, 1.75, -2)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box6" type="CSGBox3D" parent="TestEnvironment/Ground/Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 1.75, -2)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box1" type="CSGBox3D" parent="TestEnvironment/Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.75, 1.75, 4.5)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box2" type="CSGBox3D" parent="TestEnvironment/Ground"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.75, 1.75, 4.5)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Walls" type="CSGBox3D" parent="TestEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, -0.125)
+material_override = ExtResource("3_rjy6d")
+use_collision = true
+flip_faces = true
+size = Vector3(17, 8.5, 9.75)
+
+[node name="Window" type="CSGBox3D" parent="TestEnvironment/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.66667, -1.18333, 4.86667)
+flip_faces = true
+
+[node name="Window2" type="CSGBox3D" parent="TestEnvironment/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66667, -1.43333, 2.2)
+flip_faces = true
+size = Vector3(1, 3.5, 2)
