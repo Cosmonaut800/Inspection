@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxpggwkxoln4c"
-path.s3tc="res://.godot/imported/osc_screen.png-04d7c0468baf4c0896a7921cb94c3f66.s3tc.ctex"
+uid="uid://ch2qjlipgc2lg"
+path="res://.godot/imported/tool_tray.png-6464d0228aeed39533205f00851aef85.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Materials/Textures/osc_screen.png"
-dest_files=["res://.godot/imported/osc_screen.png-04d7c0468baf4c0896a7921cb94c3f66.s3tc.ctex"]
+source_file="res://Materials/Textures/tool_tray.png"
+dest_files=["res://.godot/imported/tool_tray.png-6464d0228aeed39533205f00851aef85.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

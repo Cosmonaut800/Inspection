@@ -8,11 +8,11 @@ func _process(delta):
 	timer += delta
 	
 	for i in range(256):
-		points.append(Vector2(i * 1.0, 128.0 + 64.0 * sin(i * PI/256.0) * cos(i/3.141592 - 13.72 * timer) * sin(i/20.0 + timer)))
+		points.append(Vector2(i * 1.0, 128.0 + 64.0 * sin(i * PI/256.0) * cos(i/3.617 - 13.72 * timer) * sin(i/20.0 + timer)))
 	
 	queue_redraw()
 
 func _draw():
 	draw_texture(bg, Vector2.ZERO)
-	draw_polyline(points, Color.BLACK, 1.0, true)
+	draw_polyline(points, Color.GREEN, 1.0, true)
 	points = []

@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://ca7naxg00sehu"]
+[gd_scene load_steps=4 format=3 uid="uid://ca7naxg00sehu"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_hd5dr"]
-size = Vector3(0.1, 0.1, 0.2)
+[ext_resource type="Script" path="res://Scripts/part.gd" id="1_0wkpi"]
+[ext_resource type="Material" uid="uid://ctyaogeimfp3c" path="res://Materials/checkerboard_blue.tres" id="2_xqomi"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ft4th"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.4
 
 [node name="Part" type="Node3D"]
+script = ExtResource("1_0wkpi")
 
 [node name="Graphics" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("PrismMesh_hd5dr")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+material_override = ExtResource("2_xqomi")
+mesh = SubResource("CylinderMesh_ft4th")

@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://by2771v3haugr"]
+[gd_scene load_steps=11 format=3 uid="uid://by2771v3haugr"]
 
 [ext_resource type="Texture2D" uid="uid://bv68o32w2syqa" path="res://Materials/Textures/ground.png" id="1_27my0"]
 [ext_resource type="PackedScene" uid="uid://btjt3q81y0i2b" path="res://Scenes/player.tscn" id="1_iq64q"]
 [ext_resource type="Material" uid="uid://cm76uwm7kjl1n" path="res://Materials/checkerboard.tres" id="3_rjy6d"]
 [ext_resource type="PackedScene" uid="uid://y3fhbrp47ptv" path="res://Scenes/oscilloscope.tscn" id="4_kkmu0"]
+[ext_resource type="PackedScene" uid="uid://ufmsrk8yynj3" path="res://Scenes/inspection_frame.tscn" id="5_kee1e"]
+[ext_resource type="PackedScene" uid="uid://cvwyw3pb4offg" path="res://Scenes/thermal_cam.tscn" id="6_8wxcp"]
 
 [sub_resource type="Environment" id="Environment_frknc"]
 
@@ -117,7 +119,14 @@ size = Vector3(1, 3.5, 2)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="TestEnvironment"]
 transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 5.44533, 0)
+light_color = Color(1, 1, 0.721569, 1)
 omni_range = 7.5
 
 [node name="Oscilloscope" parent="." instance=ExtResource("4_kkmu0")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.5, 1, 1)
+
+[node name="InspectionFrame" parent="." instance=ExtResource("5_kee1e")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.7, 1.6, 2.5)
+
+[node name="ThermalCam" parent="." instance=ExtResource("6_8wxcp")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0.3)

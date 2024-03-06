@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca7naxg00sehu"]
+
+[ext_resource type="Script" path="res://Scripts/part.gd" id="1_0wkpi"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_hd5dr"]
+size = Vector3(0.2, 0.2, 0.4)
+
+[node name="Part" type="Node3D"]
+script = ExtResource("1_0wkpi")
+
+[node name="Graphics" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_hd5dr")
