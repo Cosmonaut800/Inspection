@@ -125,8 +125,9 @@ omni_range = 7.5
 [node name="Oscilloscope" parent="." instance=ExtResource("4_kkmu0")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.5, 1, 1)
 
-[node name="InspectionFrame" parent="." instance=ExtResource("5_kee1e")]
+[node name="InspectionFrame" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.7, 1.6, 2.5)
+player = NodePath("../Player")
 
 [node name="ThermalCam" parent="." instance=ExtResource("6_8wxcp")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0.3)

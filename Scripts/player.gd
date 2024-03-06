@@ -24,6 +24,8 @@ var pitch_input := 0.0
 var state := 0
 enum STATE {FREE, IN_CABINET}
 
+var focused := true
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	state = STATE.FREE
@@ -51,7 +53,12 @@ func _physics_process(delta):
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if focused:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+		focused = !focused
 	
 	if Input.is_action_just_pressed("use"):
 		if state == STATE.FREE and ray.is_colliding():

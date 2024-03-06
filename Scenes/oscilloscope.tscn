@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://y3fhbrp47ptv"]
+[gd_scene load_steps=7 format=3 uid="uid://y3fhbrp47ptv"]
 
 [ext_resource type="Script" path="res://Scripts/scope_line.gd" id="1_agbpb"]
+[ext_resource type="Script" path="res://Scripts/oscilloscope.gd" id="1_ucqus"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_j2vi6"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -16,6 +17,7 @@ resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_rto3v")
 
 [node name="Oscilloscope" type="Node3D"]
+script = ExtResource("1_ucqus")
 
 [node name="BodyGraphics" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_j2vi6")
