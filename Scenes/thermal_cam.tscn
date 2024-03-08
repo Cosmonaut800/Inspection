@@ -1,19 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvwyw3pb4offg"]
+[gd_scene load_steps=6 format=3 uid="uid://cvwyw3pb4offg"]
 
 [ext_resource type="Material" uid="uid://e2vkd7ec4sc3" path="res://Materials/thermal_view.tres" id="1_dfnj8"]
+[ext_resource type="Script" path="res://Scripts/thermal_cam.gd" id="1_sh7pd"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_i2giy"]
-size = Vector3(0.1, 0.1, 0.1)
+[sub_resource type="BoxMesh" id="BoxMesh_o36ya"]
+size = Vector3(0.01, 0.01, 0.12)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_q2iri"]
 size = Vector2(0.1, 0.1)
 
+[sub_resource type="SphereMesh" id="SphereMesh_ksybc"]
+flip_faces = true
+radius = 0.25
+height = 0.5
+
 [node name="ThermalCam" type="Node3D"]
+script = ExtResource("1_sh7pd")
 
 [node name="BodyGraphics" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_i2giy")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
+mesh = SubResource("BoxMesh_o36ya")
+
+[node name="BodyGraphics2" type="MeshInstance3D" parent="BodyGraphics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
+mesh = SubResource("BoxMesh_o36ya")
+skeleton = NodePath("../..")
+
+[node name="BodyGraphics3" type="MeshInstance3D" parent="BodyGraphics"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.05, 0, 0.05)
+mesh = SubResource("BoxMesh_o36ya")
+skeleton = NodePath("../..")
+
+[node name="BodyGraphics4" type="MeshInstance3D" parent="BodyGraphics"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.05, 0, -0.05)
+mesh = SubResource("BoxMesh_o36ya")
+skeleton = NodePath("../..")
 
 [node name="Screen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0574323, 0)
 mesh = SubResource("PlaneMesh_q2iri")
+surface_material_override/0 = ExtResource("1_dfnj8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_ksybc")
 surface_material_override/0 = ExtResource("1_dfnj8")

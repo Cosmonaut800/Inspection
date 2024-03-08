@@ -8,6 +8,7 @@ const DECEL = 25.0
 @onready var yaw := $YawPivot
 @onready var pitch := $YawPivot/PitchPivot
 @onready var camera := $YawPivot/PitchPivot/Camera3D
+@onready var cam_target := $YawPivot/PitchPivot/CameraTarget
 @onready var ray := $YawPivot/PitchPivot/RayCast3D
 
 var current_cabinet: Node3D
@@ -62,19 +63,17 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("use"):
 		if state == STATE.FREE and ray.is_colliding():
-			previous_basis = camera.global_basis
-			previous_position = camera.position
+			previous_basis = cam_target.global_basis
+			previous_position = cam_target.position
 			current_cabinet = ray.get_collider().get_parent()
 			current_cabinet.open_cabinet()
-			camera.global_basis = current_cabinet.cam_target.global_basis
-			camera.global_position = current_cabinet.cam_target.global_position
+			cam_target.global_basis = current_cabinet.cam_target.global_basis
+			cam_target.global_position = current_cabinet.cam_target.global_position
+			camera.weight = 0.0
 			state = STATE.IN_CABINET
 			
 		elif state == STATE.IN_CABINET:
-			camera.global_basis = previous_basis
-			camera.position = previous_position
-			current_cabinet.close_cabinet()
-			state = STATE.FREE
+			exit_cabinet()
 	
 	if state == STATE.FREE:
 		yaw.rotate_y(yaw_input)
@@ -88,3 +87,10 @@ func _unhandled_input(event):
 			if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 				yaw_input = -event.relative.x * mouse_sensitivity
 				pitch_input = -event.relative.y * mouse_sensitivity
+
+func exit_cabinet():
+	cam_target.global_basis = previous_basis
+	cam_target.position = previous_position
+	camera.weight = 0.0
+	current_cabinet.close_cabinet()
+	state = STATE.FREE

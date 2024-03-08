@@ -1,26 +1,36 @@
-[gd_scene load_steps=9 format=3 uid="uid://ufmsrk8yynj3"]
+[gd_scene load_steps=13 format=3 uid="uid://ufmsrk8yynj3"]
 
-[ext_resource type="Material" uid="uid://bwto4s7auhjnh" path="res://Materials/checkerboard_orange.tres" id="1_imwp2"]
 [ext_resource type="Script" path="res://Scripts/inspection_frame.gd" id="1_qncd1"]
+[ext_resource type="Material" uid="uid://bn5thx7h4m463" path="res://Materials/checkerboard_dark.tres" id="2_j3l1x"]
 [ext_resource type="PackedScene" uid="uid://y3fhbrp47ptv" path="res://Scenes/oscilloscope.tscn" id="3_38jeh"]
 [ext_resource type="Texture2D" uid="uid://ch2qjlipgc2lg" path="res://Materials/Textures/tool_tray.png" id="3_gjsx4"]
 [ext_resource type="Texture2D" uid="uid://h2r2eqrf7s1y" path="res://Materials/Textures/arrow.png" id="4_asyxo"]
 [ext_resource type="PackedScene" uid="uid://cvwyw3pb4offg" path="res://Scenes/thermal_cam.tscn" id="4_w2ys5"]
 [ext_resource type="Texture2D" uid="uid://dud14eedw0p8q" path="res://Materials/Textures/arrow_dark.png" id="5_e25n4"]
+[ext_resource type="Texture2D" uid="uid://chwalqev5dr2l" path="res://Materials/Textures/emergency_button.png" id="6_e4xj7"]
+[ext_resource type="Texture2D" uid="uid://y3vx4xeegvlf" path="res://Materials/Textures/checkerboard.png" id="7_edb8i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2ahx"]
+size = Vector3(1, 1, 0.310059)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ylc6x"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_ksroq"]
+font_size = 30
 
 [node name="InspectionFrame" type="Node3D"]
 script = ExtResource("1_qncd1")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.45)
-material_override = ExtResource("1_imwp2")
+material_override = ExtResource("2_j3l1x")
 size = Vector3(1, 1, 0.1)
 
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.344971)
 shape = SubResource("BoxShape3D_f2ahx")
 
 [node name="Oscilloscope" parent="." instance=ExtResource("3_38jeh")]
@@ -28,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 visible = false
 
 [node name="ThermalCam" parent="." instance=ExtResource("4_w2ys5")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0)
 visible = false
 
 [node name="CameraTarget" type="Node3D" parent="."]
@@ -44,34 +54,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Tools" type="Panel" parent="Control"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -450.0
-offset_top = -202.0
-offset_right = -20.0
-offset_bottom = -24.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="TextureRect" type="TextureRect" parent="Control/Tools"]
+[node name="bg" type="Panel" parent="Control"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -121.0
+offset_top = -122.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Tools" type="Panel" parent="Control/bg"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -215.0
+offset_right = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToolTray" type="TextureRect" parent="Control/bg/Tools"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -76.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("3_gjsx4")
 expand_mode = 1
 
-[node name="OscButton" type="Button" parent="Control/Tools/TextureRect"]
+[node name="OscButton" type="Button" parent="Control/bg/Tools/ToolTray"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -80,7 +97,7 @@ grow_vertical = 2
 toggle_mode = true
 text = "Osc"
 
-[node name="ThermButton" type="Button" parent="Control/Tools/TextureRect"]
+[node name="ThermButton" type="Button" parent="Control/bg/Tools/ToolTray"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -93,7 +110,7 @@ grow_vertical = 2
 toggle_mode = true
 text = "Thermal"
 
-[node name="AcoButton" type="Button" parent="Control/Tools/TextureRect"]
+[node name="AcoButton" type="Button" parent="Control/bg/Tools/ToolTray"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -105,7 +122,7 @@ grow_vertical = 2
 toggle_mode = true
 text = "Acoustic"
 
-[node name="Label" type="Label" parent="Control/Tools"]
+[node name="ToolsText" type="Label" parent="Control/bg/Tools"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -116,16 +133,76 @@ text = "TOOLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Panel" parent="Control"]
+[node name="Timer" type="Panel" parent="Control/bg"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 21.0
-offset_top = -152.0
-offset_right = 405.0
-offset_bottom = -19.0
-grow_vertical = 0
+offset_right = 361.0
+grow_vertical = 2
+
+[node name="Time" type="Label" parent="Control/bg/Timer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0:00"
+label_settings = SubResource("LabelSettings_ylc6x")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TimeToMeltdown" type="Label" parent="Control/bg/Timer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "Time to Meltdown:"
+label_settings = SubResource("LabelSettings_ksroq")
+horizontal_alignment = 1
+
+[node name="Jettison" type="Panel" parent="Control/bg"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -361.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="JettisonText" type="Label" parent="Control/bg/Jettison"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 26.0
+offset_top = -24.0
+offset_right = 194.0
+offset_bottom = 26.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "JETTISON:"
+
+[node name="JettisonButton" type="TextureButton" parent="Control/bg/Jettison"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -51.0
+offset_right = -34.0
+offset_bottom = 49.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("6_e4xj7")
+texture_pressed = ExtResource("7_edb8i")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="LeftArrow" type="TextureButton" parent="Control"]
 layout_mode = 1
@@ -161,8 +238,9 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[connection signal="toggled" from="Control/Tools/TextureRect/OscButton" to="." method="_on_osc_button_toggled"]
-[connection signal="toggled" from="Control/Tools/TextureRect/ThermButton" to="." method="_on_therm_button_toggled"]
-[connection signal="toggled" from="Control/Tools/TextureRect/AcoButton" to="." method="_on_aco_button_toggled"]
+[connection signal="toggled" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_toggled"]
+[connection signal="toggled" from="Control/bg/Tools/ToolTray/ThermButton" to="." method="_on_therm_button_toggled"]
+[connection signal="toggled" from="Control/bg/Tools/ToolTray/AcoButton" to="." method="_on_aco_button_toggled"]
+[connection signal="pressed" from="Control/bg/Jettison/JettisonButton" to="." method="_on_jettison_button_pressed"]
 [connection signal="pressed" from="Control/LeftArrow" to="." method="_on_left_arrow_pressed"]
 [connection signal="pressed" from="Control/RightArrow" to="." method="_on_right_arrow_pressed"]

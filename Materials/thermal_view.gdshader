@@ -1,14 +1,14 @@
 shader_type spatial;
 render_mode unshaded, depth_draw_always;
 
-struct blobSegment {
-	float dist;
-	vec3 col;
-};
+uniform float hotspotPos = 0.0f;
+uniform float hotspotRadius = 0.25f;
+uniform float hotspotAtten = 1.0f;
+uniform vec3 basePosition = vec3(0.0f, 0.0f, 0.0f);
 
 float randf(float ofs)
 {
-	return fract(sin(dot(vec2(TIME, ofs), vec2(12.9898, 4.1414))) * 43758.5453);
+	return fract(sin(dot(vec2(ofs, ofs), vec2(12.9898, 4.1414))) * 43758.5453);
 }
 
 float smin(float d1, float d2, float k)
@@ -31,21 +31,35 @@ float sdBox(vec3 p, vec3 b)
 //Distance functions
 float map(vec3 p)
 {
-	float tOffset1 = TIME+1.0f;
-	float tOffset2 = TIME+2.0f;
-	float tOffset3 = TIME;
-	vec3 spherePos1 = vec3(0.08f * sin(TIME * 1.2f), 0.06f * cos(tOffset1 * 1.1f), 0.05f*sin(tOffset2*1.6f));
-	vec3 spherePos2 = vec3(0.08f * cos(TIME * 0.7f), 0.06f * sin(tOffset2 * 0.6f), 0.05f*sin(tOffset1*1.4f));
-	vec3 spherePos3 = vec3(0.08f * sin(TIME * 2.0f), 0.06f * cos(tOffset3 * 2.1f), 0.05f*sin(tOffset3*1.2f));
-	float sphere1 = sdSphere(p - spherePos1, 0.1f);
-	float sphere2 = sdSphere(p - spherePos2, 0.1f);
-	float sphere3 = sdSphere(p - spherePos3, 0.1f);
+	float tOffset[64];
+	vec3 spherePos[64];
+	float sphere[64];
 	
-	float sphere4 = sdSphere(p, 0.1f);
+	float index = 0.0f;
+	float result = 0.0;
 	
-	return smin(sphere1, smin(sphere2, smin(sphere3, sphere4, 0.15f), 0.12f), 0.05f);
+	for(int i=0; i<2; i++)
+	{
+		index += 1.0f;
+		tOffset[i] = TIME + 2.0*randf(index);
+		spherePos[i] = basePosition + vec3(0.08f * sin(TIME * 1.2f*randf(index + 0.1f)), 0.05f + 0.4f*randf(index + 0.2f) + 0.06f * cos(tOffset[i] * 1.2f*randf(index + 0.3f)), 0.05f*sin(tOffset[i]*1.6f*randf(index + 0.4f)));
+		sphere[i] = sdSphere(p - spherePos[i], 0.035f + 0.025f*randf(index));
+	}
+	result = smin(sphere[0], sphere[1], 0.12f*randf(index+0.5f));
+	
+	for(int i=2; i<64; i++)
+	{
+		index += 1.0f;
+		tOffset[i] = TIME + 2.0*randf(index);
+		spherePos[i] = basePosition + vec3(0.08f * sin(TIME * 1.2f*randf(index)), 0.4f*randf(index) + 0.06f * cos(tOffset[i] * 1.2f*randf(index)), 0.05f*sin(tOffset[i]*1.6f*randf(index)));
+		sphere[i] = sdSphere(p - spherePos[i], 0.035f + 0.025f*randf(index));
+		
+		result = smin(sphere[i], result, 0.12f*randf(index+0.5f));
+	}
+	
+	return result;
 }
-//Thanks to Kishimisu on YouTube for this implementation of raymarching!
+//Thanks to Kishimisu on YouTube for explaining this implementation of raymarching!
 void fragment() {
 	vec3 ro = CAMERA_POSITION_WORLD; //ray origin
 	vec3 rd = (INV_VIEW_MATRIX * vec4(-VIEW, 0.0f)).xyz; //ray direction
@@ -62,14 +76,14 @@ void fragment() {
 		float d = map(p); //current distance to the scene
 		
 		t += d; //march the ray
-		//rim = float(i)/5.0f;
-		rim = 1.0f - clamp(length(p)/0.25f, 0.2f, 0.8f);
-		col = mix(vec3(1.0f, 0.3f, 0.0f), vec3(0.1f, 0.0f, 0.1f), clamp(length(p)/0.25f, 0.0f, 1.0f));
+		//rim = float(i)/40.0f;
+		rim = 1.0f - clamp(length(p), 0.2f, 0.8f);
+		col = mix(vec3(1.0f, 0.3f, 0.0f), vec3(0.1f, 0.0f, 0.1f), clamp(pow(length(p - vec3(basePosition.x, basePosition.y + hotspotPos, basePosition.z))/hotspotRadius, hotspotAtten), 0.0f, 1.0f));
 		
 		if (d < 0.001f || t > 100.0f) break;
 	}
 	//col = mix(vec3(1.0f, 0.3f, 0.0f), vec3(0.1f, 0.0f, 0.1f), vec3(clamp(t / 3.0f, 0.0f, 1.0f)));
 	
 	ALBEDO = col;
-	ALPHA = (1.0f - clamp(t/100.0f, 0.0f, 1.0f)) * rim;
+	ALPHA = (1.0f - clamp(t/100.0f, 0.0f, 1.0f)) * 0.5f;// * rim;
 }
