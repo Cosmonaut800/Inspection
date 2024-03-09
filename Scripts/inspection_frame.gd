@@ -3,13 +3,16 @@ extends Node3D
 @export var player:CharacterBody3D
 @export var num_of_parts := 4
 @export var timer := 60.0
-@export var similarity := 0.6
+@export var difference_max := 1.0 #Should be above difference_min
+@export var difference_min := 0.5 #Should never be above 0.5
 
 @onready var cabinet_UI := $Control
 @onready var timer_label := $Control/bg/Timer/Time
 @onready var cam_target := $CameraTarget
 @onready var oscilloscope := $Oscilloscope
 @onready var thermal_cam := $ThermalCam
+@onready var hitbox := $Area3D/CollisionShape3D
+@onready var anim_tree := $OmniLight3D/AnimationTree
 
 var part_template = preload("res://Scenes/part.tscn")
 
@@ -53,6 +56,16 @@ func _process(delta):
 		var time_str = "%1.0f:%02.0f" % [floor(timer/60.0), floor(fmod(timer, 60.0))]
 		timer_label.text = time_str
 
+func activate():
+	hitbox.disabled = false
+	anim_tree.set("parameters/conditions/opened", false)
+	anim_tree.set("parameters/conditions/blinking", true)
+
+func deactivate():
+	hitbox.disabled = true
+	anim_tree.set("parameters/conditions/blinking", false)
+	anim_tree.set("parameters/conditions/finished", true)
+
 func open_cabinet():
 	open = true
 	cabinet_UI.set_visible(true)
@@ -79,6 +92,9 @@ func open_cabinet():
 	parts[aberrant].thermal_spike = thermal_aberrant
 	
 	configure_thermal_cam()
+	
+	anim_tree.set("parameters/conditions/finished", false)
+	anim_tree.set("parameters/conditions/opened", true)
 
 func close_cabinet():
 	open = false
@@ -87,6 +103,7 @@ func close_cabinet():
 	parts = []
 	cabinet_UI.set_visible(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	deactivate()
 
 func generate_em_aberrant(em_nominal, em_aberrant):
 	em_aberrant.location = randf_range(0.2, 0.8)
@@ -95,19 +112,19 @@ func generate_em_aberrant(em_nominal, em_aberrant):
 	em_aberrant.c = randf_range(-16, -64)
 	em_aberrant.ofs = randf_range(64, 192)
 	
-	while abs(em_aberrant.location - em_nominal.location) < (1.0 - similarity)*(0.8-0.2):
+	while abs(em_aberrant.location - em_nominal.location) <= (difference_min)*(0.8-0.2) or abs(em_aberrant.location - em_nominal.location) >= (difference_max)*(0.8-0.2):
 		em_aberrant.location = randf_range(0.2, 0.8)
 	
-	while abs(em_aberrant.a - em_nominal.a) < (1.0 - similarity)*(0.01-0.005):
+	while abs(em_aberrant.a - em_nominal.a) <= (difference_min)*(0.01-0.005) or abs(em_aberrant.a - em_nominal.a) >= (difference_max)*(0.01-0.005):
 		em_aberrant.a = randf_range(0.005, 0.01)
 	
-	while abs(em_aberrant.b - em_nominal.b) < (1.0 - similarity)*(2.0+2.0):
+	while abs(em_aberrant.b - em_nominal.b) <= (difference_min)*(2.0+2.0) or abs(em_aberrant.b - em_nominal.b) >= (difference_max)*(2.0+2.0):
 		em_aberrant.b = randf_range(-2.0, 2.0)
 	
-	while abs(em_aberrant.c - em_nominal.c) < (1.0 - similarity)*(64-16):
+	while abs(em_aberrant.c - em_nominal.c) <= (difference_min)*(64-16) or abs(em_aberrant.c - em_nominal.c) >= (difference_max)*(64-16):
 		em_aberrant.c = randf_range(-16, -64)
 	
-	while abs(em_aberrant.ofs - em_nominal.ofs) < (1.0 - similarity)*(192-64):
+	while abs(em_aberrant.ofs - em_nominal.ofs) <= (difference_min)*(192-64) or abs(em_aberrant.ofs - em_nominal.ofs) >= (difference_max)*(192-64):
 		em_aberrant.ofs = randf_range(64, 192)
 
 func generate_thermal_aberrant(thermal_nominal, thermal_aberrant):

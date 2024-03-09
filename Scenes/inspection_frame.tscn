@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ufmsrk8yynj3"]
+[gd_scene load_steps=26 format=3 uid="uid://ufmsrk8yynj3"]
 
 [ext_resource type="Script" path="res://Scripts/inspection_frame.gd" id="1_qncd1"]
 [ext_resource type="Material" uid="uid://bn5thx7h4m463" path="res://Materials/checkerboard_dark.tres" id="2_j3l1x"]
@@ -12,6 +12,112 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2ahx"]
 size = Vector3(1, 1, 0.310059)
+
+[sub_resource type="Animation" id="Animation_7cofx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_ye725"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4pl3p"]
+resource_name = "light_off"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uol6u"]
+resource_name = "light_on"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3c3if"]
+_data = {
+"RESET": SubResource("Animation_7cofx"),
+"blink": SubResource("Animation_ye725"),
+"light_off": SubResource("Animation_4pl3p"),
+"light_on": SubResource("Animation_uol6u")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_phdgl"]
+animation = &"blink"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ogth0"]
+animation = &"light_off"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbcv5"]
+animation = &"light_on"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_262om"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8rvbe"]
+advance_mode = 2
+advance_condition = &"finished"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w00uj"]
+advance_mode = 2
+advance_condition = &"blinking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s30ka"]
+advance_mode = 2
+advance_condition = &"opened"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_csjje"]
+states/End/position = Vector2(579, 100)
+states/Start/position = Vector2(189, 100)
+states/blink/node = SubResource("AnimationNodeAnimation_phdgl")
+states/blink/position = Vector2(464, 163)
+states/light_off/node = SubResource("AnimationNodeAnimation_ogth0")
+states/light_off/position = Vector2(319, 100)
+states/light_on/node = SubResource("AnimationNodeAnimation_wbcv5")
+states/light_on/position = Vector2(458, 47)
+transitions = ["Start", "light_off", SubResource("AnimationNodeStateMachineTransition_262om"), "light_on", "light_off", SubResource("AnimationNodeStateMachineTransition_8rvbe"), "light_off", "blink", SubResource("AnimationNodeStateMachineTransition_w00uj"), "blink", "light_on", SubResource("AnimationNodeStateMachineTransition_s30ka")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ylc6x"]
 font_size = 64
@@ -32,6 +138,7 @@ size = Vector3(1, 1, 0.1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.344971)
 shape = SubResource("BoxShape3D_f2ahx")
+disabled = true
 
 [node name="Oscilloscope" parent="." instance=ExtResource("3_38jeh")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -43,6 +150,28 @@ visible = false
 
 [node name="CameraTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.359538)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825142, -0.333681)
+light_color = Color(1, 0, 0, 1)
+light_energy = 2.0
+shadow_enabled = true
+omni_range = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_3c3if")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="OmniLight3D"]
+libraries = {
+"": SubResource("AnimationLibrary_3c3if")
+}
+tree_root = SubResource("AnimationNodeStateMachine_csjje")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/blinking = false
+parameters/conditions/finished = false
+parameters/conditions/opened = false
 
 [node name="Control" type="Control" parent="."]
 visible = false
@@ -178,13 +307,13 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 26.0
+offset_left = 69.0
 offset_top = -24.0
 offset_right = 194.0
 offset_bottom = 26.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
-text = "JETTISON:"
+text = "EJECT:"
 
 [node name="JettisonButton" type="TextureButton" parent="Control/bg/Jettison"]
 layout_mode = 1
@@ -193,10 +322,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -134.0
-offset_top = -51.0
-offset_right = -34.0
-offset_bottom = 49.0
+offset_left = -155.0
+offset_top = -52.0
+offset_right = -55.0
+offset_bottom = 48.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("6_e4xj7")

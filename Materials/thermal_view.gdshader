@@ -1,10 +1,12 @@
 shader_type spatial;
-render_mode unshaded, depth_draw_always;
+render_mode unshaded;
 
 uniform float hotspotPos = 0.0f;
 uniform float hotspotRadius = 0.25f;
 uniform float hotspotAtten = 1.0f;
 uniform vec3 basePosition = vec3(0.0f, 0.0f, 0.0f);
+
+uniform sampler2D normals: hint_normal_roughness_texture;
 
 float randf(float ofs)
 {
@@ -65,6 +67,7 @@ void fragment() {
 	vec3 rd = (INV_VIEW_MATRIX * vec4(-VIEW, 0.0f)).xyz; //ray direction
 	vec3 col = vec3(0.0f); //final pixel color
 	float rim = 1.0f;
+	float weight = 0.0f;
 	
 	float t = 0.0f; //total distance travelled
 	
@@ -84,6 +87,6 @@ void fragment() {
 	}
 	//col = mix(vec3(1.0f, 0.3f, 0.0f), vec3(0.1f, 0.0f, 0.1f), vec3(clamp(t / 3.0f, 0.0f, 1.0f)));
 	
-	ALBEDO = col;
-	ALPHA = (1.0f - clamp(t/100.0f, 0.0f, 1.0f)) * 0.5f;// * rim;
+	weight = (1.0f - clamp(t/100.0f, 0.0f, 1.0f)) * 0.5f;// * rim;
+	ALBEDO = mix(vec3(0.1f, 0.0f, 0.1f)*(1.0f - dot(texture(normals, SCREEN_UV).xyz, vec3(0.0f, 0.0f, 1.0f))), col, weight);
 }
