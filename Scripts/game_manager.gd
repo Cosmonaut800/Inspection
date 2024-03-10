@@ -5,6 +5,7 @@ extends Node3D
 @onready var timer := $CabinetWait
 @onready var text_box := $TextBox
 @onready var text_timer := $TextTimer
+@onready var player := $Player
 
 var easy_cabinet
 var medium_cabinet
@@ -46,7 +47,7 @@ func _ready():
 	
 	easy_cabinet.activate()
 	
-	display_text_box("INTRO", 3.0)
+	display_text_box("INTRO", 6.0)
 
 func display_text_box(text_index: String, duration: float):
 	text_box.show_text(text_index)
@@ -54,9 +55,10 @@ func display_text_box(text_index: String, duration: float):
 	text_timer.start()
 
 func on_cabinet_completed():
-	display_text_box("CONGRATS", 3.0)
+	display_text_box("CABINET_COMPLETE", 5.0)
 
 func on_cabinet_timeout():
+	player.exit_cabinet()
 	display_text_box("YOU_LOSE", 4.0)
 
 func _on_cabinet_wait_timeout():
@@ -72,7 +74,6 @@ func _on_air_lock_activated():
 
 
 func _on_text_timer_timeout():
-	print("Ran out of time.")
 	text_box.hide_text()
 
 

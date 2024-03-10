@@ -3,8 +3,8 @@ extends Control
 @onready var label := $Panel/Label
 @onready var text_anim_tree := $TextTree
 
-var texts = {"INTRO": "Hello! This is the intro text!",
-	"CONGRATS": "Congratulations on completing a cabinet.",
+var texts = {"INTRO": "Use your tools to find the fake parts in each cabinet that lights up.",
+	"CABINET_COMPLETE": "Good! Now, take the part over to the air lock to jettison it.",
 	"YOU_WIN": "You won the game!",
 	"YOU_LOSE": "You just lost the game."}
 

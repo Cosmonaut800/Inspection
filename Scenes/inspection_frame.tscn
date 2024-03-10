@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ufmsrk8yynj3"]
+[gd_scene load_steps=28 format=3 uid="uid://ufmsrk8yynj3"]
 
 [ext_resource type="Script" path="res://Scripts/inspection_frame.gd" id="1_qncd1"]
 [ext_resource type="Material" uid="uid://bn5thx7h4m463" path="res://Materials/checkerboard_dark.tres" id="2_j3l1x"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cvwyw3pb4offg" path="res://Scenes/thermal_cam.tscn" id="4_w2ys5"]
 [ext_resource type="Texture2D" uid="uid://dud14eedw0p8q" path="res://Materials/Textures/arrow_dark.png" id="5_e25n4"]
 [ext_resource type="Texture2D" uid="uid://chwalqev5dr2l" path="res://Materials/Textures/emergency_button.png" id="6_e4xj7"]
+[ext_resource type="Texture2D" uid="uid://kokitp7fofei" path="res://Materials/Textures/clear.png" id="7_dk67e"]
 [ext_resource type="Texture2D" uid="uid://y3vx4xeegvlf" path="res://Materials/Textures/checkerboard.png" id="7_edb8i"]
+[ext_resource type="Texture2D" uid="uid://csb4pkebgupli" path="res://Materials/Textures/emergency_button_pressed.png" id="8_560rj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2ahx"]
 size = Vector3(1, 1, 0.310059)
@@ -217,39 +219,48 @@ grow_vertical = 0
 texture = ExtResource("3_gjsx4")
 expand_mode = 1
 
-[node name="OscButton" type="Button" parent="Control/bg/Tools/ToolTray"]
+[node name="OscButton" type="TextureButton" parent="Control/bg/Tools/ToolTray"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 100.0
+offset_left = 29.0
+offset_right = 109.0
 grow_vertical = 2
-toggle_mode = true
-text = "Osc"
+keep_pressed_outside = true
+texture_normal = ExtResource("7_edb8i")
+texture_pressed = ExtResource("7_dk67e")
+stretch_mode = 0
 
-[node name="ThermButton" type="Button" parent="Control/bg/Tools/ToolTray"]
+[node name="ThermButton" type="TextureButton" parent="Control/bg/Tools/ToolTray"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -50.0
-offset_right = 50.0
+offset_left = -42.0
+offset_right = 42.0
 grow_horizontal = 2
 grow_vertical = 2
-toggle_mode = true
-text = "Thermal"
+keep_pressed_outside = true
+texture_normal = ExtResource("7_edb8i")
+texture_pressed = ExtResource("7_dk67e")
+stretch_mode = 0
 
-[node name="AcoButton" type="Button" parent="Control/bg/Tools/ToolTray"]
+[node name="AcoButton" type="TextureButton" parent="Control/bg/Tools/ToolTray"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -100.0
+offset_left = -106.0
+offset_right = -24.0
 grow_horizontal = 0
 grow_vertical = 2
-toggle_mode = true
-text = "Acoustic"
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("7_edb8i")
+texture_pressed = ExtResource("7_dk67e")
+stretch_mode = 0
 
 [node name="ToolsText" type="Label" parent="Control/bg/Tools"]
 layout_mode = 1
@@ -329,7 +340,7 @@ offset_bottom = 48.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("6_e4xj7")
-texture_pressed = ExtResource("7_edb8i")
+texture_pressed = ExtResource("8_560rj")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -367,9 +378,12 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[connection signal="toggled" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_toggled"]
-[connection signal="toggled" from="Control/bg/Tools/ToolTray/ThermButton" to="." method="_on_therm_button_toggled"]
-[connection signal="toggled" from="Control/bg/Tools/ToolTray/AcoButton" to="." method="_on_aco_button_toggled"]
+[connection signal="button_down" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_button_down"]
+[connection signal="button_up" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_button_up"]
+[connection signal="button_down" from="Control/bg/Tools/ToolTray/ThermButton" to="." method="_on_therm_button_button_down"]
+[connection signal="button_up" from="Control/bg/Tools/ToolTray/ThermButton" to="." method="_on_therm_button_button_up"]
+[connection signal="button_down" from="Control/bg/Tools/ToolTray/AcoButton" to="." method="_on_aco_button_button_down"]
+[connection signal="button_up" from="Control/bg/Tools/ToolTray/AcoButton" to="." method="_on_aco_button_button_up"]
 [connection signal="pressed" from="Control/bg/Jettison/JettisonButton" to="." method="_on_jettison_button_pressed"]
 [connection signal="pressed" from="Control/LeftArrow" to="." method="_on_left_arrow_pressed"]
 [connection signal="pressed" from="Control/RightArrow" to="." method="_on_right_arrow_pressed"]

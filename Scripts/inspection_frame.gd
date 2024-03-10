@@ -196,6 +196,7 @@ func _on_osc_button_toggled(toggled_on):
 	oscilloscope.set_visible(toggled_on)
 
 
+
 func _on_therm_button_toggled(toggled_on):
 	thermal_cam.set_visible(toggled_on)
 
@@ -210,3 +211,27 @@ func _on_jettison_button_pressed():
 	
 	print(correct, ", ", current_index, ", ", aberrant)
 	player.exit_cabinet()
+
+
+func _on_osc_button_button_down():
+	oscilloscope.set_visible(true)
+
+
+func _on_osc_button_button_up():
+	oscilloscope.set_visible(false)
+
+
+func _on_therm_button_button_down():
+	thermal_cam.set_visible(true)
+
+
+func _on_therm_button_button_up():
+	thermal_cam.set_visible(false)
+
+
+func _on_aco_button_button_down():
+	pass # Replace with function body.
+
+
+func _on_aco_button_button_up():
+	pass # Replace with function body.
