@@ -14,6 +14,8 @@ extends Node3D
 @onready var hitbox := $Area3D/CollisionShape3D
 @onready var anim_tree := $OmniLight3D/AnimationTree
 
+var entity_type := "inspection_frame"
+
 var part_template = preload("res://Scenes/part.tscn")
 
 var open := false
@@ -22,19 +24,26 @@ var parts = []
 var position_targets = []
 var current_index := 0
 var aberrant := 0
+var model := 0
 
 var correct = true
+
+enum PROPERTIES {EM_FIELD, THERMAL, ACOUSTIC}
+var property := PROPERTIES.EM_FIELD
+
+signal completed
+signal timeout
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	aberrant = randi_range(0, num_of_parts-1)
+	property = randi_range(0, 1)
 	
 	for i in range(num_of_parts):
 		position_targets.append(Node3D.new())
 		add_child(position_targets[-1])
 		position_targets[-1].scale = Vector3(1.0/(1.0 + i), 1.0/(1.0 + i), 1.0/(1.0 + i))
 		position_targets[-1].position = Vector3(i * 1.0 * position_targets[-1].scale.x, -0.2 + 0.2*(1.0 - position_targets[i].scale.y), -0.2)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -43,6 +52,7 @@ func _process(delta):
 		var drop_plane = Plane(plane_normal, plane_normal.dot(cam_target.global_position) - 0.45)
 		var position3D = drop_plane.intersects_ray(player.camera.project_ray_origin(get_viewport().get_mouse_position()), player.camera.project_ray_normal(get_viewport().get_mouse_position()))
 		timer -= delta
+		if timer <= 0.0: timeout.emit()
 		if position3D:
 			oscilloscope.global_position = position3D
 			thermal_cam.global_position = position3D
@@ -65,6 +75,7 @@ func deactivate():
 	hitbox.disabled = true
 	anim_tree.set("parameters/conditions/blinking", false)
 	anim_tree.set("parameters/conditions/finished", true)
+	completed.emit()
 
 func open_cabinet():
 	open = true
@@ -72,13 +83,17 @@ func open_cabinet():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	var em_nominal = {"location": randf_range(0.2, 0.8), "a": randf_range(0.005, 0.01), "b": randf_range(-2.0, 2.0), "c": randf_range(-16.0, -64.0), "ofs": randi_range(64, 192)}
-	var thermal_nominal = {"location": randf_range(0.0, 0.4), "radius": randf_range(0.18, 0.22), "attenuation": randf_range(0.8, 1.2)}
+	var thermal_nominal = {"location": randf_range(0.0, 0.4), "radius": randf_range(0.16, 0.17), "attenuation": randf_range(0.8, 1.2)}
 	
 	var em_aberrant = {"location": 0.0, "a": 0.0, "b": 0.0, "c": 0, "ofs": 0}
 	var thermal_aberrant = {"location": 0.0, "radius": 0.0, "attenuation": 0.0}
 	
-	generate_em_aberrant(em_nominal, em_aberrant)
-	generate_thermal_aberrant(thermal_nominal, thermal_aberrant)
+	if property == PROPERTIES.EM_FIELD:
+		generate_em_aberrant(em_nominal, em_aberrant)
+		thermal_aberrant = thermal_nominal
+	elif property == PROPERTIES.THERMAL:
+		generate_thermal_aberrant(thermal_nominal, thermal_aberrant)
+		em_aberrant = em_nominal
 	
 	for i in range(num_of_parts):
 		parts.append(part_template.instantiate())
@@ -87,6 +102,11 @@ func open_cabinet():
 		parts[-1].position = position_targets[i].position
 		parts[-1].em_spike = em_nominal
 		parts[-1].thermal_spike = thermal_nominal
+	
+	model = randi_range(0, parts[0].models.size()-1)
+	for part in parts:
+		part.model_selection = model
+		part.switch_visual(part.model_selection)
 	
 	parts[aberrant].em_spike = em_aberrant
 	parts[aberrant].thermal_spike = thermal_aberrant
@@ -98,6 +118,7 @@ func open_cabinet():
 
 func close_cabinet():
 	open = false
+	player.switch_part(parts[current_index].model_selection)
 	for part in parts:
 		part.queue_free()
 	parts = []
@@ -128,9 +149,14 @@ func generate_em_aberrant(em_nominal, em_aberrant):
 		em_aberrant.ofs = randf_range(64, 192)
 
 func generate_thermal_aberrant(thermal_nominal, thermal_aberrant):
-	thermal_aberrant.location = randf_range(0.0, 0.4)
-	thermal_aberrant.radius = randf_range(0.18, 0.22)
-	thermal_aberrant.attenuation = randf_range(0.8, 1.2)
+	while abs(thermal_aberrant.location - thermal_nominal.location) <= (difference_min)*(0.4-0.0) or abs(thermal_aberrant.location - thermal_nominal.location) >= (difference_max)*(0.4-0.0):
+		thermal_aberrant.location = randf_range(0.0, 0.4)
+	
+	while abs(thermal_aberrant.radius - thermal_nominal.radius) <= (difference_min)*(0.17-0.16) or abs(thermal_aberrant.radius - thermal_nominal.radius) >= (difference_max)*(0.17-0.16):
+		thermal_aberrant.radius = randf_range(0.16, 0.17)
+	
+	while abs(thermal_aberrant.attenuation - thermal_nominal.attenuation) <= (difference_min)*(1.2-0.8) or abs(thermal_aberrant.attenuation - thermal_nominal.attenuation) >= (difference_max)*(1.2-0.8):
+		thermal_aberrant.attenuation = randf_range(0.8, 1.2)
 
 func read_oscilloscope(pos: float):
 	pos = (pos + 0.2)/0.4

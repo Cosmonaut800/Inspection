@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://by2771v3haugr"]
+[gd_scene load_steps=13 format=3 uid="uid://by2771v3haugr"]
 
 [ext_resource type="Texture2D" uid="uid://bv68o32w2syqa" path="res://Materials/Textures/ground.png" id="1_27my0"]
 [ext_resource type="PackedScene" uid="uid://btjt3q81y0i2b" path="res://Scenes/player.tscn" id="1_iq64q"]
@@ -6,6 +6,8 @@
 [ext_resource type="Material" uid="uid://cm76uwm7kjl1n" path="res://Materials/checkerboard.tres" id="3_rjy6d"]
 [ext_resource type="PackedScene" uid="uid://ufmsrk8yynj3" path="res://Scenes/inspection_frame.tscn" id="5_kee1e"]
 [ext_resource type="PackedScene" uid="uid://cvwyw3pb4offg" path="res://Scenes/thermal_cam.tscn" id="6_8wxcp"]
+[ext_resource type="PackedScene" uid="uid://dhihf6xpb43co" path="res://Scenes/air_lock.tscn" id="7_ft670"]
+[ext_resource type="PackedScene" uid="uid://bnsk2i7camrpi" path="res://Scenes/text_box.tscn" id="8_km5qj"]
 
 [sub_resource type="Environment" id="Environment_frknc"]
 
@@ -100,11 +102,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.25, 
 size = Vector3(2.5, 4.5, 1)
 
 [node name="Box1" type="CSGBox3D" parent="TestEnvironment/Ground"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.75, 1.75, 4.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.08333, 1.75, 4.5)
 size = Vector3(2.5, 4.5, 1)
 
 [node name="Box2" type="CSGBox3D" parent="TestEnvironment/Ground"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.91667, 1.75, 4.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.08333, 1.75, 4.5)
 size = Vector3(2.5, 4.5, 1)
 
 [node name="Walls" type="CSGBox3D" parent="TestEnvironment"]
@@ -123,20 +125,113 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.66667, -1.43333, 2.2)
 flip_faces = true
 size = Vector3(1, 3.5, 2)
 
+[node name="Window3" type="CSGBox3D" parent="TestEnvironment/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -1.18333, 5.03333)
+flip_faces = true
+size = Vector3(6, 2, 0.8)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TestEnvironment/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.116667, -2.85, 14.95)
+flip_faces = true
+size = Vector3(17, 11, 19.5)
+
 [node name="OmniLight3D" type="OmniLight3D" parent="TestEnvironment"]
 transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 5.44533, 0)
 light_color = Color(1, 1, 0.721569, 1)
 shadow_enabled = true
 omni_range = 7.5
 
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="TestEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.33333, -2, 14)
+radius = 4.0
+height = 16.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="TestEnvironment/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33333, -3.76173e-07)
+radius = 1.0
+height = 21.0
+
+[node name="Box1" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, -4.73695e-15, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -2.82627e-15, -13.5833, 7.08333, 1.16667)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box2" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, -4.73695e-15, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -2.82627e-15, -13.5833, 3.75, 1.16667)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box3" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, -4.73695e-15, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -2.82627e-15, -13.5833, 0.416667, 1.16667)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box4" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, -4.73695e-15, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -2.82627e-15, -13.5833, -2.91667, 1.16667)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="Box5" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D"]
+transform = Transform3D(-4.37114e-08, -4.73695e-15, 1, -1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -2.82627e-15, -13.5833, -6.25, 1.16667)
+size = Vector3(2.5, 4.5, 1)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="TestEnvironment/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.26667, -8.66667, -4)
+radius = 0.75
+height = 1.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.33333, 0)
+radius = 0.75
+height = 1.7
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.0166664, -0.433334, 0.749997)
+operation = 1
+size = Vector3(1.9, 3, 2.3)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D/CSGCylinder3D3/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00833321, -0.0333328, -0.15)
+operation = 1
+radius = 0.75
+height = 5.0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D/CSGCylinder3D3/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.149999, 0.133333, 0.766668)
+size = Vector3(3, 5, 1.9)
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 3.97496e-09, -1, 0, 1, 3.97496e-09, 0, 0.133333, 1.33333)
+radius = 0.75
+height = 3.0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D/CSGCylinder3D3/CSGCylinder3D4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.0166664, -0.583337, 0.566667)
+operation = 1
+size = Vector3(1.9, 3, 2.3)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D/CSGCylinder3D3/CSGCylinder3D4/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00833321, -0.0333328, -0.15)
+operation = 1
+radius = 0.75
+height = 5.0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="TestEnvironment/CSGCylinder3D/CSGCylinder3D/CSGCylinder3D3/CSGCylinder3D4/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.149999, 0.133333, 0.766668)
+size = Vector3(3, 5, 1.9)
+
+[node name="CabinetWait" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="TextTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="Cabinets" type="Node3D" parent="."]
 
 [node name="InspectionFrame" parent="Cabinets" node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.3, 1.6, 2.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.3, 1.6, 2.5)
 player = NodePath("../../Player")
 
 [node name="InspectionFrame2" parent="Cabinets" node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.4, 1.6, 2.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.1, 1.6, 2.5)
 player = NodePath("../../Player")
 
 [node name="InspectionFrame3" parent="Cabinets" node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
@@ -166,3 +261,13 @@ player = NodePath("../../Player")
 [node name="InspectionFrame9" parent="Cabinets" node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
 transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 5.3, 2.2, -2.2)
 player = NodePath("../../Player")
+
+[node name="AirLock" parent="." instance=ExtResource("7_ft670")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.7, 1.55, 1.55)
+
+[node name="TextBox" parent="." instance=ExtResource("8_km5qj")]
+
+[connection signal="airlock_submitted" from="Player" to="." method="_on_player_airlock_submitted"]
+[connection signal="timeout" from="CabinetWait" to="." method="_on_cabinet_wait_timeout"]
+[connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
+[connection signal="activated" from="AirLock" to="." method="_on_air_lock_activated"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca7naxg00sehu"]
+[gd_scene load_steps=6 format=3 uid="uid://ca7naxg00sehu"]
 
 [ext_resource type="Script" path="res://Scripts/part.gd" id="1_0wkpi"]
 [ext_resource type="Material" uid="uid://ctyaogeimfp3c" path="res://Materials/checkerboard_blue.tres" id="2_xqomi"]
@@ -8,10 +8,30 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.4
 
-[node name="Part" type="Node3D"]
-script = ExtResource("1_0wkpi")
+[sub_resource type="PrismMesh" id="PrismMesh_mn7qm"]
+size = Vector3(0.2, 0.2, 0.4)
 
-[node name="Graphics" type="MeshInstance3D" parent="."]
+[sub_resource type="BoxMesh" id="BoxMesh_tnjkl"]
+size = Vector3(0.2, 0.4, 0.2)
+
+[node name="Part" type="Node3D" node_paths=PackedStringArray("models")]
+script = ExtResource("1_0wkpi")
+models = [NodePath("Graphics1"), NodePath("Graphics2"), NodePath("Graphics3")]
+
+[node name="Graphics1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
 material_override = ExtResource("2_xqomi")
 mesh = SubResource("CylinderMesh_ft4th")
+
+[node name="Graphics2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, 0)
+visible = false
+mesh = SubResource("PrismMesh_mn7qm")
+surface_material_override/0 = ExtResource("2_xqomi")
+
+[node name="Graphics3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
+mesh = SubResource("BoxMesh_tnjkl")
+surface_material_override/0 = ExtResource("2_xqomi")

@@ -1,0 +1,158 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnsk2i7camrpi"]
+
+[ext_resource type="Script" path="res://Scripts/text_box.gd" id="1_rtkbm"]
+[ext_resource type="Texture2D" uid="uid://y3vx4xeegvlf" path="res://Materials/Textures/checkerboard.png" id="1_vb4ge"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dc261"]
+font_size = 29
+
+[sub_resource type="Animation" id="Animation_0u105"]
+resource_name = "scroll_text"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ddgpe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mv3pg"]
+resource_name = "clear_text"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vu1hc"]
+_data = {
+"RESET": SubResource("Animation_ddgpe"),
+"clear_text": SubResource("Animation_mv3pg"),
+"scroll_text": SubResource("Animation_0u105")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uppbl"]
+animation = &"clear_text"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x33gq"]
+animation = &"scroll_text"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_emjuo"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_774i7"]
+advance_mode = 2
+advance_condition = &"scroll"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ts2l2"]
+advance_mode = 2
+advance_condition = &"clear"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xc8kp"]
+states/clear_text/node = SubResource("AnimationNodeAnimation_uppbl")
+states/clear_text/position = Vector2(432, 100)
+states/scroll_text/node = SubResource("AnimationNodeAnimation_x33gq")
+states/scroll_text/position = Vector2(628, 100)
+transitions = ["Start", "clear_text", SubResource("AnimationNodeStateMachineTransition_emjuo"), "clear_text", "scroll_text", SubResource("AnimationNodeStateMachineTransition_774i7"), "scroll_text", "clear_text", SubResource("AnimationNodeStateMachineTransition_ts2l2")]
+graph_offset = Vector2(118, 12)
+
+[node name="TextBox" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_rtkbm")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -197.0
+offset_right = -36.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -84.5
+offset_right = -192.0
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "This is a long paragraph of sample text so that I have an idea of what area the text takes up. The likelihood that I actually have the NPC say such a long paragraph is low, but this is nice for testing purposes."
+label_settings = SubResource("LabelSettings_dc261")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -88.5
+offset_bottom = 88.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("1_vb4ge")
+expand_mode = 1
+
+[node name="TextPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vu1hc")
+}
+
+[node name="TextTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vu1hc")
+}
+tree_root = SubResource("AnimationNodeStateMachine_xc8kp")
+anim_player = NodePath("../TextPlayer")
+parameters/conditions/clear = false
+parameters/conditions/scroll = false

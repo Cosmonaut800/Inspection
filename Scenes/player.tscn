@@ -1,14 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://btjt3q81y0i2b"]
+[gd_scene load_steps=8 format=3 uid="uid://btjt3q81y0i2b"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pxk52"]
 [ext_resource type="Script" path="res://Scripts/camera_follow.gd" id="2_nuti4"]
+[ext_resource type="Material" uid="uid://ctyaogeimfp3c" path="res://Materials/checkerboard_blue.tres" id="3_fon33"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yksil"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_fvcmy"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_sdi5s"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.4
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="PrismMesh" id="PrismMesh_kxlam"]
+size = Vector3(0.2, 0.2, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2vkm"]
+size = Vector3(0.2, 0.4, 0.2)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("part_models")]
 script = ExtResource("1_pxk52")
+part_models = [NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics1"), NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics2"), NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics3")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_yksil")
@@ -24,12 +35,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.512294, 0)
 fov = 85.0
 script = ExtResource("2_nuti4")
 
+[node name="PartModels" type="Node3D" parent="YawPivot/PitchPivot/Camera3D"]
+transform = Transform3D(0.473994, -0.149534, -0.0544885, 0.158086, 0.462147, 0.106908, 0.0183908, -0.118575, 0.485388, 0.237268, -0.231592, -0.133795)
+
+[node name="Graphics1" type="MeshInstance3D" parent="YawPivot/PitchPivot/Camera3D/PartModels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
+material_override = ExtResource("3_fon33")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_sdi5s")
+skeleton = NodePath("../../../../..")
+
+[node name="Graphics2" type="MeshInstance3D" parent="YawPivot/PitchPivot/Camera3D/PartModels"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("PrismMesh_kxlam")
+skeleton = NodePath("../../../../..")
+surface_material_override/0 = ExtResource("3_fon33")
+
+[node name="Graphics3" type="MeshInstance3D" parent="YawPivot/PitchPivot/Camera3D/PartModels"]
+transform = Transform3D(1, -4.65661e-09, 2.98023e-08, 1.2666e-07, 1, 4.47035e-08, -3.72529e-09, -4.47035e-08, 1, 0, 0.2, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_h2vkm")
+skeleton = NodePath("../Graphics2")
+surface_material_override/0 = ExtResource("3_fon33")
+
 [node name="RayCast3D" type="RayCast3D" parent="YawPivot/PitchPivot"]
 target_position = Vector3(1.45519e-11, 1.45519e-11, -1.5)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_fvcmy")

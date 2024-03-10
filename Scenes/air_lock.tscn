@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhihf6xpb43co"]
+
+[ext_resource type="Script" path="res://Scripts/air_lock.gd" id="1_3jlj2"]
+[ext_resource type="Material" uid="uid://bwto4s7auhjnh" path="res://Materials/checkerboard_orange.tres" id="1_yxonx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o7cyo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h14nv"]
+
+[node name="AirLock" type="Node3D"]
+script = ExtResource("1_3jlj2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_yxonx")
+mesh = SubResource("BoxMesh_o7cyo")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_h14nv")
