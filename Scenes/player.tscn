@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://btjt3q81y0i2b"]
+[gd_scene load_steps=12 format=3 uid="uid://btjt3q81y0i2b"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pxk52"]
 [ext_resource type="Script" path="res://Scripts/camera_follow.gd" id="2_nuti4"]
 [ext_resource type="Material" uid="uid://ctyaogeimfp3c" path="res://Materials/checkerboard_blue.tres" id="3_fon33"]
+[ext_resource type="AudioStream" uid="uid://3gquc0vegp34" path="res://Audio/footstep1.wav" id="4_1oyem"]
+[ext_resource type="AudioStream" uid="uid://bawes4gquo30d" path="res://Audio/footstep2.wav" id="5_ae2r7"]
+[ext_resource type="AudioStream" uid="uid://be6ylepr5a4wd" path="res://Audio/footstep3.wav" id="6_r4eu1"]
+[ext_resource type="AudioStream" uid="uid://biuxt3mwhcb0e" path="res://Audio/footstep4.wav" id="7_640ky"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yksil"]
 
@@ -25,7 +29,7 @@ part_models = [NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics1"), No
 shape = SubResource("CapsuleShape3D_yksil")
 
 [node name="YawPivot" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.512294, 0)
+transform = Transform3D(-0.332019, 0, 0.943273, 0, 1, 0, -0.943273, 0, -0.332019, 0, 0.512294, 0)
 
 [node name="PitchPivot" type="Node3D" parent="YawPivot"]
 
@@ -67,3 +71,27 @@ target_position = Vector3(1.45519e-11, 1.45519e-11, -1.5)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="FootstepTimer" type="Timer" parent="Audio"]
+wait_time = 0.4
+autostart = true
+
+[node name="footstep1" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("4_1oyem")
+attenuation_filter_db = 0.0
+
+[node name="footstep2" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("5_ae2r7")
+attenuation_filter_db = 0.0
+
+[node name="footstep3" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("6_r4eu1")
+attenuation_filter_db = 0.0
+
+[node name="footstep4" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("7_640ky")
+attenuation_filter_db = 0.0
+
+[connection signal="timeout" from="Audio/FootstepTimer" to="." method="_on_footstep_timer_timeout"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhihf6xpb43co"]
+[gd_scene load_steps=6 format=3 uid="uid://dhihf6xpb43co"]
 
 [ext_resource type="Script" path="res://Scripts/air_lock.gd" id="1_3jlj2"]
 [ext_resource type="Material" uid="uid://bwto4s7auhjnh" path="res://Materials/checkerboard_orange.tres" id="1_yxonx"]
+[ext_resource type="AudioStream" uid="uid://bk1l2st0gwqjs" path="res://Audio/bell.ogg" id="3_30qky"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o7cyo"]
 
@@ -18,3 +19,13 @@ mesh = SubResource("BoxMesh_o7cyo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_h14nv")
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.602475, 1.30785, 0)
+visible = false
+light_color = Color(1, 1, 0, 1)
+omni_range = 1.67435
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.592402, 1.28649, 0)
+stream = ExtResource("3_30qky")

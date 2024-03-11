@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://tulfwmxdyy2x"]
+
+[ext_resource type="PackedScene" uid="uid://dcd604f0bwedk" path="res://Models/thermal_cam_model.glb" id="1_0m603"]
+[ext_resource type="Texture2D" uid="uid://bkkmq3gyfnjyq" path="res://Materials/Textures/eU_floortile3_BaseColor.png" id="2_yhmlb"]
+[ext_resource type="Texture2D" uid="uid://cp25xsym3muwb" path="res://Materials/Textures/eU_wallpanel6_BaseColor_yellow.png" id="3_xuamv"]
+[ext_resource type="Texture2D" uid="uid://b6kq8umd7sjhv" path="res://Materials/Textures/eU_floortile3_Height.png" id="4_2v4ub"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dsal"]
+albedo_texture = ExtResource("2_yhmlb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgy11"]
+albedo_texture = ExtResource("3_xuamv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74aqs"]
+albedo_texture = ExtResource("4_2v4ub")
+
+[node name="thermal_cam2" instance=ExtResource("1_0m603")]
+
+[node name="thermal_cam" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1dsal")
+surface_material_override/1 = SubResource("StandardMaterial3D_sgy11")
+surface_material_override/2 = SubResource("StandardMaterial3D_74aqs")

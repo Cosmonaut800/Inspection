@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvwyw3pb4offg"]
+[gd_scene load_steps=7 format=3 uid="uid://cvwyw3pb4offg"]
 
 [ext_resource type="Material" uid="uid://e2vkd7ec4sc3" path="res://Materials/thermal_view.tres" id="1_dfnj8"]
 [ext_resource type="Script" path="res://Scripts/thermal_cam.gd" id="1_sh7pd"]
+[ext_resource type="PackedScene" uid="uid://tulfwmxdyy2x" path="res://Models/thermal_cam_model.tscn" id="3_peuh6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o36ya"]
 size = Vector3(0.01, 0.01, 0.12)
@@ -19,6 +20,7 @@ script = ExtResource("1_sh7pd")
 
 [node name="BodyGraphics" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_o36ya")
 
 [node name="BodyGraphics2" type="MeshInstance3D" parent="BodyGraphics"]
@@ -44,3 +46,6 @@ surface_material_override/0 = ExtResource("1_dfnj8")
 visible = false
 mesh = SubResource("SphereMesh_ksybc")
 surface_material_override/0 = ExtResource("1_dfnj8")
+
+[node name="thermal_cam2" parent="." instance=ExtResource("3_peuh6")]
+transform = Transform3D(-0.654, -5.71745e-08, 2.49918e-15, 0, -2.85872e-08, -0.654, 5.71745e-08, -0.654, 2.85872e-08, 0, -0.01, 0)

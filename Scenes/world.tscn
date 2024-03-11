@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://by2771v3haugr"]
+[gd_scene load_steps=17 format=3 uid="uid://by2771v3haugr"]
 
 [ext_resource type="Texture2D" uid="uid://bv68o32w2syqa" path="res://Materials/Textures/ground.png" id="1_27my0"]
 [ext_resource type="PackedScene" uid="uid://btjt3q81y0i2b" path="res://Scenes/player.tscn" id="1_iq64q"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://7cb54beaag5l" path="res://Scenes/test_environment.tscn" id="5_bs4bw"]
 [ext_resource type="PackedScene" uid="uid://ufmsrk8yynj3" path="res://Scenes/inspection_frame.tscn" id="5_kee1e"]
 [ext_resource type="PackedScene" uid="uid://cvwyw3pb4offg" path="res://Scenes/thermal_cam.tscn" id="6_8wxcp"]
+[ext_resource type="Texture2D" uid="uid://bgoj0ys5x71rg" path="res://Materials/Textures/poster.png" id="6_pojyi"]
 [ext_resource type="PackedScene" uid="uid://dhihf6xpb43co" path="res://Scenes/air_lock.tscn" id="7_ft670"]
 [ext_resource type="PackedScene" uid="uid://bnsk2i7camrpi" path="res://Scenes/text_box.tscn" id="8_km5qj"]
+[ext_resource type="AudioStream" uid="uid://wpals5bk4phv" path="res://Audio/ambient_01.ogg" id="9_l48eb"]
 
 [sub_resource type="Environment" id="Environment_frknc"]
 ambient_light_source = 2
@@ -21,6 +23,11 @@ albedo_texture = ExtResource("1_27my0")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fj0bd"]
 size = Vector3(25, 1, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfn7e"]
+albedo_texture = ExtResource("6_pojyi")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gpwa7"]
 
 [node name="World" type="Node3D" node_paths=PackedStringArray("cabinets")]
 script = ExtResource("1_r7dba")
@@ -43,11 +50,19 @@ shape = SubResource("BoxShape3D_fj0bd")
 [node name="Player" parent="." instance=ExtResource("1_iq64q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, 1.5)
 
+[node name="Camera3D" parent="Player/YawPivot/PitchPivot" index="1"]
+current = true
+
 [node name="ThermalCam" parent="Player" instance=ExtResource("6_8wxcp")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.5, 0)
 visible = false
 
 [node name="TestEnvironment" parent="." instance=ExtResource("5_bs4bw")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestEnvironment"]
+transform = Transform3D(-1.05, 0, 1.39876e-07, -9.17939e-08, -4.37114e-08, -1.6, 4.01244e-15, -1, 6.99382e-08, 6.66667, 2.66667, 4.73333)
+material_override = SubResource("StandardMaterial3D_yfn7e")
+mesh = SubResource("PlaneMesh_gpwa7")
 
 [node name="CabinetWait" type="Timer" parent="."]
 wait_time = 5.0
@@ -100,7 +115,20 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.7, 1.55, 1.55)
 
 [node name="TextBox" parent="." instance=ExtResource("8_km5qj")]
 
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3, 0)
+stream = ExtResource("9_l48eb")
+attenuation_model = 3
+volume_db = -12.0
+autoplay = true
+panning_strength = 0.0
+bus = &"SFX"
+
 [connection signal="airlock_submitted" from="Player" to="." method="_on_player_airlock_submitted"]
 [connection signal="timeout" from="CabinetWait" to="." method="_on_cabinet_wait_timeout"]
 [connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
 [connection signal="activated" from="AirLock" to="." method="_on_air_lock_activated"]
+
+[editable path="Player"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://y3fhbrp47ptv"]
+[gd_scene load_steps=8 format=3 uid="uid://y3fhbrp47ptv"]
 
 [ext_resource type="Script" path="res://Scripts/scope_line.gd" id="1_agbpb"]
 [ext_resource type="Script" path="res://Scripts/oscilloscope.gd" id="1_ucqus"]
+[ext_resource type="PackedScene" uid="uid://ea24jcy1sic8" path="res://Models/oscilloscope_model.tscn" id="3_jhgfr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_j2vi6"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -20,10 +21,11 @@ albedo_texture = SubResource("ViewportTexture_rto3v")
 script = ExtResource("1_ucqus")
 
 [node name="BodyGraphics" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_j2vi6")
 
 [node name="Screen" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0597745, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
 mesh = SubResource("PlaneMesh_spv2y")
 surface_material_override/0 = SubResource("StandardMaterial3D_g507j")
 
@@ -34,3 +36,6 @@ render_target_update_mode = 4
 
 [node name="Line" type="Node2D" parent="Screen/SubViewport"]
 script = ExtResource("1_agbpb")
+
+[node name="oscilloscope_model" parent="." instance=ExtResource("3_jhgfr")]
+transform = Transform3D(-0.54762, -4.78745e-08, 2.09266e-15, 0, -2.39372e-08, -0.54762, 4.78745e-08, -0.54762, 2.39372e-08, 0, 0, 0)

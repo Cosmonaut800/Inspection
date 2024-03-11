@@ -171,17 +171,17 @@ size = Vector3(5.2, 0.35, 2)
 transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 5.24503, -1.50788, 5.1428)
 light_color = Color(1, 0.513726, 0, 1)
 shadow_enabled = true
-omni_range = 15.9542
+omni_range = 5.89758
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="."]
 transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 5.24503, -1.50788, 23.9539)
 light_color = Color(1, 0.513726, 0, 1)
 shadow_enabled = true
-omni_range = 15.9542
+omni_range = 5.37529
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
 transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 1.25291, -4.33563, 14.479)
 light_color = Color(1, 0.176471, 0, 1)
 light_energy = 0.5
 shadow_enabled = true
-omni_range = 15.9542
+omni_range = 7.24855

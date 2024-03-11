@@ -1,3 +1,8 @@
+Textures:
+"PK01" and "PK02" textures by Phillip Klevestav, CC3.0, obtained from https://jovenoculto.itch.io/philip-klevestavs-pk0102-unity-material-pack
+
+"evillair's eU Texture Set" by Yves Allaire, CC4.0, obtained from https://gravendusk.itch.io/eu-sci-fi-textures
+
 Sound Effects:
 
 "Rumble/Explosion" by Michel Baradari, CC3.0,  obtained from https://opengameart.org/content/rumbleexplosion
@@ -6,3 +11,6 @@ Sound Effects:
 
 "Metal Clanks" by JustInvoke, CC4.0, obtained from https://freesound.org/people/JustInvoke/packs/25288/
 
+"Permission to Panic?" by deleted_user_2906614 [sic], CC3.0, obtained from https://freesound.org/people/deleted_user_2906614/sounds/263621/
+
+"Desk Bell.wav" by theplax, CC4.0, obtained from https://freesound.org/people/theplax/sounds/609722/

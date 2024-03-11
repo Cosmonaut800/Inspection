@@ -1,11 +1,124 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmxgvamand27o"]
+[gd_scene load_steps=8 format=3 uid="uid://bmxgvamand27o"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_11vmd"]
-size = Vector3(0.1, 0.1, 0.1)
+[ext_resource type="Script" path="res://Scripts/acoustic_tap.gd" id="1_226p8"]
+[ext_resource type="AudioStream" uid="uid://skj4sf6nhnd8" path="res://Audio/446128__justinvoke__metal-clank-4.wav" id="1_qs8lx"]
+[ext_resource type="AudioStream" uid="uid://dl37oenmmfl5u" path="res://Audio/446106__justinvoke__metal-clank-3.wav" id="2_dr7me"]
+[ext_resource type="PackedScene" uid="uid://d1jdgsi22xlpe" path="res://Models/acoustic_tap_model.tscn" id="4_jo1qe"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1lk28"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5wp0c"]
+viewport_path = NodePath("Screen/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pokgo"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_5wp0c")
 
 [node name="AcousticTap" type="Node3D"]
+script = ExtResource("1_226p8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_11vmd")
+[node name="NominalSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_qs8lx")
+volume_db = -3.0
+max_distance = 5.0
+bus = &"Tapper"
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AberrantSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_dr7me")
+max_distance = 5.0
+bus = &"Tapper"
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(1.45519e-11, -1, 1.45519e-11)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="acoustic_tap_model" parent="." instance=ExtResource("4_jo1qe")]
+transform = Transform3D(-0.5583, -4.88081e-08, 2.13347e-15, 0, -2.44041e-08, -0.5583, 4.88081e-08, -0.5583, 2.44041e-08, 0, 0.002, 0)
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009, 0)
+mesh = SubResource("PlaneMesh_1lk28")
+surface_material_override/0 = SubResource("StandardMaterial3D_pokgo")
+
+[node name="SubViewport" type="SubViewport" parent="Screen"]
+size = Vector2i(128, 128)
+
+[node name="ColorRect" type="ColorRect" parent="Screen/SubViewport"]
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.686275, 1, 1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 85.0
+offset_right = 32.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 85.0
+offset_right = 45.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 85.0
+offset_right = 58.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 85.0
+offset_right = 71.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 85.0
+offset_right = 84.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 85.0
+offset_right = 97.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 85.0
+offset_right = 110.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="Screen/SubViewport/ColorRect"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 85.0
+offset_right = 123.0
+offset_bottom = 89.0
+rotation = 3.14159
+color = Color(0, 0.470588, 0.470588, 1)

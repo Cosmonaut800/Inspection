@@ -12,6 +12,11 @@ const DECEL = 25.0
 @onready var camera := $YawPivot/PitchPivot/Camera3D
 @onready var cam_target := $YawPivot/PitchPivot/CameraTarget
 @onready var ray := $YawPivot/PitchPivot/RayCast3D
+@onready var footstep_timer := $Audio/FootstepTimer
+@onready var footsteps := [	$Audio/footstep1,
+							$Audio/footstep2,
+							$Audio/footstep3,
+							$Audio/footstep4]
 
 var current_cabinet: Node3D
 var previous_basis: Basis
@@ -29,6 +34,8 @@ enum STATE {FREE, IN_CABINET}
 var holding_part := false
 
 var focused := true
+
+var can_step := true
 
 signal airlock_submitted(correct: bool)
 
@@ -54,7 +61,14 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECEL * delta)
 		velocity.z = move_toward(velocity.z, 0, DECEL * delta)
-
+	
+	if can_step && get_last_motion().length() > 0.05:
+		var index = randi_range(0, 3)
+		can_step = false
+		footstep_timer.start()
+		footsteps[index].pitch_scale = randf_range(0.9, 1.1)
+		footsteps[index].play()
+	
 	move_and_slide()
 
 func _process(_delta):
@@ -79,6 +93,7 @@ func _process(_delta):
 				cam_target.global_basis = current_cabinet.cam_target.global_basis
 				cam_target.global_position = current_cabinet.cam_target.global_position
 				camera.weight = 0.0
+				camera.fov = 60.0
 				state = STATE.IN_CABINET
 			elif holding_part and entity.entity_type == "air_lock":
 				entity.use_airlock()
@@ -102,6 +117,7 @@ func exit_cabinet():
 	cam_target.global_basis = previous_basis
 	cam_target.position = previous_position
 	camera.weight = 0.0
+	camera.fov = 90.0
 	current_cabinet.close_cabinet()
 	state = STATE.FREE
 	holding_part = true
@@ -113,3 +129,7 @@ func switch_part(index: int):
 func hide_parts():
 	for part in part_models:
 		part.set_visible(false)
+
+
+func _on_footstep_timer_timeout():
+	can_step = true

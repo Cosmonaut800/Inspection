@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ufmsrk8yynj3"]
+[gd_scene load_steps=34 format=3 uid="uid://ufmsrk8yynj3"]
 
 [ext_resource type="Script" path="res://Scripts/inspection_frame.gd" id="1_qncd1"]
 [ext_resource type="Material" uid="uid://bn5thx7h4m463" path="res://Materials/checkerboard_dark.tres" id="2_j3l1x"]
@@ -6,11 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://ch2qjlipgc2lg" path="res://Materials/Textures/tool_tray.png" id="3_gjsx4"]
 [ext_resource type="Texture2D" uid="uid://h2r2eqrf7s1y" path="res://Materials/Textures/arrow.png" id="4_asyxo"]
 [ext_resource type="PackedScene" uid="uid://cvwyw3pb4offg" path="res://Scenes/thermal_cam.tscn" id="4_w2ys5"]
+[ext_resource type="PackedScene" uid="uid://bmxgvamand27o" path="res://Scenes/acoustic_tap.tscn" id="5_14ueh"]
 [ext_resource type="Texture2D" uid="uid://dud14eedw0p8q" path="res://Materials/Textures/arrow_dark.png" id="5_e25n4"]
 [ext_resource type="Texture2D" uid="uid://chwalqev5dr2l" path="res://Materials/Textures/emergency_button.png" id="6_e4xj7"]
 [ext_resource type="Texture2D" uid="uid://kokitp7fofei" path="res://Materials/Textures/clear.png" id="7_dk67e"]
-[ext_resource type="Texture2D" uid="uid://y3vx4xeegvlf" path="res://Materials/Textures/checkerboard.png" id="7_edb8i"]
+[ext_resource type="Texture2D" uid="uid://bhplm40ic18im" path="res://Materials/Textures/osc_icon.png" id="7_oobm8"]
 [ext_resource type="Texture2D" uid="uid://csb4pkebgupli" path="res://Materials/Textures/emergency_button_pressed.png" id="8_560rj"]
+[ext_resource type="Texture2D" uid="uid://co0n1gyx5fj4w" path="res://Materials/Textures/thermal_icon.png" id="9_trthm"]
+[ext_resource type="Texture2D" uid="uid://b8esgvyla2cof" path="res://Materials/Textures/aco_icon.png" id="10_xl2lq"]
+[ext_resource type="AudioStream" uid="uid://sxmqqlx1eppj" path="res://Audio/696172__theprinternet__two_tone_alarm_05.wav" id="13_5p7nc"]
+[ext_resource type="AudioStream" uid="uid://de62hdhkokben" path="res://Audio/explosion.wav" id="14_vnos5"]
+[ext_resource type="AudioStream" uid="uid://cn111s6ynytgq" path="res://Audio/click2.wav" id="15_pnl36"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2ahx"]
 size = Vector3(1, 1, 0.310059)
@@ -147,11 +153,15 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 visible = false
 
 [node name="ThermalCam" parent="." instance=ExtResource("4_w2ys5")]
-transform = Transform3D(2, 0, 0, 0, -8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+
+[node name="AcousticTap" parent="." instance=ExtResource("5_14ueh")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 visible = false
 
 [node name="CameraTarget" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.359538)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.658)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825142, -0.333681)
@@ -227,8 +237,9 @@ offset_left = 29.0
 offset_right = 109.0
 grow_vertical = 2
 keep_pressed_outside = true
-texture_normal = ExtResource("7_edb8i")
+texture_normal = ExtResource("7_oobm8")
 texture_pressed = ExtResource("7_dk67e")
+ignore_texture_size = true
 stretch_mode = 0
 
 [node name="ThermButton" type="TextureButton" parent="Control/bg/Tools/ToolTray"]
@@ -242,8 +253,9 @@ offset_right = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 keep_pressed_outside = true
-texture_normal = ExtResource("7_edb8i")
+texture_normal = ExtResource("9_trthm")
 texture_pressed = ExtResource("7_dk67e")
+ignore_texture_size = true
 stretch_mode = 0
 
 [node name="AcoButton" type="TextureButton" parent="Control/bg/Tools/ToolTray"]
@@ -258,8 +270,9 @@ grow_horizontal = 0
 grow_vertical = 2
 action_mode = 0
 keep_pressed_outside = true
-texture_normal = ExtResource("7_edb8i")
+texture_normal = ExtResource("10_xl2lq")
 texture_pressed = ExtResource("7_dk67e")
+ignore_texture_size = true
 stretch_mode = 0
 
 [node name="ToolsText" type="Label" parent="Control/bg/Tools"]
@@ -344,6 +357,31 @@ texture_pressed = ExtResource("8_560rj")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="AcousticTooltip" type="Panel" parent="Control/bg"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -215.0
+offset_top = -71.0
+offset_right = 215.0
+offset_bottom = -6.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control/bg/AcousticTooltip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 19
+text = "Press [Right Click] to perform acoustic test."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="LeftArrow" type="TextureButton" parent="Control"]
 layout_mode = 1
 anchors_preset = 4
@@ -378,6 +416,25 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="AlarmSound" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832157, -0.326752)
+stream = ExtResource("13_5p7nc")
+volume_db = -24.0
+attenuation_filter_db = 0.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("14_vnos5")
+
+[node name="Click" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("15_pnl36")
+attenuation_model = 3
+volume_db = 6.0
+panning_strength = 0.0
+attenuation_filter_db = 0.0
+
+[connection signal="tapped" from="AcousticTap" to="." method="_on_acoustic_tap_tapped"]
 [connection signal="button_down" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_button_down"]
 [connection signal="button_up" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_button_up"]
 [connection signal="button_down" from="Control/bg/Tools/ToolTray/ThermButton" to="." method="_on_therm_button_button_down"]
