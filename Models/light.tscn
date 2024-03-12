@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1rg7ivo7s4ac"]
+
+[ext_resource type="PackedScene" uid="uid://b7impd6h0l0fs" path="res://Models/GLTF/light.glb" id="1_qhmke"]
+[ext_resource type="Material" uid="uid://dsk7pko033yr7" path="res://Materials/grating.tres" id="2_tihxx"]
+[ext_resource type="Material" uid="uid://boqa4wrobp1cl" path="res://Materials/light.tres" id="3_ivr71"]
+
+[node name="light2" instance=ExtResource("1_qhmke")]
+
+[node name="light" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_tihxx")
+surface_material_override/1 = ExtResource("3_ivr71")

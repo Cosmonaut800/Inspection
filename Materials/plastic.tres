@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cpoyk3desyetj"]
+
+[ext_resource type="Texture2D" uid="uid://coxodwpebooky" path="res://Materials/Textures/eU_floorclang2_BaseColor.png" id="1_ue87a"]
+
+[resource]
+albedo_texture = ExtResource("1_ue87a")

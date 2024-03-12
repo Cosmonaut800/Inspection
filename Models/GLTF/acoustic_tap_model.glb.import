@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dyld510ue0qxr"
-path="res://.godot/imported/acoustic_tap_model.glb-8d605e69fa36f5cb2c7aad6d1323acc5.scn"
+path="res://.godot/imported/acoustic_tap_model.glb-558913f73538c641b2a38965892c4174.scn"
 
 [deps]
 
-source_file="res://Models/acoustic_tap_model.glb"
-dest_files=["res://.godot/imported/acoustic_tap_model.glb-8d605e69fa36f5cb2c7aad6d1323acc5.scn"]
+source_file="res://Models/GLTF/acoustic_tap_model.glb"
+dest_files=["res://.godot/imported/acoustic_tap_model.glb-558913f73538c641b2a38965892c4174.scn"]
 
 [params]
 

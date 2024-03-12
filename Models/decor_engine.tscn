@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://mkgqamomgif0"]
+
+[ext_resource type="PackedScene" uid="uid://dm8godrt43aga" path="res://Models/GLTF/decor_engine.glb" id="1_n30gd"]
+[ext_resource type="Material" uid="uid://ddwjfbvnhiyfj" path="res://Materials/core.tres" id="2_hnlsl"]
+[ext_resource type="Material" uid="uid://carr7k84eg5d6" path="res://Materials/shield.tres" id="3_r185m"]
+[ext_resource type="Material" uid="uid://bjkmf87e4wcdp" path="res://Materials/cap.tres" id="4_doafd"]
+
+[node name="decor_engine2" instance=ExtResource("1_n30gd")]
+
+[node name="decor_engine" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_hnlsl")
+surface_material_override/1 = ExtResource("3_r185m")
+surface_material_override/2 = ExtResource("4_doafd")

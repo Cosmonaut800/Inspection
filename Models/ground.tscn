@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://k6bb8kl7nqqe"]
+
+[ext_resource type="PackedScene" uid="uid://csf3c7hcnm8np" path="res://Models/GLTF/ground.glb" id="1_6awd8"]
+[ext_resource type="Material" uid="uid://bf53bkdwl7fob" path="res://Materials/metal_floor.tres" id="2_skg4r"]
+[ext_resource type="Material" uid="uid://dsk7pko033yr7" path="res://Materials/grating.tres" id="3_5scx4"]
+
+[node name="ground2" instance=ExtResource("1_6awd8")]
+
+[node name="ground" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_skg4r")
+surface_material_override/1 = ExtResource("3_5scx4")

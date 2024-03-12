@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://balc3na6c4slh"]
+
+[ext_resource type="PackedScene" uid="uid://bhceept4ee8jo" path="res://Models/GLTF/decor_catwalk.glb" id="1_ym06g"]
+[ext_resource type="Material" uid="uid://dsk7pko033yr7" path="res://Materials/grating.tres" id="2_7a2bx"]
+
+[node name="decor_catwalk2" instance=ExtResource("1_ym06g")]
+
+[node name="decor_catwalk" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_7a2bx")

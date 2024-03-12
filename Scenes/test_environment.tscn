@@ -1,13 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://7cb54beaag5l"]
+[gd_scene load_steps=12 format=3 uid="uid://7cb54beaag5l"]
 
 [ext_resource type="Material" uid="uid://cm76uwm7kjl1n" path="res://Materials/checkerboard.tres" id="1_8wo44"]
 [ext_resource type="Material" uid="uid://cctsucgsc2x6t" path="res://Materials/checkerboard_blue_emissive.tres" id="2_f56jh"]
+[ext_resource type="PackedScene" uid="uid://b5igp0t4p1o40" path="res://Models/walls.tscn" id="3_61plh"]
+[ext_resource type="PackedScene" uid="uid://byh12ddlrewsx" path="res://Models/rail.tscn" id="4_n3iia"]
+[ext_resource type="PackedScene" uid="uid://k6bb8kl7nqqe" path="res://Models/ground.tscn" id="5_lem6c"]
+[ext_resource type="PackedScene" uid="uid://d1rg7ivo7s4ac" path="res://Models/light.tscn" id="6_dgxr1"]
+[ext_resource type="PackedScene" uid="uid://mkgqamomgif0" path="res://Models/decor_engine.tscn" id="7_yacrv"]
+[ext_resource type="PackedScene" uid="uid://jwga32qmnas0" path="res://Models/decor_conduit.tscn" id="8_vdhdt"]
+[ext_resource type="PackedScene" uid="uid://balc3na6c4slh" path="res://Models/decor_catwalk.tscn" id="9_8oe7l"]
+[ext_resource type="PackedScene" uid="uid://ch05m50tr2p5a" path="res://Models/cabinet.tscn" id="10_glda2"]
+[ext_resource type="PackedScene" uid="uid://dpq67h6nc1bvm" path="res://Models/cabinet_door.tscn" id="11_fi6sh"]
 
 [node name="TestEnvironment" type="Node3D"]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
 material_override = ExtResource("1_8wo44")
 use_collision = true
 size = Vector3(17, 1, 9.5)
@@ -69,6 +79,7 @@ size = Vector3(2.5, 4.5, 1)
 
 [node name="Walls" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, -0.125)
+visible = false
 material_override = ExtResource("1_8wo44")
 use_collision = true
 flip_faces = true
@@ -94,13 +105,14 @@ flip_faces = true
 size = Vector3(17, 11, 19.5)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 5.44533, 0)
+transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 6.75178, 0)
 light_color = Color(1, 1, 0.721569, 1)
 shadow_enabled = true
 omni_range = 16.708
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.33333, -2, 15.3333)
+visible = false
 radius = 1.0
 height = 26.0
 material = ExtResource("2_f56jh")
@@ -154,12 +166,14 @@ material = ExtResource("1_8wo44")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.33333, -2, 16)
+visible = false
 material_override = ExtResource("1_8wo44")
 radius = 4.0
 height = 15.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0333333, -2.99167, 16.3583)
+visible = false
 material_override = ExtResource("1_8wo44")
 size = Vector3(2, 0.35, 15.45)
 
@@ -185,3 +199,44 @@ light_color = Color(1, 0.176471, 0, 1)
 light_energy = 0.5
 shadow_enabled = true
 omni_range = 7.24855
+
+[node name="ScaleCorrection" type="Node3D" parent="."]
+transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 0, 0)
+
+[node name="walls2" parent="ScaleCorrection" instance=ExtResource("3_61plh")]
+
+[node name="rail2" parent="ScaleCorrection" instance=ExtResource("4_n3iia")]
+
+[node name="ground2" parent="ScaleCorrection" instance=ExtResource("5_lem6c")]
+
+[node name="light2" parent="ScaleCorrection" instance=ExtResource("6_dgxr1")]
+
+[node name="decor_engine2" parent="ScaleCorrection" instance=ExtResource("7_yacrv")]
+
+[node name="decor_conduit2" parent="ScaleCorrection" instance=ExtResource("8_vdhdt")]
+
+[node name="decor_catwalk2" parent="ScaleCorrection" instance=ExtResource("9_8oe7l")]
+
+[node name="cabinet2" parent="ScaleCorrection" instance=ExtResource("10_glda2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 15.2477)
+
+[node name="cabinet3" parent="ScaleCorrection" instance=ExtResource("10_glda2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 12.7477)
+
+[node name="cabinet4" parent="ScaleCorrection" instance=ExtResource("10_glda2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 10.2477)
+
+[node name="cabinet5" parent="ScaleCorrection" instance=ExtResource("10_glda2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 7.74765)
+
+[node name="cabinet_door2" parent="ScaleCorrection" instance=ExtResource("11_fi6sh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 15.2477)
+
+[node name="cabinet_door3" parent="ScaleCorrection" instance=ExtResource("11_fi6sh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 12.7477)
+
+[node name="cabinet_door4" parent="ScaleCorrection" instance=ExtResource("11_fi6sh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 10.2477)
+
+[node name="cabinet_door5" parent="ScaleCorrection" instance=ExtResource("11_fi6sh")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.16486, -3.74723, 7.74765)

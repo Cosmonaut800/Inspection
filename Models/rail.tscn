@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://byh12ddlrewsx"]
+
+[ext_resource type="PackedScene" uid="uid://ch1ohounvytm2" path="res://Models/GLTF/rail.glb" id="1_jmfvv"]
+[ext_resource type="Material" uid="uid://oholb4nnfm0h" path="res://Materials/rail.tres" id="2_bd3vy"]
+
+[node name="rail2" instance=ExtResource("1_jmfvv")]
+
+[node name="rail" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_bd3vy")

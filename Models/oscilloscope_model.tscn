@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ea24jcy1sic8"]
 
-[ext_resource type="PackedScene" uid="uid://dyssgxcau1b37" path="res://Models/oscilloscope_model.glb" id="1_ucgoc"]
+[ext_resource type="PackedScene" uid="uid://dyssgxcau1b37" path="res://Models/GLTF/oscilloscope_model.glb" id="1_ucgoc"]
 [ext_resource type="Texture2D" uid="uid://b6kq8umd7sjhv" path="res://Materials/Textures/eU_floortile3_Height.png" id="2_msumu"]
 [ext_resource type="Texture2D" uid="uid://coxodwpebooky" path="res://Materials/Textures/eU_floorclang2_BaseColor.png" id="3_pgdd1"]
 

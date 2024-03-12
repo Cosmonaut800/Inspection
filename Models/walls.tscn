@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5igp0t4p1o40"]
+
+[ext_resource type="PackedScene" uid="uid://dmkwihe4bg4bk" path="res://Models/GLTF/walls.glb" id="1_3s51h"]
+[ext_resource type="Material" uid="uid://bf53bkdwl7fob" path="res://Materials/metal_floor.tres" id="2_du2fu"]
+[ext_resource type="Material" uid="uid://dw2sextekr6wd" path="res://Materials/wall_panel.tres" id="3_e03g8"]
+
+[node name="walls2" instance=ExtResource("1_3s51h")]
+
+[node name="walls" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_du2fu")
+surface_material_override/1 = ExtResource("3_e03g8")

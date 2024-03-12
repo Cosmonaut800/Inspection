@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dcd604f0bwedk"
-path="res://.godot/imported/thermal_cam_model.glb-2424ff87989ef0b6466e9186e5eb4826.scn"
+uid="uid://b8fup7jtgp6d0"
+path="res://.godot/imported/cabinet_door.glb-711f6acc89d4ee402436c0599f97e140.scn"
 
 [deps]
 
-source_file="res://Models/thermal_cam_model.glb"
-dest_files=["res://.godot/imported/thermal_cam_model.glb-2424ff87989ef0b6466e9186e5eb4826.scn"]
+source_file="res://Models/GLTF/cabinet_door.glb"
+dest_files=["res://.godot/imported/cabinet_door.glb-711f6acc89d4ee402436c0599f97e140.scn"]
 
 [params]
 

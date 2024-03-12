@@ -18,6 +18,7 @@ extends Node3D
 @onready var alarm_sound := $Audio/AlarmSound
 @onready var explosion_sound := $Audio/ExplosionSound
 @onready var click := $Audio/Click
+@onready var door := $cabinet2/cabinet_door2
 
 const LOOP_THRESHOLD := 400
 
@@ -85,6 +86,7 @@ func activate():
 	hitbox.disabled = false
 	alarm_sound.play()
 	explosion_sound.play()
+	door.set_visible(false)
 	anim_tree.set("parameters/conditions/opened", false)
 	anim_tree.set("parameters/conditions/blinking", true)
 

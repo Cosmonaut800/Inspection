@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch05m50tr2p5a"]
+
+[ext_resource type="PackedScene" uid="uid://dygr8p8edxj7l" path="res://Models/GLTF/cabinet.glb" id="1_t03xg"]
+[ext_resource type="Material" uid="uid://bwenlhnk3goj7" path="res://Materials/cabinet.tres" id="2_8lvp5"]
+[ext_resource type="Material" uid="uid://bhfbk63cuamcc" path="res://Materials/cabinet_panel.tres" id="3_5fyu5"]
+
+[node name="cabinet2" instance=ExtResource("1_t03xg")]
+
+[node name="cabinet" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_8lvp5")
+surface_material_override/1 = ExtResource("3_5fyu5")

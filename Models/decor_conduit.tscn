@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://jwga32qmnas0"]
+
+[ext_resource type="PackedScene" uid="uid://ba14o78rtotjl" path="res://Models/GLTF/decor_conduit.glb" id="1_i026y"]
+[ext_resource type="Material" uid="uid://cpoyk3desyetj" path="res://Materials/plastic.tres" id="2_mh0aa"]
+
+[node name="decor_conduit2" instance=ExtResource("1_i026y")]
+
+[node name="decor_conduit" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_mh0aa")

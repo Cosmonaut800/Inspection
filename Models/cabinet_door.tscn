@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpq67h6nc1bvm"]
+
+[ext_resource type="PackedScene" uid="uid://b8fup7jtgp6d0" path="res://Models/GLTF/cabinet_door.glb" id="1_f24m2"]
+[ext_resource type="Material" uid="uid://trweewftvxbp" path="res://Materials/cabinet_door.tres" id="2_35ixd"]
+
+[node name="cabinet_door2" instance=ExtResource("1_f24m2")]
+
+[node name="cabinet_door" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_35ixd")
