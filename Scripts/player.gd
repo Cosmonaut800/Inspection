@@ -12,6 +12,7 @@ const DECEL = 25.0
 @onready var camera := $YawPivot/PitchPivot/Camera3D
 @onready var cam_target := $YawPivot/PitchPivot/CameraTarget
 @onready var ray := $YawPivot/PitchPivot/RayCast3D
+@onready var action_wait := $ActionWait
 @onready var footstep_timer := $Audio/FootstepTimer
 @onready var footsteps := [	$Audio/footstep1,
 							$Audio/footstep2,
@@ -36,8 +37,12 @@ var holding_part := false
 var focused := true
 
 var can_step := true
+var can_use := true
+var can_read_text := true
 
 signal airlock_submitted(correct: bool)
+signal next_text
+signal show_tooltip(show: bool)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -82,10 +87,11 @@ func _process(_delta):
 		
 		focused = !focused
 	
-	if Input.is_action_just_pressed("use"):
+	if Input.is_action_just_pressed("use") and can_use:
 		if state == STATE.FREE and ray.is_colliding():
 			entity = ray.get_collider().get_parent()
 			if entity.entity_type == "inspection_frame":
+				show_tooltip.emit(false)
 				current_cabinet = entity
 				previous_basis = cam_target.global_basis
 				previous_position = cam_target.position
@@ -96,9 +102,12 @@ func _process(_delta):
 				camera.fov = 60.0
 				state = STATE.IN_CABINET
 			elif holding_part and entity.entity_type == "air_lock":
+				holding_part = false
 				entity.use_airlock()
 				hide_parts()
 				airlock_submitted.emit(current_cabinet.correct)
+				can_read_text = false
+				action_wait.start()
 	
 	if state == STATE.FREE:
 		yaw.rotate_y(yaw_input)
@@ -106,6 +115,11 @@ func _process(_delta):
 		pitch.rotation.x = clamp(pitch.rotation.x, -1.5, 1.5)
 		yaw_input = 0.0
 		pitch_input = 0.0
+		
+		show_tooltip.emit(ray.is_colliding() and can_use)
+		
+		if Input.is_action_just_pressed("dismiss_text") and can_read_text:
+			next_text.emit()
 
 func _unhandled_input(event):
 		if event is InputEventMouseMotion:
@@ -133,3 +147,7 @@ func hide_parts():
 
 func _on_footstep_timer_timeout():
 	can_step = true
+
+
+func _on_action_wait_timeout():
+	can_read_text = true

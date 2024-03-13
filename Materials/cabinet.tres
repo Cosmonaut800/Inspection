@@ -4,3 +4,4 @@
 
 [resource]
 albedo_texture = ExtResource("1_x3r14")
+texture_filter = 2

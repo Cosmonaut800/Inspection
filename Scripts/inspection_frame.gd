@@ -13,6 +13,7 @@ extends Node3D
 @onready var thermal_cam := $ThermalCam
 @onready var acoustic_tap := $AcousticTap
 @onready var acoustic_tooltip := $Control/bg/AcousticTooltip
+@onready var drag_tooltip := $Control/bg/DragTooltip
 @onready var hitbox := $Area3D/CollisionShape3D
 @onready var anim_tree := $OmniLight3D/AnimationTree
 @onready var alarm_sound := $Audio/AlarmSound
@@ -297,30 +298,36 @@ func _on_jettison_button_pressed():
 
 func _on_osc_button_button_down():
 	oscilloscope.set_visible(true)
+	drag_tooltip.set_visible(false)
 
 
 func _on_osc_button_button_up():
 	oscilloscope.set_visible(false)
+	drag_tooltip.set_visible(true)
 
 
 func _on_therm_button_button_down():
 	thermal_cam.set_visible(true)
+	drag_tooltip.set_visible(false)
 
 
 func _on_therm_button_button_up():
 	thermal_cam.set_visible(false)
+	drag_tooltip.set_visible(true)
 
 
 func _on_aco_button_button_down():
 	acoustic_tap.set_visible(true)
 	acoustic_tooltip.set_visible(true)
 	acoustic_tap.active = true
+	drag_tooltip.set_visible(false)
 
 
 func _on_aco_button_button_up():
 	acoustic_tap.set_visible(false)
 	acoustic_tooltip.set_visible(false)
 	acoustic_tap.active = false
+	drag_tooltip.set_visible(true)
 
 
 func _on_acoustic_tap_tapped(region):

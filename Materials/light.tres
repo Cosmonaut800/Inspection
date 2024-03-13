@@ -7,3 +7,4 @@ albedo_texture = ExtResource("1_fjlan")
 emission = Color(0, 0.454902, 0.768627, 1)
 emission_energy_multiplier = 1.24
 emission_operator = 1
+texture_filter = 2

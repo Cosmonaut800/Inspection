@@ -6,9 +6,11 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oj47r"]
 albedo_texture = ExtResource("2_chffa")
+texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hcoo"]
 albedo_texture = ExtResource("3_f54rg")
+texture_filter = 2
 
 [node name="acoustic_tap_model" instance=ExtResource("1_rml4t")]
 

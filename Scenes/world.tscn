@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://by2771v3haugr"]
+[gd_scene load_steps=23 format=3 uid="uid://by2771v3haugr"]
 
 [ext_resource type="Texture2D" uid="uid://bv68o32w2syqa" path="res://Materials/Textures/ground.png" id="1_27my0"]
 [ext_resource type="PackedScene" uid="uid://btjt3q81y0i2b" path="res://Scenes/player.tscn" id="1_iq64q"]
@@ -10,6 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://dhihf6xpb43co" path="res://Scenes/air_lock.tscn" id="7_ft670"]
 [ext_resource type="PackedScene" uid="uid://bnsk2i7camrpi" path="res://Scenes/text_box.tscn" id="8_km5qj"]
 [ext_resource type="AudioStream" uid="uid://wpals5bk4phv" path="res://Audio/ambient_01.ogg" id="9_l48eb"]
+[ext_resource type="AudioStream" uid="uid://us8tn4yhe0uq" path="res://Audio/BreakOvr1.ogg" id="11_878op"]
+[ext_resource type="AudioStream" uid="uid://dajpq34cow50g" path="res://Audio/BreakOvr2.ogg" id="12_4p6tf"]
+[ext_resource type="AudioStream" uid="uid://cirn3uh3j7gfs" path="res://Audio/BreakOvr3.ogg" id="13_hisa8"]
+[ext_resource type="AudioStream" uid="uid://babi1i1xujqop" path="res://Audio/BreakOvr4.ogg" id="14_g0vit"]
+[ext_resource type="PackedScene" uid="uid://da6twysfg3h64" path="res://Models/alien.tscn" id="15_ke7cx"]
 
 [sub_resource type="Environment" id="Environment_frknc"]
 ambient_light_source = 2
@@ -26,8 +31,12 @@ size = Vector3(25, 1, 25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfn7e"]
 albedo_texture = ExtResource("6_pojyi")
+texture_filter = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gpwa7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cpd47"]
+font_size = 48
 
 [node name="World" type="Node3D" node_paths=PackedStringArray("cabinets")]
 script = ExtResource("1_r7dba")
@@ -59,8 +68,8 @@ visible = false
 
 [node name="TestEnvironment" parent="." instance=ExtResource("5_bs4bw")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TestEnvironment"]
-transform = Transform3D(-1.05, 0, 1.39876e-07, -9.17939e-08, -4.37114e-08, -1.6, 4.01244e-15, -1, 6.99382e-08, 6.66667, 2.66667, 4.73333)
+[node name="Poster" type="MeshInstance3D" parent="TestEnvironment"]
+transform = Transform3D(-0.470702, -3.8097e-09, -0.0627521, 0.041181, -4.35451e-08, -0.71726, 1.8056e-15, -1, 3.14722e-08, 6.66667, 2, 4.73333)
 material_override = SubResource("StandardMaterial3D_yfn7e")
 mesh = SubResource("PlaneMesh_gpwa7")
 
@@ -75,11 +84,11 @@ one_shot = true
 [node name="Cabinets" type="Node3D" parent="."]
 
 [node name="InspectionFrame" parent="Cabinets" node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.3, 1.6, 2.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.3, 1.4, 2.5)
 player = NodePath("../../Player")
 
 [node name="InspectionFrame2" parent="Cabinets" node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.1, 1.6, 2.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.1, 1.4, 2.5)
 player = NodePath("../../Player")
 
 [node name="InspectionFrame3" parent="Cabinets" node_paths=PackedStringArray("player") instance=ExtResource("5_kee1e")]
@@ -113,11 +122,40 @@ player = NodePath("../../Player")
 [node name="AirLock" parent="." instance=ExtResource("7_ft670")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -6.7, 1.55, 1.55)
 
+[node name="InteractTooltip" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EtoInteract" type="Label" parent="InteractTooltip"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -156.5
+offset_top = -126.0
+offset_right = 156.5
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[E] to interact"
+label_settings = SubResource("LabelSettings_cpd47")
+
 [node name="TextBox" parent="." instance=ExtResource("8_km5qj")]
 
 [node name="Audio" type="Node3D" parent="."]
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Audio"]
+[node name="MusicTimer" type="Timer" parent="Audio"]
+wait_time = 2.0
+autostart = true
+
+[node name="Ambience" type="AudioStreamPlayer3D" parent="Audio"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3, 0)
 stream = ExtResource("9_l48eb")
 attenuation_model = 3
@@ -126,9 +164,46 @@ autoplay = true
 panning_strength = 0.0
 bus = &"SFX"
 
+[node name="BreakOvr1" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("11_878op")
+attenuation_model = 3
+panning_strength = 0.0
+bus = &"Music"
+attenuation_filter_db = 0.0
+
+[node name="BreakOvr2" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("12_4p6tf")
+attenuation_model = 3
+panning_strength = 0.0
+bus = &"Music"
+attenuation_filter_db = 0.0
+
+[node name="BreakOvr3" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("13_hisa8")
+attenuation_model = 3
+panning_strength = 0.0
+bus = &"Music"
+attenuation_filter_db = 0.0
+
+[node name="BreakOvr4" type="AudioStreamPlayer3D" parent="Audio"]
+stream = ExtResource("14_g0vit")
+attenuation_model = 3
+panning_strength = 0.0
+bus = &"Music"
+attenuation_filter_db = 0.0
+
+[node name="alien2" parent="." instance=ExtResource("15_ke7cx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5229, 2.13405, -3.1875)
+
 [connection signal="airlock_submitted" from="Player" to="." method="_on_player_airlock_submitted"]
+[connection signal="next_text" from="Player" to="." method="on_next_text"]
+[connection signal="show_tooltip" from="Player" to="." method="_on_player_show_tooltip"]
 [connection signal="timeout" from="CabinetWait" to="." method="_on_cabinet_wait_timeout"]
 [connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
 [connection signal="activated" from="AirLock" to="." method="_on_air_lock_activated"]
+[connection signal="timeout" from="Audio/MusicTimer" to="." method="_on_music_timer_timeout"]
+[connection signal="finished" from="Audio/BreakOvr1" to="." method="_on_break_ovr_1_finished"]
+[connection signal="finished" from="Audio/BreakOvr2" to="." method="_on_break_ovr_2_finished"]
+[connection signal="finished" from="Audio/BreakOvr3" to="." method="_on_break_ovr_3_finished"]
 
 [editable path="Player"]

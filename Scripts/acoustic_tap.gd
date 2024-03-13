@@ -15,7 +15,7 @@ const MIN_DB = 60
 
 signal tapped(region: String)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#Thanks to Phantasy Dev on youtube for this implementation of an audio visualizer!
 func _process(delta):
 	if active and Input.is_action_just_pressed("use_acoustic_tap"):
 		if ray.is_colliding():

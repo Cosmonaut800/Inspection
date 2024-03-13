@@ -68,6 +68,7 @@ surface_material_override/0 = ExtResource("3_fon33")
 
 [node name="RayCast3D" type="RayCast3D" parent="YawPivot/PitchPivot"]
 target_position = Vector3(1.45519e-11, 1.45519e-11, -1.5)
+collision_mask = 5
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
@@ -94,4 +95,9 @@ attenuation_filter_db = 0.0
 stream = ExtResource("7_640ky")
 attenuation_filter_db = 0.0
 
+[node name="ActionWait" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="Audio/FootstepTimer" to="." method="_on_footstep_timer_timeout"]
+[connection signal="timeout" from="ActionWait" to="." method="_on_action_wait_timeout"]
