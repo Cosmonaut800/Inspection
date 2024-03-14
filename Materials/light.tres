@@ -1,10 +1,12 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://boqa4wrobp1cl"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://boqa4wrobp1cl"]
 
 [ext_resource type="Texture2D" uid="uid://tqihh5xydaxx" path="res://Materials/Textures/pk02_light01a_C.png" id="1_fjlan"]
+[ext_resource type="Texture2D" uid="uid://lf131q8hqgnj" path="res://Materials/Textures/pk02_light01_N.png" id="2_kjpmg"]
 
 [resource]
 albedo_texture = ExtResource("1_fjlan")
-emission = Color(0, 0.454902, 0.768627, 1)
-emission_energy_multiplier = 1.24
-emission_operator = 1
+emission_enabled = true
+emission_texture = ExtResource("1_fjlan")
+normal_enabled = true
+normal_texture = ExtResource("2_kjpmg")
 texture_filter = 2

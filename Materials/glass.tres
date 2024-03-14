@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cm4cvgop73ykt"]
+
+[ext_resource type="Texture2D" uid="uid://cv5gcn6onkg60" path="res://Materials/Textures/pk02_wall04a_C.png" id="1_oli6l"]
+[ext_resource type="Texture2D" uid="uid://dg572f4huo011" path="res://Materials/Textures/pk02_wall04a_N.png" id="2_mkfiw"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_oli6l")
+normal_enabled = true
+normal_texture = ExtResource("2_mkfiw")
+texture_filter = 2

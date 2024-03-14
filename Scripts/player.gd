@@ -43,6 +43,10 @@ var can_read_text := true
 signal airlock_submitted(correct: bool)
 signal next_text
 signal show_tooltip(show: bool)
+signal took_coffee
+
+var model := 3
+var coffee := true
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -87,7 +91,11 @@ func _process(_delta):
 		
 		focused = !focused
 	
-	if Input.is_action_just_pressed("use") and can_use:
+	if !focused and Input.is_action_just_pressed("dismiss_text"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		focused = true
+	
+	if focused and Input.is_action_just_pressed("use") and can_use:
 		if state == STATE.FREE and ray.is_colliding():
 			entity = ray.get_collider().get_parent()
 			if entity.entity_type == "inspection_frame":
@@ -101,13 +109,24 @@ func _process(_delta):
 				camera.weight = 0.0
 				camera.fov = 60.0
 				state = STATE.IN_CABINET
+				model = current_cabinet.model
 			elif holding_part and entity.entity_type == "air_lock":
 				holding_part = false
-				entity.use_airlock()
+				if coffee:
+					coffee = false
+					entity.use_airlock(true, model)
+					airlock_submitted.emit(true)
+				else:
+					entity.use_airlock(current_cabinet.correct, model)
+					airlock_submitted.emit(current_cabinet.correct)
 				hide_parts()
-				airlock_submitted.emit(current_cabinet.correct)
 				can_read_text = false
 				action_wait.start()
+			elif entity.entity_type == "intro_cutscene":
+				holding_part = true
+				switch_part(3)
+				model = 3
+				took_coffee.emit()
 	
 	if state == STATE.FREE:
 		yaw.rotate_y(yaw_input)
@@ -118,7 +137,7 @@ func _process(_delta):
 		
 		show_tooltip.emit(ray.is_colliding() and can_use)
 		
-		if Input.is_action_just_pressed("dismiss_text") and can_read_text:
+		if focused and Input.is_action_just_pressed("dismiss_text") and can_read_text:
 			next_text.emit()
 
 func _unhandled_input(event):

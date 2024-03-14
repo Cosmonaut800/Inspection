@@ -1,19 +1,581 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhihf6xpb43co"]
+[gd_scene load_steps=43 format=3 uid="uid://dhihf6xpb43co"]
 
 [ext_resource type="Script" path="res://Scripts/air_lock.gd" id="1_3jlj2"]
-[ext_resource type="Material" uid="uid://bwto4s7auhjnh" path="res://Materials/checkerboard_orange.tres" id="1_yxonx"]
 [ext_resource type="AudioStream" uid="uid://bk1l2st0gwqjs" path="res://Audio/bell.ogg" id="3_30qky"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_o7cyo"]
+[ext_resource type="PackedScene" uid="uid://bxlpiregsj8dc" path="res://Models/GLTF/airlock_frame.glb" id="3_am8ou"]
+[ext_resource type="Material" uid="uid://cpepmrixrsrtr" path="res://Materials/caution.tres" id="4_0kout"]
+[ext_resource type="Material" uid="uid://dw2sextekr6wd" path="res://Materials/wall_panel.tres" id="5_spr5c"]
+[ext_resource type="PackedScene" uid="uid://bgu2a6yfqdty" path="res://Models/GLTF/airlock_backdoor.glb" id="6_isnms"]
+[ext_resource type="Material" uid="uid://bv8nrbal6a1x4" path="res://Materials/airlock_backdoor.tres" id="7_sg5my"]
+[ext_resource type="PackedScene" uid="uid://bu051d5dvru3a" path="res://Models/GLTF/airlock_frontdoor.glb" id="8_cf887"]
+[ext_resource type="Material" uid="uid://cm4cvgop73ykt" path="res://Materials/glass.tres" id="9_5yx06"]
+[ext_resource type="AudioStream" uid="uid://bate1ooiihjqc" path="res://Audio/ViolentGnome.wav" id="11_2y1ge"]
+[ext_resource type="PackedScene" uid="uid://da6twysfg3h64" path="res://Models/alien.tscn" id="11_oybh6"]
+[ext_resource type="PackedScene" uid="uid://c0c3akgxryd0o" path="res://Models/GLTF/part1.glb" id="12_nh2f7"]
+[ext_resource type="Material" uid="uid://bw0jn4f5x0dc5" path="res://Materials/part1_body.tres" id="13_pvpii"]
+[ext_resource type="Material" uid="uid://do1bwhe40be3o" path="res://Materials/part3_body.tres" id="14_r5wft"]
+[ext_resource type="Material" uid="uid://d374go2nuc556" path="res://Materials/wires.tres" id="15_gm7ad"]
+[ext_resource type="Material" uid="uid://7erlaflqp757" path="res://Materials/part_white.tres" id="16_niibw"]
+[ext_resource type="Material" uid="uid://oholb4nnfm0h" path="res://Materials/rail.tres" id="17_8so1r"]
+[ext_resource type="PackedScene" uid="uid://c17ntpsbetyfu" path="res://Models/GLTF/part2.glb" id="18_jetdl"]
+[ext_resource type="Material" uid="uid://cswcmuur1fx0o" path="res://Materials/part2_body.tres" id="19_v33fk"]
+[ext_resource type="Material" uid="uid://boqa4wrobp1cl" path="res://Materials/light.tres" id="20_p7ug2"]
+[ext_resource type="PackedScene" uid="uid://bu13w7182kbul" path="res://Models/GLTF/coffee.glb" id="21_6pk0q"]
+[ext_resource type="PackedScene" uid="uid://b6rfbjhjgflwp" path="res://Models/GLTF/part3.glb" id="21_62xnt"]
+[ext_resource type="Material" uid="uid://cpoyk3desyetj" path="res://Materials/plastic.tres" id="22_2cq7i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h14nv"]
 
+[sub_resource type="Animation" id="Animation_q7xjv"]
+resource_name = "open_frontdoor"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("airlock_frontdoor2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.862361, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c6mhg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("airlock_frontdoor2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alien2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("alien2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Part:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Part:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("airlock_backdoor2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("alien2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0149058, 1.49012e-08, -0.0165256)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Part:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("alien2/scream:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_yftj1"]
+resource_name = "place_alien"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("alien2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alien2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(0.3, 0.3, 0.3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Part:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Part:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11)]
+}
+
+[sub_resource type="Animation" id="Animation_myqhv"]
+resource_name = "open_backdoor"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("airlock_backdoor2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.831397, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3trw5"]
+resource_name = "shoot_alien"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("alien2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0149058, 1.49012e-08, -0.0165256), Vector3(-0.014905, 1.49012e-08, -5.17442)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alien2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 0.3), Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11)]
+}
+
+[sub_resource type="Animation" id="Animation_46yns"]
+resource_name = "jettison_alien"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("airlock_frontdoor2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.85, 0), Vector3(0, 0.85, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alien2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("alien2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1.3, 2.5, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11), Vector3(0, 0, 0), Vector3(0.3, 0.3, 0.3), Vector3(0.3, 0.3, 0.3), Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Part:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Part:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.3, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("airlock_backdoor2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3, 3.5, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.85, 0), Vector3(0, 0.85, 0), Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("alien2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(5.75922e-07, 0, -3.81416)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("alien2/scream:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(3.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tv5br"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("airlock_frontdoor2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("airlock_backdoor2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("alien2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("alien2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("alien2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0149058, 1.49012e-08, -0.0165256)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Part:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Part:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Part:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tsgs7"]
+resource_name = "jettison_part"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("airlock_frontdoor2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.85, 0), Vector3(0, 0.85, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("airlock_backdoor2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 3.5, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0.85, 0), Vector3(0, 0.85, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("alien2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Part:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Part:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Part:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3.5, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -4.02498)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_btbdd"]
+_data = {
+"RESET": SubResource("Animation_c6mhg"),
+"idle": SubResource("Animation_tv5br"),
+"jettison_alien": SubResource("Animation_46yns"),
+"jettison_part": SubResource("Animation_tsgs7"),
+"open_backdoor": SubResource("Animation_myqhv"),
+"open_frontdoor": SubResource("Animation_q7xjv"),
+"place_alien": SubResource("Animation_yftj1"),
+"shoot_alien": SubResource("Animation_3trw5")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3ykvc"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lf0cj"]
+animation = &"jettison_alien"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ldjs1"]
+animation = &"jettison_part"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4k20"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lq5ls"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bm5jd"]
+advance_mode = 2
+advance_condition = &"incorrect"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_22ll1"]
+advance_mode = 2
+advance_condition = &"correct"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b484l"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_s5ypv"]
+states/Start/position = Vector2(88, 80)
+states/idle/node = SubResource("AnimationNodeAnimation_3ykvc")
+states/idle/position = Vector2(284.46, 80)
+states/jettison_alien/node = SubResource("AnimationNodeAnimation_lf0cj")
+states/jettison_alien/position = Vector2(457.46, 138)
+states/jettison_part/node = SubResource("AnimationNodeAnimation_ldjs1")
+states/jettison_part/position = Vector2(457.46, 41)
+transitions = ["jettison_part", "idle", SubResource("AnimationNodeStateMachineTransition_x4k20"), "jettison_alien", "idle", SubResource("AnimationNodeStateMachineTransition_lq5ls"), "idle", "jettison_part", SubResource("AnimationNodeStateMachineTransition_bm5jd"), "idle", "jettison_alien", SubResource("AnimationNodeStateMachineTransition_22ll1"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_b484l")]
+graph_offset = Vector2(-37.5399, 0)
+
 [node name="AirLock" type="Node3D"]
 script = ExtResource("1_3jlj2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = ExtResource("1_yxonx")
-mesh = SubResource("BoxMesh_o7cyo")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -21,11 +583,111 @@ mesh = SubResource("BoxMesh_o7cyo")
 shape = SubResource("BoxShape3D_h14nv")
 
 [node name="Light" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.602475, 1.30785, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326231, 0)
 visible = false
 light_color = Color(1, 1, 0, 1)
 omni_range = 1.67435
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.592402, 1.28649, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0388221, 0.00352859)
 stream = ExtResource("3_30qky")
+
+[node name="airlock_frame2" parent="." instance=ExtResource("3_am8ou")]
+
+[node name="airlock_frame" parent="airlock_frame2" index="0"]
+surface_material_override/0 = ExtResource("4_0kout")
+surface_material_override/1 = ExtResource("5_spr5c")
+
+[node name="airlock_backdoor2" parent="." instance=ExtResource("6_isnms")]
+
+[node name="airlock_backdoor" parent="airlock_backdoor2" index="0"]
+surface_material_override/0 = ExtResource("7_sg5my")
+
+[node name="airlock_frontdoor2" parent="." instance=ExtResource("8_cf887")]
+
+[node name="airlock_frontdoor" parent="airlock_frontdoor2" index="0"]
+surface_material_override/0 = ExtResource("9_5yx06")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_btbdd")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_btbdd")
+}
+tree_root = SubResource("AnimationNodeStateMachine_s5ypv")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/correct = false
+parameters/conditions/incorrect = false
+
+[node name="alien2" parent="." instance=ExtResource("11_oybh6")]
+transform = Transform3D(-0.01, 0, 1.50996e-09, 0, 0.01, 0, -1.50996e-09, 0, -0.01, -0.0149058, 1.49012e-08, -0.0165256)
+
+[node name="scream" type="AudioStreamPlayer3D" parent="alien2"]
+transform = Transform3D(-100, 0, -1.50996e-05, 0, 100, 0, 1.50996e-05, 0, -100, -1.49058, -1.49012e-06, -1.65256)
+stream = ExtResource("11_2y1ge")
+volume_db = -23.8298
+
+[node name="Part" type="Node3D" parent="."]
+
+[node name="Graphics1" parent="Part" instance=ExtResource("12_nh2f7")]
+transform = Transform3D(-1, -1.50437e-15, -8.74228e-08, 0, 1, -1.72079e-08, 8.74228e-08, -1.72079e-08, -1, 0, 0, 2.98023e-08)
+visible = false
+
+[node name="part1" parent="Part/Graphics1" index="0"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("13_pvpii")
+surface_material_override/1 = ExtResource("14_r5wft")
+surface_material_override/2 = ExtResource("15_gm7ad")
+surface_material_override/3 = ExtResource("16_niibw")
+surface_material_override/4 = ExtResource("17_8so1r")
+
+[node name="Graphics2" parent="Part" instance=ExtResource("18_jetdl")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="part2" parent="Part/Graphics2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+cast_shadow = 0
+surface_material_override/0 = ExtResource("19_v33fk")
+surface_material_override/1 = ExtResource("20_p7ug2")
+surface_material_override/2 = ExtResource("15_gm7ad")
+surface_material_override/3 = ExtResource("14_r5wft")
+surface_material_override/4 = ExtResource("5_spr5c")
+
+[node name="Graphics3" parent="Part" instance=ExtResource("21_62xnt")]
+transform = Transform3D(-1, 1.55132e-15, -8.74228e-08, 0, 1, 1.77451e-08, 8.74228e-08, 1.77451e-08, -1, 0, 0, 2.98023e-08)
+visible = false
+
+[node name="part3" parent="Part/Graphics3" index="0"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("14_r5wft")
+surface_material_override/1 = ExtResource("5_spr5c")
+surface_material_override/2 = ExtResource("15_gm7ad")
+surface_material_override/3 = ExtResource("20_p7ug2")
+surface_material_override/4 = ExtResource("16_niibw")
+surface_material_override/5 = ExtResource("17_8so1r")
+
+[node name="coffee2" parent="Part" instance=ExtResource("21_6pk0q")]
+transform = Transform3D(0.438371, 0, 0.898794, 0, 1, 0, -0.898794, 0, 0.438371, 0, -0.16, 0)
+visible = false
+
+[node name="coffee" parent="Part/coffee2" index="0"]
+surface_material_override/0 = ExtResource("22_2cq7i")
+surface_material_override/1 = ExtResource("9_5yx06")
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 4.9
+one_shot = true
+
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]
+
+[editable path="airlock_frame2"]
+[editable path="airlock_backdoor2"]
+[editable path="airlock_frontdoor2"]
+[editable path="Part/Graphics1"]
+[editable path="Part/Graphics2"]
+[editable path="Part/Graphics3"]
+[editable path="Part/coffee2"]

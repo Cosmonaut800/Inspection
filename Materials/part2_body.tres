@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cswcmuur1fx0o"]
+
+[ext_resource type="Texture2D" uid="uid://bkgy00y1fy4v7" path="res://Materials/Textures/pk01_vent_wall01a_d.png" id="1_hldyd"]
+[ext_resource type="Texture2D" uid="uid://mfietg3n6ohi" path="res://Materials/Textures/pk01_vent_wall01_local.png" id="2_slf6w"]
+
+[resource]
+albedo_texture = ExtResource("1_hldyd")
+normal_enabled = true
+normal_texture = ExtResource("2_slf6w")
+texture_filter = 2

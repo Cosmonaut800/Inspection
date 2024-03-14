@@ -21,6 +21,14 @@ extends Node3D
 @onready var click := $Audio/Click
 @onready var door := $cabinet2/cabinet_door2
 
+@onready var particles := $GPUParticles3D
+@onready var ground_parts := [	$PartsOnFloor/PartGroup1,
+								$PartsOnFloor/PartGroup2,
+								$PartsOnFloor/PartGroup3]
+@onready var cabinet_parts := [	$PartsInCabinet/PartGroup1,
+								$PartsInCabinet/PartGroup2,
+								$PartsInCabinet/PartGroup3]
+
 const LOOP_THRESHOLD := 400
 
 var entity_type := "inspection_frame"
@@ -50,7 +58,7 @@ signal timeout
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	aberrant = randi_range(0, num_of_parts-1)
-	#property = randi_range(0, 2)
+	#model = randi_range(0, 2)
 	
 	for i in range(num_of_parts):
 		position_targets.append(Node3D.new())
@@ -87,7 +95,9 @@ func activate():
 	hitbox.disabled = false
 	alarm_sound.play()
 	explosion_sound.play()
+	particles.emitting = true
 	door.set_visible(false)
+	ground_parts[model].set_visible(true)
 	anim_tree.set("parameters/conditions/opened", false)
 	anim_tree.set("parameters/conditions/blinking", true)
 
@@ -100,6 +110,7 @@ func deactivate():
 func open_cabinet():
 	open = true
 	cabinet_UI.set_visible(true)
+	ground_parts[model].set_visible(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	alarm_sound.stop()
 	
@@ -134,7 +145,6 @@ func open_cabinet():
 		parts[-1].thermal_spike = thermal_nominal
 		parts[-1].acoustic_spike = acoustic_nominal
 	
-	model = randi_range(0, parts[0].models.size()-1)
 	for part in parts:
 		part.model_selection = model
 		part.switch_visual(part.model_selection)
@@ -158,6 +168,7 @@ func close_cabinet():
 		part.queue_free()
 	parts = []
 	cabinet_UI.set_visible(false)
+	cabinet_parts[model].set_visible(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	deactivate()
 

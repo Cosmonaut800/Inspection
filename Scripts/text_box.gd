@@ -3,12 +3,14 @@ extends Control
 @onready var label := $Panel/Label
 @onready var text_anim_tree := $TextTree
 
-var texts = {"INTRO_1": "[Insert scene where you see a shapeshifting alien, learn to place it in the orange airlock on the far wall]",
-	"INTRO_2": "Use your tools to find the fake parts in each cabinet that lights up. See the poster by the door for more info.",
-	"INTRO_3": "The game will start once you dismiss this text box.",
-	"CABINET_COMPLETE": "Good! Now, take the part over to the air lock to jettison it.",
-	"YOU_WIN": "You won the game! [Insert winning scene]",
-	"YOU_LOSE": "You just lost the game. [Insert losing scene]"}
+var texts = {"INTRO_1": "We're reading some alien lifeforms down in the engine room. Can you look through the window and see if you see anything?",
+	"INTRO_2": "If they've broken anything down there, you'll need to fix it. Check out the poster by the door to make sure you're up to date on your tools.",
+	"INTRO_3": "Ready? [Start Game]",
+	"SHAPESHIFTER": "Oh! It's a shapeshifter! We don't need that hanging around, throw it in the disposal airlock on the far side of the room.",
+	"THERES_MORE": "This is bad! They're going to mess with our engine parts for sure. Quick! Get them out of here before they ruin something important!",
+	"CAREFUL": "But make sure you don't throw out any real parts! This ship'll explode without them!",
+	"YOU_WIN": "You did it! ... Get back to work.",
+	"YOU_LOSE": "You're fired..."}
 
 func show_text(text_index: String):
 	text_anim_tree.set("parameters/conditions/clear", false)

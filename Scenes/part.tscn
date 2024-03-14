@@ -1,18 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca7naxg00sehu"]
+[gd_scene load_steps=14 format=3 uid="uid://ca7naxg00sehu"]
 
 [ext_resource type="Script" path="res://Scripts/part.gd" id="1_0wkpi"]
-[ext_resource type="Material" uid="uid://ctyaogeimfp3c" path="res://Materials/checkerboard_blue.tres" id="2_xqomi"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ft4th"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.4
-
-[sub_resource type="PrismMesh" id="PrismMesh_mn7qm"]
-size = Vector3(0.2, 0.2, 0.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tnjkl"]
-size = Vector3(0.2, 0.4, 0.2)
+[ext_resource type="PackedScene" uid="uid://c0c3akgxryd0o" path="res://Models/GLTF/part1.glb" id="3_cxrjd"]
+[ext_resource type="Material" uid="uid://bw0jn4f5x0dc5" path="res://Materials/part1_body.tres" id="4_cdd44"]
+[ext_resource type="PackedScene" uid="uid://c17ntpsbetyfu" path="res://Models/GLTF/part2.glb" id="4_x6553"]
+[ext_resource type="PackedScene" uid="uid://b6rfbjhjgflwp" path="res://Models/GLTF/part3.glb" id="5_1lg8b"]
+[ext_resource type="Material" uid="uid://do1bwhe40be3o" path="res://Materials/part3_body.tres" id="5_6ytjo"]
+[ext_resource type="Material" uid="uid://d374go2nuc556" path="res://Materials/wires.tres" id="6_7r3at"]
+[ext_resource type="Material" uid="uid://7erlaflqp757" path="res://Materials/part_white.tres" id="7_40ayk"]
+[ext_resource type="Material" uid="uid://oholb4nnfm0h" path="res://Materials/rail.tres" id="8_rlane"]
+[ext_resource type="Material" uid="uid://cswcmuur1fx0o" path="res://Materials/part2_body.tres" id="10_cfoon"]
+[ext_resource type="Material" uid="uid://boqa4wrobp1cl" path="res://Materials/light.tres" id="11_et6ts"]
+[ext_resource type="Material" uid="uid://dw2sextekr6wd" path="res://Materials/wall_panel.tres" id="12_b7i17"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mq8qq"]
 size = Vector3(0.2, 0.1, 0.2)
@@ -20,24 +19,6 @@ size = Vector3(0.2, 0.1, 0.2)
 [node name="Part" type="Node3D" node_paths=PackedStringArray("models")]
 script = ExtResource("1_0wkpi")
 models = [NodePath("Graphics1"), NodePath("Graphics2"), NodePath("Graphics3")]
-
-[node name="Graphics1" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-visible = false
-material_override = ExtResource("2_xqomi")
-mesh = SubResource("CylinderMesh_ft4th")
-
-[node name="Graphics2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, 0)
-visible = false
-mesh = SubResource("PrismMesh_mn7qm")
-surface_material_override/0 = ExtResource("2_xqomi")
-
-[node name="Graphics3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-visible = false
-mesh = SubResource("BoxMesh_tnjkl")
-surface_material_override/0 = ExtResource("2_xqomi")
 
 [node name="AudioRegions" type="Node3D" parent="."]
 
@@ -76,3 +57,41 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AudioRegions/AudioRegion4"]
 shape = SubResource("BoxShape3D_mq8qq")
 disabled = true
+
+[node name="Graphics1" parent="." instance=ExtResource("3_cxrjd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.2, 0)
+visible = false
+
+[node name="part1" parent="Graphics1" index="0"]
+surface_material_override/0 = ExtResource("4_cdd44")
+surface_material_override/1 = ExtResource("5_6ytjo")
+surface_material_override/2 = ExtResource("6_7r3at")
+surface_material_override/3 = ExtResource("7_40ayk")
+surface_material_override/4 = ExtResource("8_rlane")
+
+[node name="Graphics2" parent="." instance=ExtResource("4_x6553")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.2, 0)
+visible = false
+
+[node name="part2" parent="Graphics2" index="0"]
+surface_material_override/0 = ExtResource("10_cfoon")
+surface_material_override/1 = ExtResource("11_et6ts")
+surface_material_override/2 = ExtResource("6_7r3at")
+surface_material_override/3 = ExtResource("5_6ytjo")
+surface_material_override/4 = ExtResource("12_b7i17")
+
+[node name="Graphics3" parent="." instance=ExtResource("5_1lg8b")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.2, 0)
+visible = false
+
+[node name="part3" parent="Graphics3" index="0"]
+surface_material_override/0 = ExtResource("5_6ytjo")
+surface_material_override/1 = ExtResource("12_b7i17")
+surface_material_override/2 = ExtResource("6_7r3at")
+surface_material_override/3 = ExtResource("11_et6ts")
+surface_material_override/4 = ExtResource("7_40ayk")
+surface_material_override/5 = ExtResource("8_rlane")
+
+[editable path="Graphics1"]
+[editable path="Graphics2"]
+[editable path="Graphics3"]

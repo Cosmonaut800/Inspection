@@ -9,11 +9,27 @@ extends Node3D
 @onready var player := $Player
 @onready var air_lock := $AirLock
 
+@onready var intro_timer := $IntroCutscene/IntroTimer
+@onready var shapeshifter_timer := $IntroCutscene/Shapeshifter
+@onready var aliens_timer := $AliensCutscene/AliensSceneTimer
+@onready var intro_anim := $IntroCutscene/AnimationTree
+@onready var aliens_anim := $AliensCutscene/AnimationTree
+@onready var intro_coffee := $IntroCutscene/coffee3
+@onready var intro_coffee_hitbox := $IntroCutscene/Area3D/CollisionShape3D
+
 @onready var music_timer := $Audio/MusicTimer
 @onready var music_loops := [	$Audio/BreakOvr1,
 								$Audio/BreakOvr2,
 								$Audio/BreakOvr3,
 								$Audio/BreakOvr4]
+
+@onready var win_timer := $WinTimer
+@onready var lose_timer := $LoseTimer
+@onready var reset_timer := $ResetTimer
+@onready var really_reset_timer := $ReallyResetTimer
+@onready var out_tree := $outtree
+var winner := false
+
 var can_switch_tracks := false
 var can_switch_cabinets := false
 
@@ -34,8 +50,11 @@ var correct_cabinets := 0
 var text_queue = []
 var text_counter = 0
 
+var game_started = false
 var game_ended = false
 var already_submitted = false
+
+signal reset
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -56,7 +75,11 @@ func _ready():
 	index2 = randi_range(0, 2)
 	hard_cabinet = cabinets[choices[0][index2]]
 	
+	choices = [0, 1, 2]
+	choices.shuffle()
+	
 	easy_cabinet.property = tool_selection[0]
+	easy_cabinet.model = choices[0]
 	easy_cabinet.timer = 90.0
 	easy_cabinet.difference_min = 0.5
 	easy_cabinet.difference_max = 0.55
@@ -65,6 +88,7 @@ func _ready():
 	easy_cabinet.completed.connect(on_cabinet_completed)
 	easy_cabinet.timeout.connect(on_cabinet_timeout)
 	medium_cabinet.property = tool_selection[1]
+	medium_cabinet.model = choices[1]
 	medium_cabinet.difference_min = 0.4
 	medium_cabinet.difference_max = 0.8
 	medium_cabinet.nominal_sound = sound2
@@ -72,16 +96,13 @@ func _ready():
 	medium_cabinet.completed.connect(on_cabinet_completed)
 	medium_cabinet.timeout.connect(on_cabinet_timeout)
 	hard_cabinet.property = tool_selection[2]
+	hard_cabinet.model = choices[2]
 	hard_cabinet.difference_min = 0.2
 	hard_cabinet.difference_max = 0.4
 	hard_cabinet.nominal_sound = sound1
 	hard_cabinet.aberrant_sound = sound2
 	hard_cabinet.completed.connect(on_cabinet_completed)
 	hard_cabinet.timeout.connect(on_cabinet_timeout)
-	
-	display_text_box("INTRO_1")
-	display_text_box("INTRO_2")
-	display_text_box("INTRO_3")
 
 func _process(_delta):
 	if can_switch_tracks:
@@ -121,7 +142,7 @@ func display_text_box_timed(text_index: String, duration: float):
 	text_timer.start()
 
 func display_next_text():
-	text_counter += 1
+	if game_started: text_counter += 1
 	if text_queue.size() <= 0:
 		text_box.hide_text()
 		player.can_use = true
@@ -129,7 +150,8 @@ func display_next_text():
 		text_box.show_text(text_queue.pop_front())
 	
 	if text_counter == 3:
-		timer.start()
+		shapeshifter_timer.start()
+		intro_anim.set("parameters/conditions/start", true)
 
 func _on_text_timer_timeout():
 	player.can_read_text = true
@@ -138,20 +160,24 @@ func _on_text_timer_timeout():
 func on_cabinet_completed():
 	air_lock.light.set_visible(true)
 	air_lock.sound.play()
-	display_text_box("CABINET_COMPLETE")
+	#display_text_box("CABINET_COMPLETE")
 
 func on_cabinet_timeout():
 	player.exit_cabinet()
 	player.hide_parts()
 	player.holding_part = false
-	display_text_box("YOU_LOSE")
+	winner = false
+	lose_timer.start()
 	difficulty = 2
 
 func _on_cabinet_wait_timeout():
 	timer.wait_time = 5.0
 	can_switch_cabinets = true
 
-func _on_air_lock_activated():
+func _on_air_lock_activated(counter):
+	if counter == 1:
+		aliens_timer.start()
+	
 	timer.start()
 
 func on_next_text():
@@ -160,11 +186,17 @@ func on_next_text():
 func _on_player_airlock_submitted(correct):
 	if correct:
 		correct_cabinets += 1
-		if correct_cabinets >= 3 and !game_ended:
-			display_text_box("YOU_WIN")
+		if correct_cabinets == 1:
+			pass
+		if correct_cabinets >= 4 and !game_ended:
+			win_timer.start()
+			winner = true
+			#display_text_box("YOU_WIN")
 			game_ended = true
 	elif !game_ended:
-		display_text_box("YOU_LOSE")
+		lose_timer.start()
+		winner = false
+		#display_text_box("YOU_LOSE")
 		difficulty = 2
 		game_ended = true
 
@@ -182,3 +214,53 @@ func _on_break_ovr_3_finished():
 
 func _on_player_show_tooltip(show):
 	tooltip.set_visible(show)
+
+
+func _on_aliens_scene_timer_timeout():
+	display_text_box("THERES_MORE")
+	aliens_anim.set("parameters/conditions/start", true)
+
+
+func _on_player_took_coffee():
+	intro_coffee.set_visible(false)
+	intro_coffee_hitbox.disabled = true
+	air_lock.light.set_visible(true)
+	air_lock.sound.play()
+
+
+func _on_shapeshifter_timeout():
+	display_text_box("SHAPESHIFTER")
+
+
+func _on_intro_timer_timeout():
+	game_started = true
+	display_text_box("INTRO_1")
+	display_text_box("INTRO_2")
+	display_text_box("INTRO_3")
+
+
+func _on_theres_more_timeout():
+	display_text_box("THERES_MORE")
+
+
+func _on_win_timer_timeout():
+	display_text_box("YOU_WIN")
+	winner = true
+	reset_timer.start()
+
+
+func _on_lose_timer_timeout():
+	display_text_box("YOU_LOSE")
+	winner = false
+	reset_timer.start()
+
+
+func _on_reset_timer_timeout():
+	out_tree.set("parameters/conditions/lost", !winner)
+	out_tree.set("parameters/conditions/won", winner)
+	if !winner:
+		really_reset_timer.start()
+
+
+func _on_really_reset_timer_timeout():
+	reset.emit()

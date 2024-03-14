@@ -1,29 +1,31 @@
-[gd_scene load_steps=12 format=3 uid="uid://btjt3q81y0i2b"]
+[gd_scene load_steps=22 format=3 uid="uid://btjt3q81y0i2b"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pxk52"]
 [ext_resource type="Script" path="res://Scripts/camera_follow.gd" id="2_nuti4"]
-[ext_resource type="Material" uid="uid://ctyaogeimfp3c" path="res://Materials/checkerboard_blue.tres" id="3_fon33"]
+[ext_resource type="PackedScene" uid="uid://c0c3akgxryd0o" path="res://Models/GLTF/part1.glb" id="3_03he1"]
 [ext_resource type="AudioStream" uid="uid://3gquc0vegp34" path="res://Audio/footstep1.wav" id="4_1oyem"]
+[ext_resource type="Material" uid="uid://bw0jn4f5x0dc5" path="res://Materials/part1_body.tres" id="4_3f647"]
+[ext_resource type="Material" uid="uid://do1bwhe40be3o" path="res://Materials/part3_body.tres" id="5_a5uqh"]
 [ext_resource type="AudioStream" uid="uid://bawes4gquo30d" path="res://Audio/footstep2.wav" id="5_ae2r7"]
 [ext_resource type="AudioStream" uid="uid://be6ylepr5a4wd" path="res://Audio/footstep3.wav" id="6_r4eu1"]
+[ext_resource type="Material" uid="uid://d374go2nuc556" path="res://Materials/wires.tres" id="6_uj4xd"]
 [ext_resource type="AudioStream" uid="uid://biuxt3mwhcb0e" path="res://Audio/footstep4.wav" id="7_640ky"]
+[ext_resource type="Material" uid="uid://7erlaflqp757" path="res://Materials/part_white.tres" id="7_g8ash"]
+[ext_resource type="Material" uid="uid://oholb4nnfm0h" path="res://Materials/rail.tres" id="8_1lg82"]
+[ext_resource type="PackedScene" uid="uid://c17ntpsbetyfu" path="res://Models/GLTF/part2.glb" id="9_136vp"]
+[ext_resource type="Material" uid="uid://cswcmuur1fx0o" path="res://Materials/part2_body.tres" id="10_6etwr"]
+[ext_resource type="Material" uid="uid://boqa4wrobp1cl" path="res://Materials/light.tres" id="11_4viah"]
+[ext_resource type="Material" uid="uid://dw2sextekr6wd" path="res://Materials/wall_panel.tres" id="12_5gixs"]
+[ext_resource type="PackedScene" uid="uid://b6rfbjhjgflwp" path="res://Models/GLTF/part3.glb" id="13_44xw1"]
+[ext_resource type="PackedScene" uid="uid://bu13w7182kbul" path="res://Models/GLTF/coffee.glb" id="14_8sjnn"]
+[ext_resource type="Material" uid="uid://cpoyk3desyetj" path="res://Materials/plastic.tres" id="15_fwwe6"]
+[ext_resource type="Material" uid="uid://cm4cvgop73ykt" path="res://Materials/glass.tres" id="16_mvghx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yksil"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_sdi5s"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.4
-
-[sub_resource type="PrismMesh" id="PrismMesh_kxlam"]
-size = Vector3(0.2, 0.2, 0.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_h2vkm"]
-size = Vector3(0.2, 0.4, 0.2)
-
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("part_models")]
 script = ExtResource("1_pxk52")
-part_models = [NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics1"), NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics2"), NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics3")]
+part_models = [NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics1"), NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics2"), NodePath("YawPivot/PitchPivot/Camera3D/PartModels/Graphics3"), NodePath("YawPivot/PitchPivot/Camera3D/PartModels/coffee2")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_yksil")
@@ -42,29 +44,51 @@ script = ExtResource("2_nuti4")
 [node name="PartModels" type="Node3D" parent="YawPivot/PitchPivot/Camera3D"]
 transform = Transform3D(0.473994, -0.149534, -0.0544885, 0.158086, 0.462147, 0.106908, 0.0183908, -0.118575, 0.485388, 0.237268, -0.231592, -0.133795)
 
-[node name="Graphics1" type="MeshInstance3D" parent="YawPivot/PitchPivot/Camera3D/PartModels"]
+[node name="Graphics1" parent="YawPivot/PitchPivot/Camera3D/PartModels" instance=ExtResource("3_03he1")]
+transform = Transform3D(-0.769871, 0, 0.6382, 0, 1, 1.49012e-08, -0.6382, -2.23517e-08, -0.769871, 0, 0.2, 2.98023e-08)
+visible = false
+
+[node name="part1" parent="YawPivot/PitchPivot/Camera3D/PartModels/Graphics1" index="0"]
+cast_shadow = 0
+surface_material_override/0 = ExtResource("4_3f647")
+surface_material_override/1 = ExtResource("5_a5uqh")
+surface_material_override/2 = ExtResource("6_uj4xd")
+surface_material_override/3 = ExtResource("7_g8ash")
+surface_material_override/4 = ExtResource("8_1lg82")
+
+[node name="Graphics2" parent="YawPivot/PitchPivot/Camera3D/PartModels" instance=ExtResource("9_136vp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 visible = false
-material_override = ExtResource("3_fon33")
-cast_shadow = 0
-mesh = SubResource("CylinderMesh_sdi5s")
-skeleton = NodePath("../../../../..")
 
-[node name="Graphics2" type="MeshInstance3D" parent="YawPivot/PitchPivot/Camera3D/PartModels"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.2, 0)
-visible = false
+[node name="part2" parent="YawPivot/PitchPivot/Camera3D/PartModels/Graphics2" index="0"]
+transform = Transform3D(-0.578769, 0, 0.815492, -2.98023e-08, 1, 2.98023e-08, -0.815492, -2.23517e-08, -0.578769, 0, 0, 0)
 cast_shadow = 0
-mesh = SubResource("PrismMesh_kxlam")
-skeleton = NodePath("../../../../..")
-surface_material_override/0 = ExtResource("3_fon33")
+surface_material_override/0 = ExtResource("10_6etwr")
+surface_material_override/1 = ExtResource("11_4viah")
+surface_material_override/2 = ExtResource("6_uj4xd")
+surface_material_override/3 = ExtResource("5_a5uqh")
+surface_material_override/4 = ExtResource("12_5gixs")
 
-[node name="Graphics3" type="MeshInstance3D" parent="YawPivot/PitchPivot/Camera3D/PartModels"]
-transform = Transform3D(1, -4.65661e-09, 2.98023e-08, 1.2666e-07, 1, 4.47035e-08, -3.72529e-09, -4.47035e-08, 1, 0, 0.2, 0)
+[node name="Graphics3" parent="YawPivot/PitchPivot/Camera3D/PartModels" instance=ExtResource("13_44xw1")]
+transform = Transform3D(-0.518863, -2.98023e-08, 0.854858, 0, 1, -1.49012e-08, -0.854858, -1.49012e-08, -0.518863, 0, 0.2, 2.98023e-08)
 visible = false
+
+[node name="part3" parent="YawPivot/PitchPivot/Camera3D/PartModels/Graphics3" index="0"]
 cast_shadow = 0
-mesh = SubResource("BoxMesh_h2vkm")
-skeleton = NodePath("../Graphics2")
-surface_material_override/0 = ExtResource("3_fon33")
+surface_material_override/0 = ExtResource("5_a5uqh")
+surface_material_override/1 = ExtResource("12_5gixs")
+surface_material_override/2 = ExtResource("6_uj4xd")
+surface_material_override/3 = ExtResource("11_4viah")
+surface_material_override/4 = ExtResource("7_g8ash")
+surface_material_override/5 = ExtResource("8_1lg82")
+
+[node name="coffee2" parent="YawPivot/PitchPivot/Camera3D/PartModels" instance=ExtResource("14_8sjnn")]
+transform = Transform3D(-0.934204, 0, -0.356738, 0, 1, 0, 0.356738, 0, -0.934205, 0, 0, 0)
+visible = false
+
+[node name="coffee" parent="YawPivot/PitchPivot/Camera3D/PartModels/coffee2" index="0"]
+surface_material_override/0 = ExtResource("15_fwwe6")
+surface_material_override/1 = ExtResource("16_mvghx")
 
 [node name="RayCast3D" type="RayCast3D" parent="YawPivot/PitchPivot"]
 target_position = Vector3(1.45519e-11, 1.45519e-11, -1.5)
@@ -101,3 +125,8 @@ one_shot = true
 
 [connection signal="timeout" from="Audio/FootstepTimer" to="." method="_on_footstep_timer_timeout"]
 [connection signal="timeout" from="ActionWait" to="." method="_on_action_wait_timeout"]
+
+[editable path="YawPivot/PitchPivot/Camera3D/PartModels/Graphics1"]
+[editable path="YawPivot/PitchPivot/Camera3D/PartModels/Graphics2"]
+[editable path="YawPivot/PitchPivot/Camera3D/PartModels/Graphics3"]
+[editable path="YawPivot/PitchPivot/Camera3D/PartModels/coffee2"]

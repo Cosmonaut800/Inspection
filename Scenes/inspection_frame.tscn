@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ufmsrk8yynj3"]
+[gd_scene load_steps=54 format=3 uid="uid://ufmsrk8yynj3"]
 
 [ext_resource type="Script" path="res://Scripts/inspection_frame.gd" id="1_qncd1"]
 [ext_resource type="Material" uid="uid://bn5thx7h4m463" path="res://Materials/checkerboard_dark.tres" id="2_j3l1x"]
@@ -19,6 +19,18 @@
 [ext_resource type="AudioStream" uid="uid://cn111s6ynytgq" path="res://Audio/click2.wav" id="15_pnl36"]
 [ext_resource type="PackedScene" uid="uid://ch05m50tr2p5a" path="res://Models/cabinet.tscn" id="18_l4afh"]
 [ext_resource type="PackedScene" uid="uid://dpq67h6nc1bvm" path="res://Models/cabinet_door.tscn" id="19_d43ns"]
+[ext_resource type="PackedScene" uid="uid://c0c3akgxryd0o" path="res://Models/GLTF/part1.glb" id="20_gjdsk"]
+[ext_resource type="Material" uid="uid://bw0jn4f5x0dc5" path="res://Materials/part1_body.tres" id="21_0dfvc"]
+[ext_resource type="Material" uid="uid://do1bwhe40be3o" path="res://Materials/part3_body.tres" id="22_81bfa"]
+[ext_resource type="Material" uid="uid://d374go2nuc556" path="res://Materials/wires.tres" id="23_svnh6"]
+[ext_resource type="Material" uid="uid://7erlaflqp757" path="res://Materials/part_white.tres" id="24_yuh43"]
+[ext_resource type="Material" uid="uid://oholb4nnfm0h" path="res://Materials/rail.tres" id="25_t1xnq"]
+[ext_resource type="PackedScene" uid="uid://c17ntpsbetyfu" path="res://Models/GLTF/part2.glb" id="26_aigyc"]
+[ext_resource type="Material" uid="uid://cswcmuur1fx0o" path="res://Materials/part2_body.tres" id="27_li0lv"]
+[ext_resource type="Material" uid="uid://boqa4wrobp1cl" path="res://Materials/light.tres" id="28_640gy"]
+[ext_resource type="Material" uid="uid://dw2sextekr6wd" path="res://Materials/wall_panel.tres" id="29_adrk0"]
+[ext_resource type="PackedScene" uid="uid://b6rfbjhjgflwp" path="res://Models/GLTF/part3.glb" id="30_bw2jc"]
+[ext_resource type="Texture2D" uid="uid://e82gtdl5p1cr" path="res://Materials/Textures/smoke.png" id="31_tb8li"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2ahx"]
 size = Vector3(1.5, 2.4, 0.310059)
@@ -134,6 +146,38 @@ font_size = 64
 
 [sub_resource type="LabelSettings" id="LabelSettings_ksroq"]
 font_size = 30
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ekyr"]
+size = Vector3(0.1, 0.3, 0.3)
+
+[sub_resource type="Curve" id="Curve_yd5s8"]
+_data = [Vector2(0, 1), 0.0, 0.0334446, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.42987, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1gmeq"]
+curve = SubResource("Curve_yd5s8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mkq3p"]
+lifetime_randomness = 0.5
+direction = Vector3(1.45519e-11, 1.45519e-11, 0.2)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.5
+gravity = Vector3(1.45519e-11, 1, 1.45519e-11)
+scale_max = 3.0
+alpha_curve = SubResource("CurveTexture_1gmeq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lf8m5"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("31_tb8li")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_vpni7"]
+material = SubResource("StandardMaterial3D_lf8m5")
 
 [node name="InspectionFrame" type="Node3D"]
 script = ExtResource("1_qncd1")
@@ -465,6 +509,272 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -1.35, -0.79)
 
 [node name="cabinet_door2" parent="cabinet2" instance=ExtResource("19_d43ns")]
 
+[node name="plug1" type="MeshInstance3D" parent="cabinet2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.9375, 0)
+mesh = SubResource("BoxMesh_2ekyr")
+surface_material_override/0 = ExtResource("29_adrk0")
+
+[node name="plug2" type="MeshInstance3D" parent="cabinet2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.31323e-09, 1.9375, 0)
+mesh = SubResource("BoxMesh_2ekyr")
+surface_material_override/0 = ExtResource("29_adrk0")
+
+[node name="plug3" type="MeshInstance3D" parent="cabinet2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.9375, 0)
+mesh = SubResource("BoxMesh_2ekyr")
+surface_material_override/0 = ExtResource("29_adrk0")
+
+[node name="PartsOnFloor" type="Node3D" parent="."]
+
+[node name="PartGroup1" type="Node3D" parent="PartsOnFloor"]
+visible = false
+
+[node name="Graphics1" parent="PartsOnFloor/PartGroup1" instance=ExtResource("20_gjdsk")]
+transform = Transform3D(0.612372, -0.707107, 0.353553, 0.5, -2.98023e-08, -0.866025, 0.612372, 0.707107, 0.353553, -0.541421, -1.35, 0.0414214)
+
+[node name="part1" parent="PartsOnFloor/PartGroup1/Graphics1" index="0"]
+surface_material_override/0 = ExtResource("21_0dfvc")
+surface_material_override/1 = ExtResource("22_81bfa")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("24_yuh43")
+surface_material_override/4 = ExtResource("25_t1xnq")
+
+[node name="Graphics4" parent="PartsOnFloor/PartGroup1" instance=ExtResource("20_gjdsk")]
+transform = Transform3D(-0.368688, -0.876221, -0.310332, 0.619473, 0.0173078, -0.784827, 0.693053, -0.481599, 0.536414, -0.113546, -1.33555, -0.226521)
+
+[node name="part1" parent="PartsOnFloor/PartGroup1/Graphics4" index="0"]
+surface_material_override/0 = ExtResource("21_0dfvc")
+surface_material_override/1 = ExtResource("22_81bfa")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("24_yuh43")
+surface_material_override/4 = ExtResource("25_t1xnq")
+
+[node name="Graphics7" parent="PartsOnFloor/PartGroup1" instance=ExtResource("20_gjdsk")]
+transform = Transform3D(0.750764, 0.27904, 0.59874, 0.619473, 0.0173078, -0.784827, -0.229361, 0.960124, -0.159864, 0.617506, -1.33555, 0.0618236)
+
+[node name="part1" parent="PartsOnFloor/PartGroup1/Graphics7" index="0"]
+surface_material_override/0 = ExtResource("21_0dfvc")
+surface_material_override/1 = ExtResource("22_81bfa")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("24_yuh43")
+surface_material_override/4 = ExtResource("25_t1xnq")
+
+[node name="Graphics10" parent="PartsOnFloor/PartGroup1" instance=ExtResource("20_gjdsk")]
+transform = Transform3D(0.0921522, -0.691971, -0.716019, -0.989417, 0.0173078, -0.144065, 0.112082, 0.721718, -0.683053, 0.0733035, -1.33555, 0.114142)
+
+[node name="part1" parent="PartsOnFloor/PartGroup1/Graphics10" index="0"]
+surface_material_override/0 = ExtResource("21_0dfvc")
+surface_material_override/1 = ExtResource("22_81bfa")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("24_yuh43")
+surface_material_override/4 = ExtResource("25_t1xnq")
+
+[node name="PartGroup2" type="Node3D" parent="PartsOnFloor"]
+visible = false
+
+[node name="Graphics2" parent="PartsOnFloor/PartGroup2" instance=ExtResource("26_aigyc")]
+transform = Transform3D(0.612372, -0.707107, 0.353553, 0.5, -2.98023e-08, -0.866025, 0.612372, 0.707107, 0.353553, -0.541421, -1.35, 0.0414214)
+
+[node name="part2" parent="PartsOnFloor/PartGroup2/Graphics2" index="0"]
+surface_material_override/0 = ExtResource("27_li0lv")
+surface_material_override/1 = ExtResource("28_640gy")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("22_81bfa")
+surface_material_override/4 = ExtResource("29_adrk0")
+
+[node name="Graphics5" parent="PartsOnFloor/PartGroup2" instance=ExtResource("26_aigyc")]
+transform = Transform3D(-0.368688, -0.876221, -0.310332, 0.619473, 0.0173078, -0.784827, 0.693053, -0.481599, 0.536414, -0.113546, -1.33555, -0.226521)
+
+[node name="part2" parent="PartsOnFloor/PartGroup2/Graphics5" index="0"]
+surface_material_override/0 = ExtResource("27_li0lv")
+surface_material_override/1 = ExtResource("28_640gy")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("22_81bfa")
+surface_material_override/4 = ExtResource("29_adrk0")
+
+[node name="Graphics8" parent="PartsOnFloor/PartGroup2" instance=ExtResource("26_aigyc")]
+transform = Transform3D(0.750764, 0.27904, 0.59874, 0.619473, 0.0173078, -0.784827, -0.229361, 0.960124, -0.159864, 0.617506, -1.33555, 0.0618236)
+
+[node name="part2" parent="PartsOnFloor/PartGroup2/Graphics8" index="0"]
+surface_material_override/0 = ExtResource("27_li0lv")
+surface_material_override/1 = ExtResource("28_640gy")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("22_81bfa")
+surface_material_override/4 = ExtResource("29_adrk0")
+
+[node name="Graphics11" parent="PartsOnFloor/PartGroup2" instance=ExtResource("26_aigyc")]
+transform = Transform3D(0.0921522, -0.691971, -0.716019, -0.989417, 0.0173078, -0.144065, 0.112082, 0.721718, -0.683053, 0.0733035, -1.33555, 0.114142)
+
+[node name="part2" parent="PartsOnFloor/PartGroup2/Graphics11" index="0"]
+surface_material_override/0 = ExtResource("27_li0lv")
+surface_material_override/1 = ExtResource("28_640gy")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("22_81bfa")
+surface_material_override/4 = ExtResource("29_adrk0")
+
+[node name="PartGroup3" type="Node3D" parent="PartsOnFloor"]
+visible = false
+
+[node name="Graphics3" parent="PartsOnFloor/PartGroup3" instance=ExtResource("30_bw2jc")]
+transform = Transform3D(0.612372, -0.707107, 0.353553, 0.5, -2.98023e-08, -0.866025, 0.612372, 0.707107, 0.353553, -0.541421, -1.35, 0.0414214)
+
+[node name="part3" parent="PartsOnFloor/PartGroup3/Graphics3" index="0"]
+surface_material_override/0 = ExtResource("22_81bfa")
+surface_material_override/1 = ExtResource("29_adrk0")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("28_640gy")
+surface_material_override/4 = ExtResource("24_yuh43")
+surface_material_override/5 = ExtResource("25_t1xnq")
+
+[node name="Graphics6" parent="PartsOnFloor/PartGroup3" instance=ExtResource("30_bw2jc")]
+transform = Transform3D(-0.368688, -0.876221, -0.310332, 0.619473, 0.0173078, -0.784827, 0.693053, -0.481599, 0.536414, -0.113546, -1.33555, -0.226521)
+
+[node name="part3" parent="PartsOnFloor/PartGroup3/Graphics6" index="0"]
+surface_material_override/0 = ExtResource("22_81bfa")
+surface_material_override/1 = ExtResource("29_adrk0")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("28_640gy")
+surface_material_override/4 = ExtResource("24_yuh43")
+surface_material_override/5 = ExtResource("25_t1xnq")
+
+[node name="Graphics9" parent="PartsOnFloor/PartGroup3" instance=ExtResource("30_bw2jc")]
+transform = Transform3D(0.750764, 0.27904, 0.59874, 0.619473, 0.0173078, -0.784827, -0.229361, 0.960124, -0.159864, 0.617506, -1.33555, 0.0618236)
+
+[node name="part3" parent="PartsOnFloor/PartGroup3/Graphics9" index="0"]
+surface_material_override/0 = ExtResource("22_81bfa")
+surface_material_override/1 = ExtResource("29_adrk0")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("28_640gy")
+surface_material_override/4 = ExtResource("24_yuh43")
+surface_material_override/5 = ExtResource("25_t1xnq")
+
+[node name="Graphics12" parent="PartsOnFloor/PartGroup3" instance=ExtResource("30_bw2jc")]
+transform = Transform3D(0.0921522, -0.691971, -0.716019, -0.989417, 0.0173078, -0.144065, 0.112082, 0.721718, -0.683053, 0.0733035, -1.33555, 0.114142)
+
+[node name="part3" parent="PartsOnFloor/PartGroup3/Graphics12" index="0"]
+surface_material_override/0 = ExtResource("22_81bfa")
+surface_material_override/1 = ExtResource("29_adrk0")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("28_640gy")
+surface_material_override/4 = ExtResource("24_yuh43")
+surface_material_override/5 = ExtResource("25_t1xnq")
+
+[node name="PartsInCabinet" type="Node3D" parent="."]
+
+[node name="PartGroup1" type="Node3D" parent="PartsInCabinet"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Graphics1" parent="PartsInCabinet/PartGroup1" instance=ExtResource("20_gjdsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.2, 0.6)
+
+[node name="part1" parent="PartsInCabinet/PartGroup1/Graphics1" index="0"]
+surface_material_override/0 = ExtResource("21_0dfvc")
+surface_material_override/1 = ExtResource("22_81bfa")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("24_yuh43")
+surface_material_override/4 = ExtResource("25_t1xnq")
+
+[node name="Graphics4" parent="PartsInCabinet/PartGroup1" instance=ExtResource("20_gjdsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24537e-08, 0.2, 0.6)
+
+[node name="part1" parent="PartsInCabinet/PartGroup1/Graphics4" index="0"]
+surface_material_override/0 = ExtResource("21_0dfvc")
+surface_material_override/1 = ExtResource("22_81bfa")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("24_yuh43")
+surface_material_override/4 = ExtResource("25_t1xnq")
+
+[node name="Graphics7" parent="PartsInCabinet/PartGroup1" instance=ExtResource("20_gjdsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.2, 0.6)
+
+[node name="part1" parent="PartsInCabinet/PartGroup1/Graphics7" index="0"]
+surface_material_override/0 = ExtResource("21_0dfvc")
+surface_material_override/1 = ExtResource("22_81bfa")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("24_yuh43")
+surface_material_override/4 = ExtResource("25_t1xnq")
+
+[node name="PartGroup2" type="Node3D" parent="PartsInCabinet"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Graphics2" parent="PartsInCabinet/PartGroup2" instance=ExtResource("26_aigyc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.2, 0.6)
+
+[node name="part2" parent="PartsInCabinet/PartGroup2/Graphics2" index="0"]
+surface_material_override/0 = ExtResource("27_li0lv")
+surface_material_override/1 = ExtResource("28_640gy")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("22_81bfa")
+surface_material_override/4 = ExtResource("29_adrk0")
+
+[node name="Graphics5" parent="PartsInCabinet/PartGroup2" instance=ExtResource("26_aigyc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24537e-08, 0.2, 0.6)
+
+[node name="part2" parent="PartsInCabinet/PartGroup2/Graphics5" index="0"]
+surface_material_override/0 = ExtResource("27_li0lv")
+surface_material_override/1 = ExtResource("28_640gy")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("22_81bfa")
+surface_material_override/4 = ExtResource("29_adrk0")
+
+[node name="Graphics8" parent="PartsInCabinet/PartGroup2" instance=ExtResource("26_aigyc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.2, 0.6)
+
+[node name="part2" parent="PartsInCabinet/PartGroup2/Graphics8" index="0"]
+surface_material_override/0 = ExtResource("27_li0lv")
+surface_material_override/1 = ExtResource("28_640gy")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("22_81bfa")
+surface_material_override/4 = ExtResource("29_adrk0")
+
+[node name="PartGroup3" type="Node3D" parent="PartsInCabinet"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+
+[node name="Graphics3" parent="PartsInCabinet/PartGroup3" instance=ExtResource("30_bw2jc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.2, 0.6)
+
+[node name="part3" parent="PartsInCabinet/PartGroup3/Graphics3" index="0"]
+surface_material_override/0 = ExtResource("22_81bfa")
+surface_material_override/1 = ExtResource("29_adrk0")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("28_640gy")
+surface_material_override/4 = ExtResource("24_yuh43")
+surface_material_override/5 = ExtResource("25_t1xnq")
+
+[node name="Graphics6" parent="PartsInCabinet/PartGroup3" instance=ExtResource("30_bw2jc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.24537e-08, 0.2, 0.6)
+
+[node name="part3" parent="PartsInCabinet/PartGroup3/Graphics6" index="0"]
+surface_material_override/0 = ExtResource("22_81bfa")
+surface_material_override/1 = ExtResource("29_adrk0")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("28_640gy")
+surface_material_override/4 = ExtResource("24_yuh43")
+surface_material_override/5 = ExtResource("25_t1xnq")
+
+[node name="Graphics9" parent="PartsInCabinet/PartGroup3" instance=ExtResource("30_bw2jc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.2, 0.6)
+
+[node name="part3" parent="PartsInCabinet/PartGroup3/Graphics9" index="0"]
+surface_material_override/0 = ExtResource("22_81bfa")
+surface_material_override/1 = ExtResource("29_adrk0")
+surface_material_override/2 = ExtResource("23_svnh6")
+surface_material_override/3 = ExtResource("28_640gy")
+surface_material_override/4 = ExtResource("24_yuh43")
+surface_material_override/5 = ExtResource("25_t1xnq")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+emitting = false
+one_shot = true
+explosiveness = 0.95
+randomness = 0.34
+process_material = SubResource("ParticleProcessMaterial_mkq3p")
+draw_pass_1 = SubResource("QuadMesh_vpni7")
+
 [connection signal="tapped" from="AcousticTap" to="." method="_on_acoustic_tap_tapped"]
 [connection signal="button_down" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_button_down"]
 [connection signal="button_up" from="Control/bg/Tools/ToolTray/OscButton" to="." method="_on_osc_button_button_up"]
@@ -475,3 +785,25 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -1.35, -0.79)
 [connection signal="pressed" from="Control/bg/Jettison/JettisonButton" to="." method="_on_jettison_button_pressed"]
 [connection signal="pressed" from="Control/LeftArrow" to="." method="_on_left_arrow_pressed"]
 [connection signal="pressed" from="Control/RightArrow" to="." method="_on_right_arrow_pressed"]
+
+[editable path="PartsOnFloor/PartGroup1/Graphics1"]
+[editable path="PartsOnFloor/PartGroup1/Graphics4"]
+[editable path="PartsOnFloor/PartGroup1/Graphics7"]
+[editable path="PartsOnFloor/PartGroup1/Graphics10"]
+[editable path="PartsOnFloor/PartGroup2/Graphics2"]
+[editable path="PartsOnFloor/PartGroup2/Graphics5"]
+[editable path="PartsOnFloor/PartGroup2/Graphics8"]
+[editable path="PartsOnFloor/PartGroup2/Graphics11"]
+[editable path="PartsOnFloor/PartGroup3/Graphics3"]
+[editable path="PartsOnFloor/PartGroup3/Graphics6"]
+[editable path="PartsOnFloor/PartGroup3/Graphics9"]
+[editable path="PartsOnFloor/PartGroup3/Graphics12"]
+[editable path="PartsInCabinet/PartGroup1/Graphics1"]
+[editable path="PartsInCabinet/PartGroup1/Graphics4"]
+[editable path="PartsInCabinet/PartGroup1/Graphics7"]
+[editable path="PartsInCabinet/PartGroup2/Graphics2"]
+[editable path="PartsInCabinet/PartGroup2/Graphics5"]
+[editable path="PartsInCabinet/PartGroup2/Graphics8"]
+[editable path="PartsInCabinet/PartGroup3/Graphics3"]
+[editable path="PartsInCabinet/PartGroup3/Graphics6"]
+[editable path="PartsInCabinet/PartGroup3/Graphics9"]
