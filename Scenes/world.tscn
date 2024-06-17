@@ -48,6 +48,129 @@ texture_filter = 2
 [sub_resource type="LabelSettings" id="LabelSettings_cpd47"]
 font_size = 48
 
+[sub_resource type="Animation" id="Animation_sofaj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("alien2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5.9771, -0.36595, 3.8125)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alien2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 0.3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("alien2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("coffee3:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("coffee3:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.60919, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("coffee3:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.61711, 0.0366041, 1.52443)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("coffee2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.5, 0.8, 3)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("coffee2:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.309, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("alien2/thud:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Area3D/CollisionShape3D:disabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_1220g"]
 resource_name = "intro_scene"
 length = 10.0
@@ -172,129 +295,6 @@ tracks/9/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_sofaj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("alien2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-5.9771, -0.36595, 3.8125)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("alien2:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.3, 0.3, 0.3)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("alien2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 3.14159, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("coffee3:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.45519e-11, 1.45519e-11, 1.45519e-11)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("coffee3:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -1.60919, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("coffee3:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(4.61711, 0.0366041, 1.52443)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("coffee2:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(4.5, 0.8, 3)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("coffee2:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -1.309, 0)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("alien2/thud:playing")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Area3D/CollisionShape3D:disabled")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_krv3t"]
 _data = {
 "RESET": SubResource("Animation_sofaj"),
@@ -316,118 +316,6 @@ transitions = ["Start", "intro_scene", SubResource("AnimationNodeStateMachineTra
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hrev6"]
 size = Vector3(0.589233, 0.724838, 0.574036)
-
-[sub_resource type="Animation" id="Animation_8nwso"]
-resource_name = "aliens_scene"
-length = 8.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("alien3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5, 2.8, 2.9, 3.9, 4, 6, 7, 7.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-3.4771, 3.13405, 3.8125), Vector3(-3.4771, 2.13579, 3.8125), Vector3(-3.4771, 3.00272, 3.51208), Vector3(5.92675, 3.41604, 3.49769), Vector3(6.3241, 3.44759, 3.25287), Vector3(6.34476, 3.91433, -3.39477), Vector3(6.00605, 3.91356, -3.73232), Vector3(-3.00608, 3.61636, -3.73428), Vector3(-4.65517, 2.0337, -3.79694), Vector3(-4.617, 2.0658, -4.84707)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("alien3:quaternion")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5, 0.6, 2.8, 2.9, 3.9, 4, 6, 6.2, 7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Quaternion(1, -4.37114e-08, -4.37114e-08, -1.91069e-15), Quaternion(-0.730196, 6.17831e-08, 2.05258e-09, 0.683238), Quaternion(-0.0173928, 4.4465e-08, -4.29445e-08, 0.999849), Quaternion(-0.0150024, -0.0087999, -0.505876, 0.862431), Quaternion(-0.0150024, -0.0087999, -0.505876, 0.862431), Quaternion(-0.461053, 0.482394, -0.499846, 0.55216), Quaternion(-0.517694, 0.530956, -0.448282, 0.499121), Quaternion(0.718275, -0.695355, 0.00242303, -0.023599), Quaternion(0.718275, -0.695355, 0.00242303, -0.023599), Quaternion(0.919637, -0.392052, 0.0107125, -0.0211666), Quaternion(0.919637, -0.392052, 0.0107125, -0.0211666)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("alien3/thud2:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("alien4:quaternion")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.2, 0.5, 1.4, 1.5, 1.9, 2, 4.1, 4.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Quaternion(0.973928, -0.226856, -4.25718e-08, 9.91619e-09), Quaternion(-0.0465514, -0.68826, 0.722848, -0.0402658), Quaternion(-0.0465513, -0.68826, 0.722848, -0.0402658), Quaternion(0.0400848, 0.78759, -0.613118, 0.0467072), Quaternion(0.0400848, 0.78759, -0.613118, 0.0467072), Quaternion(0.529976, 0.443608, -0.475567, 0.544218), Quaternion(-0.465303, -0.511034, 0.544622, -0.475105), Quaternion(-0.147026, -0.675312, 0.709295, -0.138699)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("alien4:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5, 1.4, 1.5, 1.9, 2, 4.1, 4.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-3.32559, 3.02547, 3.8125), Vector3(-3.87708, 2.32205, 3.8125), Vector3(-4.82762, 0.0287359, 2.63859), Vector3(-4.50644, 0.0387664, 0.0418608), Vector3(-4.50644, 0.0387664, 0.0418608), Vector3(-4.2971, 0.730876, -1.61793), Vector3(-4.25439, 0.792918, -1.7802), Vector3(3.32601, 0.77477, -2.66194), Vector3(5.18886, 0.541836, -6.9839)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("alien4/thud3:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.3, 4.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("alien5:quaternion")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.6, 1, 1.2, 2.3, 2.6, 3.3, 3.5, 5.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Quaternion(0.993861, 0.110638, -4.3443e-08, -4.83616e-09), Quaternion(-0.0879128, -0.700672, 0.706075, -0.0528034), Quaternion(-0.471437, -0.525753, 0.550197, -0.445661), Quaternion(-0.462346, -0.536752, 0.539473, -0.455086), Quaternion(-0.263556, 0.657574, -0.652383, -0.269314), Quaternion(-0.263556, 0.657574, -0.652383, -0.269314), Quaternion(0.700925, -0.102811, 0.0952233, 0.699333), Quaternion(0.700925, -0.102811, 0.0952233, 0.699333)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("alien5:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.6, 1, 2.3, 3.3, 5.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-3.36149, 3.1639, 3.8125), Vector3(-3.07785, 2.21617, 3.8125), Vector3(-2.61371, 0.0700043, 2.72223), Vector3(3.53076, 0.0194159, 1.73706), Vector3(1.83161, 0.0434392, -0.00594401), Vector3(-0.318372, 0.0378115, 7.44294)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("alien5/thud4:playing")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(1, 5.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_kybvl"]
 length = 0.001
@@ -540,6 +428,118 @@ tracks/8/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_8nwso"]
+resource_name = "aliens_scene"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("alien3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 2.8, 2.9, 3.9, 4, 6, 7, 7.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-3.4771, 3.13405, 3.8125), Vector3(-3.4771, 2.13579, 3.8125), Vector3(-3.4771, 3.00272, 3.51208), Vector3(5.92675, 3.41604, 3.49769), Vector3(6.3241, 3.44759, 3.25287), Vector3(6.34476, 3.91433, -3.39477), Vector3(6.00605, 3.91356, -3.73232), Vector3(-3.00608, 3.61636, -3.73428), Vector3(-4.65517, 2.0337, -3.79694), Vector3(-4.617, 2.0658, -4.84707)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("alien3:quaternion")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.6, 2.8, 2.9, 3.9, 4, 6, 6.2, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Quaternion(1, -4.37114e-08, -4.37114e-08, -1.91069e-15), Quaternion(-0.730196, 6.17831e-08, 2.05258e-09, 0.683238), Quaternion(-0.0173928, 4.4465e-08, -4.29445e-08, 0.999849), Quaternion(-0.0150024, -0.0087999, -0.505876, 0.862431), Quaternion(-0.0150024, -0.0087999, -0.505876, 0.862431), Quaternion(-0.461053, 0.482394, -0.499846, 0.55216), Quaternion(-0.517694, 0.530956, -0.448282, 0.499121), Quaternion(0.718275, -0.695355, 0.00242303, -0.023599), Quaternion(0.718275, -0.695355, 0.00242303, -0.023599), Quaternion(0.919637, -0.392052, 0.0107125, -0.0211666), Quaternion(0.919637, -0.392052, 0.0107125, -0.0211666)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("alien3/thud2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("alien4:quaternion")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.5, 1.4, 1.5, 1.9, 2, 4.1, 4.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Quaternion(0.973928, -0.226856, -4.25718e-08, 9.91619e-09), Quaternion(-0.0465514, -0.68826, 0.722848, -0.0402658), Quaternion(-0.0465513, -0.68826, 0.722848, -0.0402658), Quaternion(0.0400848, 0.78759, -0.613118, 0.0467072), Quaternion(0.0400848, 0.78759, -0.613118, 0.0467072), Quaternion(0.529976, 0.443608, -0.475567, 0.544218), Quaternion(-0.465303, -0.511034, 0.544622, -0.475105), Quaternion(-0.147026, -0.675312, 0.709295, -0.138699)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("alien4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 1.4, 1.5, 1.9, 2, 4.1, 4.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-3.32559, 3.02547, 3.8125), Vector3(-3.87708, 2.32205, 3.8125), Vector3(-4.82762, 0.0287359, 2.63859), Vector3(-4.50644, 0.0387664, 0.0418608), Vector3(-4.50644, 0.0387664, 0.0418608), Vector3(-4.2971, 0.730876, -1.61793), Vector3(-4.25439, 0.792918, -1.7802), Vector3(3.32601, 0.77477, -2.66194), Vector3(5.18886, 0.541836, -6.9839)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("alien4/thud3:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3, 4.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("alien5:quaternion")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6, 1, 1.2, 2.3, 2.6, 3.3, 3.5, 5.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Quaternion(0.993861, 0.110638, -4.3443e-08, -4.83616e-09), Quaternion(-0.0879128, -0.700672, 0.706075, -0.0528034), Quaternion(-0.471437, -0.525753, 0.550197, -0.445661), Quaternion(-0.462346, -0.536752, 0.539473, -0.455086), Quaternion(-0.263556, 0.657574, -0.652383, -0.269314), Quaternion(-0.263556, 0.657574, -0.652383, -0.269314), Quaternion(0.700925, -0.102811, 0.0952233, 0.699333), Quaternion(0.700925, -0.102811, 0.0952233, 0.699333)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("alien5:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.6, 1, 2.3, 3.3, 4.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-3.36149, 3.1639, 3.8125), Vector3(-3.07785, 2.21617, 3.8125), Vector3(-2.61371, 0.0700043, 2.72223), Vector3(3.53076, 0.0194159, 1.73706), Vector3(1.83161, 0.0434392, -0.00594401), Vector3(0.360569, 0.0395887, 5.09066)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("alien5/thud4:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1, 5.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ea2lb"]
 _data = {
 "RESET": SubResource("Animation_kybvl"),
@@ -564,34 +564,6 @@ size = Vector3(1, 3.15771, 1.50342)
 [sub_resource type="LabelSettings" id="LabelSettings_pixsl"]
 font_size = 48
 font_color = Color(1, 1, 1, 0)
-
-[sub_resource type="Animation" id="Animation_rms8h"]
-resource_name = "whiteout"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("whiteout/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("explosion:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_uef4g"]
 length = 0.001
@@ -633,7 +605,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("explosion:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -709,6 +681,34 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rms8h"]
+resource_name = "whiteout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("whiteout/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("explosion:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qpxcq"]
@@ -899,14 +899,14 @@ attenuation_filter_db = 0.0
 script = ExtResource("15_dh1ct")
 
 [node name="coffee3" parent="IntroCutscene" instance=ExtResource("19_ucrlw")]
-transform = Transform3D(-5.58616e-13, 0, -1.45412e-11, 0, 1.45519e-11, 0, 1.45412e-11, 0, -5.58616e-13, 4.61711, 0.0366041, 1.52443)
+transform = Transform3D(-5.58563e-13, 0, -1.45412e-11, 0, 1.45519e-11, 0, 1.45412e-11, 0, -5.58563e-13, 4.61711, 0.0366041, 1.52443)
 
 [node name="coffee" parent="IntroCutscene/coffee3" index="0"]
 surface_material_override/0 = ExtResource("20_y15fn")
 surface_material_override/1 = ExtResource("21_a7f8s")
 
 [node name="alien2" parent="IntroCutscene" instance=ExtResource("15_ke7cx")]
-transform = Transform3D(-0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, -5.9771, -0.36595, 3.8125)
+transform = Transform3D(-0.3, 0, 7.60555e-07, 0, 0.3, 0, -7.60555e-07, 0, -0.3, -5.9771, -0.36595, 3.8125)
 
 [node name="thud" type="AudioStreamPlayer3D" parent="IntroCutscene/alien2"]
 stream = ExtResource("19_cv0ij")
@@ -927,7 +927,7 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 4.5, 0, 3)
 surface_material_override/0 = ExtResource("17_5eqad")
 
 [node name="coffee2" parent="IntroCutscene" instance=ExtResource("19_ucrlw")]
-transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 4.5, 0.8, 3)
+transform = Transform3D(0.258816, 0, -0.965927, 0, 1, 0, 0.965927, 0, 0.258816, 4.5, 0.8, 3)
 
 [node name="coffee" parent="IntroCutscene/coffee2" index="0"]
 surface_material_override/0 = ExtResource("20_y15fn")
@@ -958,7 +958,6 @@ disabled = true
 [node name="IntroTimer" type="Timer" parent="IntroCutscene"]
 wait_time = 5.0
 one_shot = true
-autostart = true
 
 [node name="Shapeshifter" type="Timer" parent="IntroCutscene"]
 wait_time = 8.0
@@ -967,7 +966,7 @@ one_shot = true
 [node name="AliensCutscene" type="Node3D" parent="."]
 
 [node name="alien3" parent="AliensCutscene" instance=ExtResource("15_ke7cx")]
-transform = Transform3D(0.3, -2.62268e-08, -2.62268e-08, -2.62268e-08, -0.3, 2.29282e-15, -2.62268e-08, 0, -0.3, -3.4771, 3.13405, 3.8125)
+transform = Transform3D(0.3, -2.62268e-08, -2.62268e-08, -2.62268e-08, -0.3, 2.29283e-15, -2.62268e-08, -2.15993e-21, -0.3, -3.4771, 3.13405, 3.8125)
 rotation_edit_mode = 1
 
 [node name="thud2" type="AudioStreamPlayer3D" parent="AliensCutscene/alien3"]
@@ -978,7 +977,7 @@ pitch_scale = 2.0
 attenuation_filter_db = -47.7
 
 [node name="alien4" parent="AliensCutscene" instance=ExtResource("15_ke7cx")]
-transform = Transform3D(0.269122, -0.132566, -2.6227e-08, -0.132565, -0.269123, 1.06582e-15, -2.35274e-08, 1.15892e-08, -0.300002, -3.26456, 3.0398, 3.8125)
+transform = Transform3D(0.269122, -0.132566, -2.6227e-08, -0.132565, -0.269123, 7.46075e-15, -2.35274e-08, 1.15893e-08, -0.300002, -3.26456, 3.0398, 3.8125)
 rotation_edit_mode = 1
 
 [node name="thud3" type="AudioStreamPlayer3D" parent="AliensCutscene/alien4"]
@@ -989,7 +988,7 @@ pitch_scale = 2.0
 attenuation_filter_db = -47.7
 
 [node name="alien5" parent="AliensCutscene" instance=ExtResource("15_ke7cx")]
-transform = Transform3D(0.292655, 0.0659757, -2.62269e-08, 0.0659755, -0.292656, 1.86518e-15, -2.55848e-08, -5.76778e-09, -0.300001, -3.43917, 3.1326, 3.8125)
+transform = Transform3D(0.292655, 0.0659754, -2.62269e-08, 0.0659751, -0.292656, 1.43885e-14, -2.55847e-08, -5.76776e-09, -0.300001, -3.43917, 3.1326, 3.8125)
 rotation_edit_mode = 1
 
 [node name="thud4" type="AudioStreamPlayer3D" parent="AliensCutscene/alien5"]

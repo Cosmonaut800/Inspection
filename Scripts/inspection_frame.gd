@@ -15,6 +15,7 @@ extends Node3D
 @onready var acoustic_tooltip := $Control/bg/AcousticTooltip
 @onready var drag_tooltip := $Control/bg/DragTooltip
 @onready var hitbox := $Area3D/CollisionShape3D
+@onready var hitbox2 := $Area3D/CollisionShape3D2
 @onready var anim_tree := $OmniLight3D/AnimationTree
 @onready var alarm_sound := $Audio/AlarmSound
 @onready var explosion_sound := $Audio/ExplosionSound
@@ -93,6 +94,7 @@ func _process(delta):
 
 func activate():
 	hitbox.disabled = false
+	hitbox2.disabled = false
 	alarm_sound.play()
 	explosion_sound.play()
 	particles.emitting = true
@@ -103,6 +105,7 @@ func activate():
 
 func deactivate():
 	hitbox.disabled = true
+	hitbox2.disabled = true
 	anim_tree.set("parameters/conditions/blinking", false)
 	anim_tree.set("parameters/conditions/finished", true)
 	completed.emit()

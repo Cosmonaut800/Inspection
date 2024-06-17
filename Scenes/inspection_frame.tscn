@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ufmsrk8yynj3"]
+[gd_scene load_steps=55 format=3 uid="uid://ufmsrk8yynj3"]
 
 [ext_resource type="Script" path="res://Scripts/inspection_frame.gd" id="1_qncd1"]
 [ext_resource type="Material" uid="uid://bn5thx7h4m463" path="res://Materials/checkerboard_dark.tres" id="2_j3l1x"]
@@ -34,6 +34,9 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2ahx"]
 size = Vector3(1.5, 2.4, 0.310059)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yct43"]
+size = Vector3(1.6, 0.8, 1)
 
 [sub_resource type="Animation" id="Animation_7cofx"]
 length = 0.001
@@ -193,6 +196,11 @@ size = Vector3(1, 1, 0.1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.344971)
 shape = SubResource("BoxShape3D_f2ahx")
+disabled = true
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, -1.1, 0)
+shape = SubResource("BoxShape3D_yct43")
 disabled = true
 
 [node name="Oscilloscope" parent="." instance=ExtResource("3_38jeh")]

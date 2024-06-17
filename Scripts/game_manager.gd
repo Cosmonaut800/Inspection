@@ -48,11 +48,13 @@ var difficulty := -1
 var correct_cabinets := 0
 
 var text_queue = []
-var text_counter = 0
+var text_counter := 0
 
-var game_started = false
-var game_ended = false
-var already_submitted = false
+var game_started := false
+var game_ended := false
+var already_submitted := false
+
+var skip_intro := false
 
 signal reset
 
@@ -103,6 +105,11 @@ func _ready():
 	hard_cabinet.aberrant_sound = sound2
 	hard_cabinet.completed.connect(on_cabinet_completed)
 	hard_cabinet.timeout.connect(on_cabinet_timeout)
+	
+	if !skip_intro:
+		intro_timer.start()
+	else:
+		skip_cutscenes()
 
 func _process(_delta):
 	if can_switch_tracks:
@@ -215,6 +222,15 @@ func _on_break_ovr_3_finished():
 func _on_player_show_tooltip(show):
 	tooltip.set_visible(show)
 
+func skip_cutscenes():
+	timer.wait_time = 5.0
+	timer.start()
+	air_lock.counter = 1
+	correct_cabinets = 1
+	player.coffee = false
+	
+	game_started = true
+	can_switch_tracks = true
 
 func _on_aliens_scene_timer_timeout():
 	display_text_box("THERES_MORE")

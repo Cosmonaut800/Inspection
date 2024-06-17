@@ -16,5 +16,6 @@ func _process(delta):
 func _on_world_reset():
 	world.queue_free()
 	world = world_scene.instantiate()
+	world.skip_intro = true
 	add_child(world)
 	world.reset.connect(_on_world_reset)
