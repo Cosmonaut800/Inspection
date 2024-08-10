@@ -105,18 +105,22 @@ autostart = true
 
 [node name="footstep1" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("4_1oyem")
+bus = &"SFX"
 attenuation_filter_db = 0.0
 
 [node name="footstep2" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("5_ae2r7")
+bus = &"SFX"
 attenuation_filter_db = 0.0
 
 [node name="footstep3" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("6_r4eu1")
+bus = &"SFX"
 attenuation_filter_db = 0.0
 
 [node name="footstep4" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("7_640ky")
+bus = &"SFX"
 attenuation_filter_db = 0.0
 
 [node name="ActionWait" type="Timer" parent="."]

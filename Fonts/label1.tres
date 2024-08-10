@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b7tha3i3kgwru"]
+
+[ext_resource type="FontFile" uid="uid://vpsfol54gbcp" path="res://Fonts/KodeMono-Regular.ttf" id="1_fu6ua"]
+
+[resource]
+font = ExtResource("1_fu6ua")
+font_size = 64
+font_color = Color(1, 0.701961, 0.109804, 1)

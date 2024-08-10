@@ -1,0 +1,435 @@
+[gd_scene load_steps=10 format=3 uid="uid://dm1pvy6rtipcx"]
+
+[ext_resource type="Script" path="res://Scripts/options_menu.gd" id="1_dqgcs"]
+[ext_resource type="LabelSettings" uid="uid://cr07ox8w0tac6" path="res://Fonts/Header.tres" id="2_qbel5"]
+[ext_resource type="LabelSettings" uid="uid://cbas3yb1l8jx7" path="res://Fonts/Header2.tres" id="3_eh1ly"]
+[ext_resource type="StyleBox" uid="uid://dyjhp1tqnd63m" path="res://Fonts/line_unselected.tres" id="4_brobu"]
+[ext_resource type="StyleBox" uid="uid://2h4jsxcwrdgp" path="res://Fonts/line_selected.tres" id="5_t2scj"]
+[ext_resource type="LabelSettings" uid="uid://vbaxb3mokgb2" path="res://Fonts/Header3.tres" id="6_cqwst"]
+[ext_resource type="FontFile" uid="uid://vpsfol54gbcp" path="res://Fonts/KodeMono-Regular.ttf" id="7_cxa00"]
+[ext_resource type="LabelSettings" uid="uid://btrlypejjt8s1" path="res://Fonts/annotation.tres" id="8_ye14a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obkkp"]
+bg_color = Color(0, 0, 0, 0.705882)
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dqgcs")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_obkkp")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -178.5
+offset_right = 178.5
+offset_bottom = 111.0
+grow_horizontal = 2
+text = "OPTIONS"
+label_settings = ExtResource("2_qbel5")
+vertical_alignment = 1
+
+[node name="Audio" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -331.0
+offset_top = -193.0
+offset_right = -197.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Audio"
+label_settings = ExtResource("3_eh1ly")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 188.0
+offset_top = -193.0
+offset_right = 369.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Camera"
+label_settings = ExtResource("3_eh1ly")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -465.0
+offset_top = -55.0
+offset_right = -69.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = ExtResource("4_brobu")
+theme_override_styles/grabber_area = ExtResource("5_t2scj")
+value = 100.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Volume" type="Label" parent="VolumeSlider"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -56.0
+offset_right = 66.5
+offset_bottom = -6.0
+grow_horizontal = 2
+text = "Volume: 100%"
+label_settings = ExtResource("6_cqwst")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Min" type="Label" parent="VolumeSlider"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 13.0
+offset_bottom = 25.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.760784, 0.403922, 0, 1)
+theme_override_fonts/font = ExtResource("7_cxa00")
+text = "0"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="Max" type="Label" parent="VolumeSlider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = 2.0
+offset_right = 6.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "100"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="VolumeSlider"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = 80.0
+offset_right = 150.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/slider = ExtResource("4_brobu")
+theme_override_styles/grabber_area = ExtResource("5_t2scj")
+value = 100.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Music" type="Label" parent="VolumeSlider/MusicSlider"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -56.0
+offset_right = 66.5
+offset_bottom = -6.0
+grow_horizontal = 2
+text = "Music: 100%"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Min" type="Label" parent="VolumeSlider/MusicSlider"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 13.0
+offset_bottom = 25.0
+grow_vertical = 0
+text = "0"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="Max" type="Label" parent="VolumeSlider/MusicSlider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = 2.0
+offset_right = 6.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "100"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="SfxSlider" type="HSlider" parent="VolumeSlider"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = 176.0
+offset_right = 150.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/slider = ExtResource("4_brobu")
+theme_override_styles/grabber_area = ExtResource("5_t2scj")
+value = 100.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="SoundEffects" type="Label" parent="VolumeSlider/SfxSlider"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -56.0
+offset_right = 66.5
+offset_bottom = -6.0
+grow_horizontal = 2
+text = "Sound Effects: 100%"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Min" type="Label" parent="VolumeSlider/SfxSlider"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 13.0
+offset_bottom = 25.0
+grow_vertical = 0
+text = "0"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="Max" type="Label" parent="VolumeSlider/SfxSlider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = 2.0
+offset_right = 6.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "100"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="HorizontalSpeedSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 81.0
+offset_top = -36.0
+offset_right = 477.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = ExtResource("4_brobu")
+theme_override_styles/grabber_area = ExtResource("5_t2scj")
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="HorizontalSpeed" type="Label" parent="HorizontalSpeedSlider"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -56.0
+offset_right = 66.5
+offset_bottom = -6.0
+grow_horizontal = 2
+text = "Horizontal Speed: x1.0"
+label_settings = ExtResource("6_cqwst")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Min" type="Label" parent="HorizontalSpeedSlider"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 2.0
+offset_right = 20.0
+offset_bottom = 25.0
+grow_vertical = 0
+text = "0.1"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="Max" type="Label" parent="HorizontalSpeedSlider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = 2.0
+offset_right = 6.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "5"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="VerticalSpeedSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 81.0
+offset_top = 75.0
+offset_right = 477.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = ExtResource("4_brobu")
+theme_override_styles/grabber_area = ExtResource("5_t2scj")
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="VerticalSpeed" type="Label" parent="VerticalSpeedSlider"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = -56.0
+offset_right = 66.5
+offset_bottom = -6.0
+grow_horizontal = 2
+text = "Vertical Speed: x1.0"
+label_settings = ExtResource("6_cqwst")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Min" type="Label" parent="VerticalSpeedSlider"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 2.0
+offset_right = 20.0
+offset_bottom = 25.0
+grow_vertical = 0
+text = "0.1"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="Max" type="Label" parent="VerticalSpeedSlider"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = 2.0
+offset_right = 6.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "5"
+label_settings = ExtResource("8_ye14a")
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 63.0
+offset_top = -128.0
+offset_right = 182.0
+offset_bottom = -53.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.760784, 0.403922, 0, 1)
+theme_override_fonts/font = ExtResource("7_cxa00")
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="VolumeSlider/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VolumeSlider/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="HorizontalSpeedSlider" to="." method="_on_horizontal_speed_slider_value_changed"]
+[connection signal="value_changed" from="VerticalSpeedSlider" to="." method="_on_vertical_speed_slider_value_changed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

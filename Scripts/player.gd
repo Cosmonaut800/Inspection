@@ -26,6 +26,8 @@ var previous_position: Vector3
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var horizontal_speed := 1.0
+var vertical_speed := 1.0
 var mouse_sensitivity := 0.002
 var yaw_input := 0.0
 var pitch_input := 0.0
@@ -83,13 +85,13 @@ func _physics_process(delta):
 func _process(_delta):
 	var entity;
 	
-	if Input.is_action_just_pressed("ui_cancel"):
-		if focused:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		
-		focused = !focused
+	#if Input.is_action_just_pressed("ui_cancel"):
+		#if focused:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		#else:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		#
+		#focused = !focused
 	
 	if !focused and Input.is_action_just_pressed("dismiss_text"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -143,8 +145,8 @@ func _process(_delta):
 func _unhandled_input(event):
 		if event is InputEventMouseMotion:
 			if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-				yaw_input = -event.relative.x * mouse_sensitivity
-				pitch_input = -event.relative.y * mouse_sensitivity
+				yaw_input = -event.relative.x * mouse_sensitivity * horizontal_speed
+				pitch_input = -event.relative.y * mouse_sensitivity * vertical_speed
 
 func exit_cabinet():
 	cam_target.global_basis = previous_basis

@@ -1,9 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnsk2i7camrpi"]
+[gd_scene load_steps=15 format=3 uid="uid://bnsk2i7camrpi"]
 
 [ext_resource type="Script" path="res://Scripts/text_box.gd" id="1_rtkbm"]
+[ext_resource type="FontFile" uid="uid://vpsfol54gbcp" path="res://Fonts/KodeMono-Regular.ttf" id="2_2qh22"]
+[ext_resource type="LabelSettings" uid="uid://btrlypejjt8s1" path="res://Fonts/annotation.tres" id="3_ll3k6"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_dc261"]
-font_size = 29
+[sub_resource type="LabelSettings" id="LabelSettings_4bp7g"]
+font = ExtResource("2_2qh22")
+font_size = 28
+font_color = Color(1, 0.701961, 0.109804, 1)
 
 [sub_resource type="Animation" id="Animation_ddgpe"]
 length = 0.001
@@ -102,7 +106,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 35.0
-offset_top = -216.0
+offset_top = -250.0
 offset_right = -36.0
 offset_bottom = -39.0
 grow_horizontal = 2
@@ -121,7 +125,7 @@ offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "This is a long paragraph of sample text so that I have an idea of what area the text takes up. The likelihood that I actually have the NPC say such a long paragraph is low, but this is nice for testing purposes."
-label_settings = SubResource("LabelSettings_dc261")
+label_settings = SubResource("LabelSettings_4bp7g")
 vertical_alignment = 1
 autowrap_mode = 2
 
@@ -132,8 +136,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -409.0
-offset_right = -185.0
+offset_left = -469.0
+offset_right = -125.0
 offset_bottom = 24.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -146,6 +150,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "[Left Click] or [E] to dismiss."
+label_settings = ExtResource("3_ll3k6")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -155,9 +160,6 @@ libraries = {
 }
 
 [node name="TextTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_vu1hc")
-}
 tree_root = SubResource("AnimationNodeStateMachine_xc8kp")
 anim_player = NodePath("../TextPlayer")
 parameters/conditions/clear = false

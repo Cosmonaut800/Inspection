@@ -29,6 +29,9 @@ func _process(delta):
 		var height = energy * HEIGHT
 		prev_hz = hz
 		
+		if (not nominal_sound.is_playing()) and (not aberrant_sound.is_playing()):
+			height = 0.0
+		
 		var vis_rect = visualizer_array[i-1]
 		var tween = get_tree().create_tween()
 		tween.tween_property(vis_rect, "size", Vector2(vis_rect.size.x, 2.0 * height), 0.05)

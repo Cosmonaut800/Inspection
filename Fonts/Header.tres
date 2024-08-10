@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cr07ox8w0tac6"]
+
+[ext_resource type="FontFile" uid="uid://d1p4unxf4ru6" path="res://Fonts/Bulletproof-w1nxx.ttf" id="1_2spr5"]
+
+[resource]
+line_spacing = 5.0
+font = ExtResource("1_2spr5")
+font_size = 81
+font_color = Color(1, 0.703333, 0.11, 1)

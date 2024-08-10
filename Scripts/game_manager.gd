@@ -28,6 +28,7 @@ extends Node3D
 @onready var reset_timer := $ResetTimer
 @onready var really_reset_timer := $ReallyResetTimer
 @onready var out_tree := $outtree
+
 var winner := false
 
 var can_switch_tracks := false
@@ -134,6 +135,12 @@ func _process(_delta):
 			
 			music_loops[difficulty].play()
 
+func pause_game():
+	pass
+
+func unpause_game():
+	pass
+
 func display_text_box(text_index: String):
 	text_queue.push_back(text_index)
 	if !text_box.visible:
@@ -159,6 +166,12 @@ func display_next_text():
 	if text_counter == 3:
 		shapeshifter_timer.start()
 		intro_anim.set("parameters/conditions/start", true)
+
+func update_horizontal_speed(new_horizontal_speed: float):
+	player.horizontal_speed = new_horizontal_speed
+
+func update_vertical_speed(new_vertical_speed: float):
+	player.vertical_speed = new_vertical_speed
 
 func _on_text_timer_timeout():
 	player.can_read_text = true

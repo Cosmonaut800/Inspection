@@ -1,15 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://ceg644wanqc0p"]
+[gd_scene load_steps=5 format=3 uid="uid://ceg644wanqc0p"]
 
-[ext_resource type="Script" path="res://Scenes/root_scene.gd" id="1_t2xyg"]
-[ext_resource type="PackedScene" uid="uid://by2771v3haugr" path="res://Scenes/world.tscn" id="2_xhcno"]
+[ext_resource type="Script" path="res://Scripts/root_scene.gd" id="1_t2xyg"]
 [ext_resource type="PackedScene" uid="uid://dcc24f4t7ky6a" path="res://Scenes/main_menu.tscn" id="3_mj63m"]
+[ext_resource type="PackedScene" uid="uid://dm1pvy6rtipcx" path="res://Scenes/options_menu.tscn" id="3_n1vbu"]
+[ext_resource type="PackedScene" uid="uid://6rwg1kuf1vmv" path="res://Scenes/pause_menu.tscn" id="4_wvp60"]
 
 [node name="RootScene" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_t2xyg")
 
-[node name="World" parent="." instance=ExtResource("2_xhcno")]
+[node name="MainMenu" parent="." node_paths=PackedStringArray("options_menu") instance=ExtResource("3_mj63m")]
+options_menu = NodePath("../OptionsMenu")
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_n1vbu")]
 visible = false
 
-[node name="MainMenu" parent="." instance=ExtResource("3_mj63m")]
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("options_menu") instance=ExtResource("4_wvp60")]
+visible = false
+options_menu = NodePath("../OptionsMenu")
 
-[connection signal="reset" from="World" to="." method="_on_world_reset"]
+[connection signal="start_game_pressed" from="MainMenu" to="." method="_on_main_menu_start_game_pressed"]
+[connection signal="change_horizontal_speed" from="OptionsMenu" to="." method="_on_options_menu_change_horizontal_speed"]
+[connection signal="change_vertical_speed" from="OptionsMenu" to="." method="_on_options_menu_change_vertical_speed"]

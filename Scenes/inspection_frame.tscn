@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ufmsrk8yynj3"]
+[gd_scene load_steps=59 format=3 uid="uid://ufmsrk8yynj3"]
 
 [ext_resource type="Script" path="res://Scripts/inspection_frame.gd" id="1_qncd1"]
 [ext_resource type="Material" uid="uid://bn5thx7h4m463" path="res://Materials/checkerboard_dark.tres" id="2_j3l1x"]
@@ -14,9 +14,13 @@
 [ext_resource type="Texture2D" uid="uid://csb4pkebgupli" path="res://Materials/Textures/emergency_button_pressed.png" id="8_560rj"]
 [ext_resource type="Texture2D" uid="uid://co0n1gyx5fj4w" path="res://Materials/Textures/thermal_icon.png" id="9_trthm"]
 [ext_resource type="Texture2D" uid="uid://b8esgvyla2cof" path="res://Materials/Textures/aco_icon.png" id="10_xl2lq"]
+[ext_resource type="LabelSettings" uid="uid://0blv82x3tek" path="res://Fonts/label2.tres" id="11_gkvcj"]
+[ext_resource type="LabelSettings" uid="uid://jwiomtugjkg7" path="res://Fonts/label3.tres" id="11_iwiyo"]
+[ext_resource type="LabelSettings" uid="uid://b7tha3i3kgwru" path="res://Fonts/label1.tres" id="12_5dgcl"]
 [ext_resource type="AudioStream" uid="uid://sxmqqlx1eppj" path="res://Audio/696172__theprinternet__two_tone_alarm_05.wav" id="13_5p7nc"]
 [ext_resource type="AudioStream" uid="uid://de62hdhkokben" path="res://Audio/explosion.wav" id="14_vnos5"]
 [ext_resource type="AudioStream" uid="uid://cn111s6ynytgq" path="res://Audio/click2.wav" id="15_pnl36"]
+[ext_resource type="FontFile" uid="uid://vpsfol54gbcp" path="res://Fonts/KodeMono-Regular.ttf" id="16_qtel3"]
 [ext_resource type="PackedScene" uid="uid://ch05m50tr2p5a" path="res://Models/cabinet.tscn" id="18_l4afh"]
 [ext_resource type="PackedScene" uid="uid://dpq67h6nc1bvm" path="res://Models/cabinet_door.tscn" id="19_d43ns"]
 [ext_resource type="PackedScene" uid="uid://c0c3akgxryd0o" path="res://Models/GLTF/part1.glb" id="20_gjdsk"]
@@ -144,11 +148,15 @@ states/light_on/node = SubResource("AnimationNodeAnimation_wbcv5")
 states/light_on/position = Vector2(458, 47)
 transitions = ["Start", "light_off", SubResource("AnimationNodeStateMachineTransition_262om"), "light_on", "light_off", SubResource("AnimationNodeStateMachineTransition_8rvbe"), "light_off", "blink", SubResource("AnimationNodeStateMachineTransition_w00uj"), "blink", "light_on", SubResource("AnimationNodeStateMachineTransition_s30ka")]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ylc6x"]
-font_size = 64
+[sub_resource type="LabelSettings" id="LabelSettings_qh81y"]
+font = ExtResource("16_qtel3")
+font_size = 18
+font_color = Color(1, 0.701961, 0.109804, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ksroq"]
-font_size = 30
+[sub_resource type="LabelSettings" id="LabelSettings_s6yhm"]
+font = ExtResource("16_qtel3")
+font_size = 18
+font_color = Color(1, 0.701961, 0.109804, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2ekyr"]
 size = Vector3(0.1, 0.3, 0.3)
@@ -231,9 +239,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="OmniLight3D"]
-libraries = {
-"": SubResource("AnimationLibrary_3c3if")
-}
 tree_root = SubResource("AnimationNodeStateMachine_csjje")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/blinking = false
@@ -338,6 +343,7 @@ offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
 text = "TOOL TRAY"
+label_settings = ExtResource("11_iwiyo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -357,7 +363,7 @@ offset_top = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "0:00"
-label_settings = SubResource("LabelSettings_ylc6x")
+label_settings = ExtResource("12_5dgcl")
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -368,7 +374,7 @@ anchor_right = 1.0
 offset_bottom = 43.0
 grow_horizontal = 2
 text = "Time to Meltdown:"
-label_settings = SubResource("LabelSettings_ksroq")
+label_settings = ExtResource("11_gkvcj")
 horizontal_alignment = 1
 
 [node name="Jettison" type="Panel" parent="Control/bg"]
@@ -386,13 +392,14 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 69.0
+offset_left = 44.0
 offset_top = -24.0
-offset_right = 194.0
+offset_right = 176.0
 offset_bottom = 26.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 text = "EJECT:"
+label_settings = ExtResource("11_iwiyo")
 
 [node name="JettisonButton" type="TextureButton" parent="Control/bg/Jettison"]
 layout_mode = 1
@@ -418,9 +425,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -215.0
+offset_left = -255.0
 offset_top = -71.0
-offset_right = 215.0
+offset_right = 255.0
 offset_bottom = -6.0
 grow_horizontal = 2
 mouse_filter = 2
@@ -434,6 +441,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 19
 text = "Press [Right Click] to perform acoustic test."
+label_settings = SubResource("LabelSettings_qh81y")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -442,9 +450,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -187.0
+offset_left = -227.0
 offset_top = -56.0
-offset_right = 187.0
+offset_right = 227.0
 offset_bottom = -14.0
 grow_horizontal = 2
 
@@ -457,6 +465,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 19
 text = "Click and drag tools from the tool tray."
+label_settings = SubResource("LabelSettings_s6yhm")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -500,16 +509,19 @@ flip_h = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.832157, -0.326752)
 stream = ExtResource("13_5p7nc")
 volume_db = -24.0
+bus = &"SFX"
 attenuation_filter_db = 0.0
 
 [node name="ExplosionSound" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("14_vnos5")
+bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer3D" parent="Audio"]
 stream = ExtResource("15_pnl36")
 attenuation_model = 3
 volume_db = 6.0
 panning_strength = 0.0
+bus = &"SFX"
 attenuation_filter_db = 0.0
 
 [node name="cabinet2" parent="." instance=ExtResource("18_l4afh")]

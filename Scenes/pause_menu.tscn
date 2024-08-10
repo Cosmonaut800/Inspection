@@ -1,4 +1,11 @@
-[gd_scene format=3 uid="uid://6rwg1kuf1vmv"]
+[gd_scene load_steps=5 format=3 uid="uid://6rwg1kuf1vmv"]
+
+[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_x7cdr"]
+[ext_resource type="LabelSettings" uid="uid://cr07ox8w0tac6" path="res://Fonts/Header.tres" id="2_2bpmw"]
+[ext_resource type="FontFile" uid="uid://vpsfol54gbcp" path="res://Fonts/KodeMono-Regular.ttf" id="3_x3623"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ee82i"]
+bg_color = Color(0, 0, 0, 0.705882)
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +14,63 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_x7cdr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ee82i")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_right = 127.0
+offset_bottom = 111.0
+grow_horizontal = 2
+text = "PAUSE"
+label_settings = ExtResource("2_2bpmw")
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 1
+offset_left = 168.0
+offset_top = 195.0
+offset_right = 362.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.760784, 0.403922, 0, 1)
+theme_override_fonts/font = ExtResource("3_x3623")
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+
+[node name="Options" type="Button" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 310.0
+offset_right = 362.0
+offset_bottom = 385.0
+theme_override_colors/font_color = Color(0.760784, 0.403922, 0, 1)
+theme_override_fonts/font = ExtResource("3_x3623")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 425.0
+offset_right = 362.0
+offset_bottom = 500.0
+theme_override_colors/font_color = Color(0.760784, 0.403922, 0, 1)
+theme_override_fonts/font = ExtResource("3_x3623")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
